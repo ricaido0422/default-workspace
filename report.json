@@ -1,0 +1,63 @@
+{
+  "title": "HomeRunHazard 跟单分析报告",
+  "gap": 14,
+  "items": [
+    {"type": "callout", "tone": "info", "content": "用户 @homerunhazard 真实用户名 HomeRunHazard，排名第 55，全期 PnL 约 282 万美元，交易量 4.46 亿美元，是 Polymarket 顶级交易者。"},
+    {"type": "divider", "label": "一、核心身份"},
+    {"type": "keyvalue", "pairs": [
+      {"key": "用户名", "value": "HomeRunHazard"},
+      {"key": "钱包地址", "value": "0x5268527977f700f9bf9b6d5cd843859e4e70135d"},
+      {"key": "排行榜排名", "value": "#55"},
+      {"key": "加入时间", "value": "2026-04-20 (Unix 1776945345)"},
+      {"key": "当前组合价值", "value": "$396,128.78"}
+    ]},
+    {"type": "divider", "label": "二、财务概览"},
+    {"type": "stat", "label": "已实现 PnL", "value": "$2,820,922"},
+    {"type": "stat", "label": "未实现 PnL", "value": "$253"},
+    {"type": "stat", "label": "总交易量", "value": "$445.66M"},
+    {"type": "stat", "label": "总交易次数", "value": "750,872"},
+    {"type": "stat", "label": "最大单笔盈利", "value": "$322,618"},
+    {"type": "stat", "label": "总费用支出", "value": "-$1,403,751"},
+    {"type": "stat", "label": "返利收入", "value": "$981,266"},
+    {"type": "stat", "label": "费用退款", "value": "$131,354"},
+    {"type": "divider", "label": "三、当前持仓 (8 个)"},
+    {"type": "table", "columns": ["市场", "方向", "持仓量", "均价", "现价", "盈亏", "收益率"], "rows": [
+      ["South Carolina vs Tennessee", "Tennessee", "30,349", "0.4635", "0.465", "+$43", "+0.31%"],
+      ["LSU vs Auburn", "Auburn", "24,704", "0.4341", "0.435", "+$22", "+0.20%"],
+      ["Pelicans vs Jazz", "Jazz", "19,800", "0.6142", "0.535", "-$1,569", "-12.90%"],
+      ["Trail Blazers vs Kings", "Trail Blazers", "14,105", "0.7204", "0.745", "+$346", "+3.41%"],
+      ["LSU vs Auburn (7.5)", "Auburn", "18,308", "0.5154", "0.52", "+$83", "+0.87%"],
+      ["Ravens vs Bengals", "Ravens", "18,705", "0.4777", "0.495", "+$323", "+3.62%"],
+      ["Rays vs Brewers", "Brewers", "14,105", "0.60", "0.625", "+$353", "+4.17%"]
+    ]},
+    {"type": "divider", "label": "四、交易模式分析"},
+    {"type": "list", "items": [
+      "📊 主要市场：NBA、NFL、CFB、MLB、网球 — 以体育赛事为主",
+      "📈 交易类型：大部分为 BUY 订单，使用别名 Powerless-Savannah",
+      "🎯 策略：分散押注多个市场，单仓规模适中（$8k-$14k）",
+      "⚠️ 风险点：Pelicans vs Jazz 当前亏损 $1,569 (-12.9%)，需关注",
+      "💰 盈利策略：Spread 和 O/U 市场，多方向押注",
+      "🔄 活跃度：极高 — 45,224 笔交易，日均数十笔"
+    ]},
+    {"type": "divider", "label": "五、跟单建议"},
+    {"type": "callout", "tone": "warning", "content": "跟单风险提示：该交易者交易量巨大（4.46 亿美元），单仓规模 $8k-$14k。若按比例跟单（如 10%），每笔需 $800-$1,400。当前有 1 个亏损仓位（Jazz -12.9%），需关注是否止损。"},
+    {"type": "list", "items": [
+      "✅ 适合跟单：Spread 和 O/U 市场，多方向押注策略",
+      "✅ 优势：高活跃度、多市场分散、历史胜率高",
+      "⚠️ 注意：单仓规模较大，需准备充足资金",
+      "⚠️ 当前亏损仓位：Pelicans vs Jazz（Jazz -12.9%），建议观望",
+      "📌 监控重点：最新交易活动显示正在押注 NBA Rockets vs Spurs O/U"
+    ]},
+    {"type": "divider", "label": "六、最新交易 (最近 10 笔)"},
+    {"type": "list", "items": [
+      "BUY Rockets vs Spurs O/U 228.5 Over @ 0.49 (912 股)",
+      "BUY Rockets vs Spurs O/U 226.5 Over @ 0.53 (332 股)",
+      "BUY Guangzhou 2: Jie Cui @ 0.77 (1,742 股)",
+      "BUY BYU vs UCF Spread BYU @ 0.44 (855 股)",
+      "BUY Almaty Open: James Duckworth @ 0.22 (221 股)",
+      "BUY Ningbo Open: Ekaterina Alexandrova @ 0.73 (3,292 股)",
+      "BUY Rockets vs Spurs O/U 230.5 Under @ 0.56 (1,343 股)",
+      "BUY Rockets vs Spurs O/U 228.5 Under @ 0.51 (929 股)"
+    ]}
+  ]
+}

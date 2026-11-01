@@ -1,0 +1,167 @@
+[
+  {
+    "id": "pl_conservative",
+    "name": "保守跟单",
+    "enabled": true,
+    "target_wallets": [],
+    "strategies": [
+      {
+        "id": "st_size_filter_1",
+        "type": "SIZE_FILTER",
+        "category": "FILTER",
+        "name": "金额过滤",
+        "description": "只跟单金额 > $500 的交易，过滤小额交易噪音",
+        "enabled": true,
+        "params": {
+          "threshold": 500.0
+        },
+        "display_order": 0
+      },
+      {
+        "id": "st_proportional_1",
+        "type": "PROPORTIONAL",
+        "category": "TRANSFORM",
+        "name": "比例缩放",
+        "description": "按 50% 比例缩放交易数量，降低跟单规模",
+        "enabled": true,
+        "params": {
+          "ratio": 0.5
+        },
+        "display_order": 1
+      },
+      {
+        "id": "st_position_cap_1",
+        "type": "POSITION_CAP",
+        "category": "RISK",
+        "name": "仓位上限",
+        "description": "单市场仓位上限 $1000，总仓位上限 $10000",
+        "enabled": true,
+        "params": {
+          "max_per_market": 1000.0,
+          "max_total": 10000.0
+        },
+        "display_order": 2
+      },
+      {
+        "id": "st_mirror_1",
+        "type": "MIRROR",
+        "category": "EXECUTION",
+        "name": "镜像跟单",
+        "description": "完全复制源交易方向和数量",
+        "enabled": true,
+        "params": {},
+        "display_order": 3
+      }
+    ]
+  },
+  {
+    "id": "pl_aggressive",
+    "name": "激进跟单",
+    "enabled": true,
+    "target_wallets": [],
+    "strategies": [
+      {
+        "id": "st_size_filter_2",
+        "type": "SIZE_FILTER",
+        "category": "FILTER",
+        "name": "金额过滤",
+        "description": "只跟单金额 > $100 的交易",
+        "enabled": true,
+        "params": {
+          "threshold": 100.0
+        },
+        "display_order": 0
+      },
+      {
+        "id": "st_fixed_amount_1",
+        "type": "FIXED_AMOUNT",
+        "category": "TRANSFORM",
+        "name": "固定金额",
+        "description": "每次跟单使用固定 $200 金额",
+        "enabled": true,
+        "params": {
+          "amount": 200.0
+        },
+        "display_order": 1
+      },
+      {
+        "id": "st_price_offset_1",
+        "type": "PRICE_OFFSET",
+        "category": "TRANSFORM",
+        "name": "价格偏移",
+        "description": "价格偏移 0.01 提高成交概率",
+        "enabled": true,
+        "params": {
+          "offset": 0.01,
+          "direction": "auto"
+        },
+        "display_order": 2
+      },
+      {
+        "id": "st_mirror_2",
+        "type": "MIRROR",
+        "category": "EXECUTION",
+        "name": "镜像跟单",
+        "description": "执行跟单",
+        "enabled": true,
+        "params": {},
+        "display_order": 3
+      }
+    ]
+  },
+  {
+    "id": "pl_reverse",
+    "name": "反向跟单",
+    "enabled": true,
+    "target_wallets": [],
+    "strategies": [
+      {
+        "id": "st_size_filter_3",
+        "type": "SIZE_FILTER",
+        "category": "FILTER",
+        "name": "金额过滤",
+        "description": "只跟单金额 > $1000 的大额交易",
+        "enabled": true,
+        "params": {
+          "threshold": 1000.0
+        },
+        "display_order": 0
+      },
+      {
+        "id": "st_reverse_1",
+        "type": "REVERSE",
+        "category": "TRANSFORM",
+        "name": "反向跟单",
+        "description": "翻转交易方向（BUY → SELL, SELL → BUY）",
+        "enabled": true,
+        "params": {},
+        "display_order": 1
+      },
+      {
+        "id": "st_proportional_2",
+        "type": "PROPORTIONAL",
+        "category": "TRANSFORM",
+        "name": "比例缩放",
+        "description": "按 30% 比例缩放",
+        "enabled": true,
+        "params": {
+          "ratio": 0.3
+        },
+        "display_order": 2
+      },
+      {
+        "id": "st_stop_loss_1",
+        "type": "STOP_LOSS",
+        "category": "RISK",
+        "name": "止盈止损",
+        "description": "止损 10%，止盈 20%",
+        "enabled": true,
+        "params": {
+          "stop_loss_pct": 0.1,
+          "take_profit_pct": 0.2
+        },
+        "display_order": 3
+      }
+    ]
+  }
+]

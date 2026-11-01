@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polymarket 跟单系统 - 多钱包管理</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-chart-line"></i>
+          <span>Polymarket 跟单</span>
+        </div>
+      </div>
+
+      <!-- 操作钱包 -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">
+          <i class="fas fa-wallet"></i>
+          操作钱包
+        </div>
+        <div class="wallet-selector" id="tradingWalletSelector">
+          <div class="wallet-item active" data-wallet="0x5268527977f700f9bf9b6d5cd843859e4e70135d">
+            <div class="wallet-avatar" style="background: linear-gradient(135deg, #00d4ff, #7b2cbf);">
+              <i class="fas fa-crown"></i>
+            </div>
+            <div class="wallet-info">
+              <div class="wallet-name">主钱包</div>
+              <div class="wallet-address">0x5268...0135d</div>
+            </div>
+          </div>
+          <button class="btn-add-wallet" id="addTradingWallet">
+            <i class="fas fa-plus"></i>
+            <span>切换操作钱包</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 跟踪钱包列表 -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">
+          <i class="fas fa-eye"></i>
+          跟踪钱包
+          <button class="btn-icon-sm" id="addTrackedWalletBtn">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        <div class="tracked-wallets" id="trackedWalletsList">
+          <!-- 动态生成 -->
+        </div>
+      </div>
+
+      <!-- 导航 -->
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-item active" data-view="dashboard">
+          <i class="fas fa-home"></i>
+          <span>仪表盘</span>
+        </a>
+        <a href="#positions" class="nav-item" data-view="positions">
+          <i class="fas fa-briefcase"></i>
+          <span>持仓分析</span>
+        </a>
+        <a href="#trades" class="nav-item" data-view="trades">
+          <i class="fas fa-exchange-alt"></i>
+          <span>实时交易</span>
+        </a>
+        <a href="#leaderboard" class="nav-item" data-view="leaderboard">
+          <i class="fas fa-trophy"></i>
+          <span>排行榜</span>
+        </a>
+        <a href="#settings" class="nav-item" data-view="settings">
+          <i class="fas fa-cog"></i>
+          <span>设置</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-bar">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">连接中...</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="header-left">
+          <h1 class="page-title" id="pageTitle">仪表盘</h1>
+          <div class="active-wallet-info" id="activeWalletInfo">
+            <i class="fas fa-eye"></i>
+            <span id="activeWalletName">HomeRunHazard</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="time-display">
+            <i class="fas fa-clock"></i>
+            <span id="currentTime">--:--:--</span>
+          </div>
+          <button class="btn-refresh" id="refreshBtn">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+          <button class="btn-monitor" id="monitorBtn">
+            <i class="fas fa-play"></i>
+            <span>开始监控</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard View -->
+      <div class="view active" id="view-dashboard">
+        <div class="stats-row">
+          <div class="stat-card highlight">
+            <div class="stat-header">
+              <i class="fas fa-dollar-sign icon-profit"></i>
+              <span class="stat-label">全期 PnL</span>
+            </div>
+            <div class="stat-value" id="pnlValue">--</div>
+            <div class="stat-change" id="pnlChange">
+              <i class="fas fa-arrow-up"></i>
+              <span>+2,820,922</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <i class="fas fa-exchange-alt icon-volume"></i>
+              <span class="stat-label">总交易量</span>
+            </div>
+            <div class="stat-value" id="volumeValue">--</div>
+            <div class="stat-sub">$445.66M</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <i class="fas fa-coins icon-trades"></i>
+              <span class="stat-label">交易笔数</span>
+            </div>
+            <div class="stat-value" id="tradesValue">--</div>
+            <div class="stat-sub">750,872 笔</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <i class="fas fa-wallet icon-portfolio"></i>
+              <span class="stat-label">当前组合</span>
+            </div>
+            <div class="stat-value" id="portfolioValue">--</div>
+            <div class="stat-sub" id="portfolioSub">加载中...</div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="card-header">
+              <h3><i class="fas fa-chart-pie"></i> 持仓分布</h3>
+            </div>
+            <div class="chart-container">
+              <canvas id="positionChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="card-header">
+              <h3><i class="fas fa-chart-line"></i> 盈亏趋势</h3>
+            </div>
+            <div class="chart-container">
+              <canvas id="pnlChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- 实时交易流 -->
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-bolt"></i> 实时交易流</h3>
+            <div class="card-actions">
+              <div class="filter-group">
+                <button class="filter-btn active" data-type="all">全部</button>
+                <button class="filter-btn" data-type="win">盈利</button>
+                <button class="filter-btn" data-type="loss">亏损</button>
+              </div>
+            </div>
+          </div>
+          <div class="trade-stream" id="tradeStream">
+            <div class="loading-state">
+              <i class="fas fa-spinner fa-spin"></i>
+              <span>加载实时交易...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Positions View -->
+      <div class="view" id="view-positions">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-briefcase"></i> 持仓分析</h3>
+            <div class="card-actions">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="positionSearch" placeholder="搜索市场...">
+              </div>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>市场</th>
+                  <th>方向</th>
+                  <th>持仓量</th>
+                  <th>入场价</th>
+                  <th>当前价</th>
+                  <th>盈亏</th>
+                  <th>收益率</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="positionsTable">
+                <tr>
+                  <td colspan="8" class="loading-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>加载持仓数据...</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trades View -->
+      <div class="view" id="view-trades">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-exchange-alt"></i> 实时交易明细</h3>
+            <div class="card-actions">
+              <div class="filter-group">
+                <button class="filter-btn active" data-type="all">全部</button>
+                <button class="filter-btn" data-type="buy">买入</button>
+                <button class="filter-btn" data-type="sell">卖出</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>时间</th>
+                  <th>市场</th>
+                  <th>方向</th>
+                  <th>金额</th>
+                  <th>价格</th>
+                  <th>盈亏</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody id="tradesTable">
+                <tr>
+                  <td colspan="7" class="loading-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>加载交易数据...</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leaderboard View -->
+      <div class="view" id="view-leaderboard">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-trophy"></i> 交易排行榜</h3>
+            <div class="card-actions">
+              <div class="filter-group">
+                <button class="filter-btn active" data-period="all">全部</button>
+                <button class="filter-btn" data-period="month">本月</button>
+                <button class="filter-btn" data-period="week">本周</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>排名</th>
+                  <th>用户</th>
+                  <th>PnL</th>
+                  <th>交易量</th>
+                  <th>交易笔数</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardTable">
+                <tr>
+                  <td colspan="6" class="loading-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>加载排行榜...</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings View -->
+      <div class="view" id="view-settings">
+        <div class="settings-grid">
+          <div class="card settings-card">
+            <div class="card-header">
+              <h3><i class="fas fa-wallet"></i> 操作钱包设置</h3>
+            </div>
+            <div class="settings-body">
+              <div class="setting-group">
+                <label class="setting-label">当前操作钱包</label>
+                <div class="user-display">
+                  <div class="user-avatar" id="tradingAvatar">
+                    <i class="fas fa-crown"></i>
+                  </div>
+                  <div class="user-info">
+                    <div class="username" id="tradingName">主钱包</div>
+                    <div class="wallet" id="tradingAddress">0x5268...0135d</div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn primary full-width" id="changeTradingWallet">
+                <i class="fas fa-exchange-alt"></i>
+                切换操作钱包
+              </button>
+            </div>
+          </div>
+
+          <div class="card settings-card">
+            <div class="card-header">
+              <h3><i class="fas fa-eye"></i> 跟踪钱包管理</h3>
+            </div>
+            <div class="settings-body">
+              <div class="tracked-list" id="settingsTrackedList">
+                <!-- 动态生成 -->
+              </div>
+              <button class="btn secondary full-width" id="addTrackedWalletSettings">
+                <i class="fas fa-plus"></i>
+                添加跟踪钱包
+              </button>
+            </div>
+          </div>
+
+          <div class="card settings-card">
+            <div class="card-header">
+              <h3><i class="fas fa-bell"></i> 监控设置</h3>
+            </div>
+            <div class="settings-body">
+              <div class="setting-group">
+                <label class="setting-label">
+                  <i class="fas fa-clock"></i>
+                  刷新频率
+                </label>
+                <select id="refreshRate" class="setting-select">
+                  <option value="5">5 秒</option>
+                  <option value="10">10 秒</option>
+                  <option value="30" selected>30 秒</option>
+                  <option value="60">1 分钟</option>
+                  <option value="300">5 分钟</option>
+                </select>
+              </div>
+              <div class="setting-group">
+                <label class="setting-label">
+                  <i class="fas fa-volume-up"></i>
+                  通知方式
+                </label>
+                <div class="checkbox-group">
+                  <label class="checkbox">
+                    <input type="checkbox" id="notifyBrowser" checked>
+                    <span>浏览器通知</span>
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox" id="notifySound" checked>
+                    <span>声音提醒</span>
+                  </label>
+                </div>
+              </div>
+              <button class="btn primary full-width" id="saveSettings">
+                <i class="fas fa-save"></i>
+                保存设置
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 添加钱包 Modal -->
+  <div class="modal-overlay" id="addWalletModal" style="display: none;">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-plus"></i> 添加钱包</h3>
+        <button class="btn-close" id="closeModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>钱包地址</label>
+          <input type="text" id="walletAddress" class="setting-input" placeholder="输入钱包地址 (0x...)" />
+        </div>
+        <div class="form-group">
+          <label>钱包名称 (可选)</label>
+          <input type="text" id="walletName" class="setting-input" placeholder="例如: HomeRunHazard" />
+        </div>
+        <div class="form-group">
+          <label>或从排行榜选择</label>
+          <select id="leaderboardSelect" class="setting-select">
+            <option value="">-- 选择用户 --</option>
+          </select>
+        </div>
+        <button class="btn primary full-width" id="confirmAddWallet">
+          <i class="fas fa-plus"></i>
+          添加钱包
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 切换操作钱包 Modal -->
+  <div class="modal-overlay" id="switchWalletModal" style="display: none;">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-exchange-alt"></i> 切换操作钱包</h3>
+        <button class="btn-close" id="closeSwitchModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>选择操作钱包</label>
+          <select id="switchWalletSelect" class="setting-select">
+            <option value="0x5268527977f700f9bf9b6d5cd843859e4e70135d">主钱包 (0x5268...0135d)</option>
+          </select>
+        </div>
+        <button class="btn primary full-width" id="confirmSwitchWallet">
+          <i class="fas fa-check"></i>
+          确认切换
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 通知 -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

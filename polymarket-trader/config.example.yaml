@@ -1,0 +1,73 @@
+# Polymarket Trader 配置示例
+# 复制为 config.yaml 并按需修改，或使用环境变量覆盖
+
+# HTTP/HTTPS 代理（可选，用于访问 Polymarket API）
+proxy:
+  http: ""        # 例: "http://127.0.0.1:7890"
+  https: ""       # 例: "http://127.0.0.1:7890"
+
+# Polymarket API 凭据（可选，真实跟单需要）
+polymarket:
+  api_key: ""
+  api_secret: ""
+  api_passphrase: ""
+  wallet_address: ""    # 你的 Polygon 钱包地址
+  private_key: ""       # 你的私钥（仅本地使用，切勿提交）
+
+# 监控配置
+monitor:
+  interval: 2           # 轮询间隔（秒）— 秒级实时，默认 2s
+  min_interval: 1       # 最小轮询间隔（秒），防止过于频繁
+  ws_enabled: true      # 启用 WebSocket Market Channel 实时价格缓存
+
+# 风险控制参数
+risk:
+  max_trade_amount: 100.0      # 单笔最大金额 (USDC)
+  max_position_per_market: 500.0  # 单市场最大仓位 (USDC)
+  max_daily_trades: 50         # 日最大交易数
+
+# 执行器配置
+executor:
+  mode: paper           # paper | live
+
+# 服务器配置
+server:
+  port: 8765
+  host: "0.0.0.0"
+
+# 通知推送配置（可选）
+# 让用户不用一直盯屏幕：交易 / 信号 / 成交 / 失败 / 风控 / 汇总 主动推送
+notification:
+  # ── Telegram ──
+  telegram_enabled: false        # 是否启用 Telegram 通知
+  telegram_token: ""             # Bot Token（@BotFather 获取），切勿提交到版本控制
+  telegram_chat_ids: []          # 接收方 Chat ID 列表（个人: 123456789，群组: -1001234567890）
+
+  # ── 邮件 ──
+  email_enabled: false           # 是否启用邮件通知
+  email_host: ""                 # SMTP 主机（例: "smtp.qq.com"）
+  email_port: 587                # SMTP 端口（465=SSL，587=STARTTLS）
+  email_user: ""                 # SMTP 用户名（通常为邮箱地址）
+  email_password: ""             # SMTP 密码 / 授权码，切勿提交到版本控制
+  email_from: ""                 # 发件人地址（留空则使用 email_user）
+  email_to: []                   # 收件人列表
+  email_use_ssl: false           # true = 隐式 SSL(465)；false = STARTTLS(587)
+
+  # ── 过滤规则 ──
+  min_notify_amount: 0.0         # 最小通知金额 (USDC)，0 = 不过滤
+  notify_events: []              # 事件类型白名单，空 = 全部通知
+                                # 可选: trade_detected / signal_generated /
+                                #       execution_filled / execution_failed /
+                                #       risk_blocked / daily_summary
+  notify_wallets: []             # 仅通知这些源钱包，空 = 不限制
+  cooldown_seconds: 0.0          # 同一事件重复推送冷却时间（秒），0 = 不限制
+
+  # ── 每日汇总 ──
+  daily_summary_hour: 8          # 每日汇总发送时间（UTC 小时）
+  daily_summary_minute: 0        # 每日汇总发送时间（UTC 分钟）
+
+# 实时成交推送、REST 补拉与最终结算同步
+realtime:
+  enabled: true
+  rest_interval: 2
+  settlement_interval: 15

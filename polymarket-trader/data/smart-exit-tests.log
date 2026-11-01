@@ -1,0 +1,18 @@
+test_auto_strategy_executes_with_global_review_and_caps (test_smart_trading.SmartTests.test_auto_strategy_executes_with_global_review_and_caps) ... ok
+test_consensus_counts_unique_wallets_not_number_of_trades (test_smart_trading.SmartTests.test_consensus_counts_unique_wallets_not_number_of_trades) ... ok
+test_estimates_disclose_hypothesis_and_costs (test_smart_trading.SmartTests.test_estimates_disclose_hypothesis_and_costs) ... ok
+test_global_observe_vetoes_auto (test_smart_trading.SmartTests.test_global_observe_vetoes_auto) ... ok
+test_mode_mismatch_no_live_orders (test_smart_trading.SmartTests.test_mode_mismatch_no_live_orders) ... ok
+test_model_schema_cannot_override_orders (test_smart_trading.SmartTests.test_model_schema_cannot_override_orders) ... ok
+test_model_unconfigured_or_failed_never_falls_back_to_buy (test_smart_trading.SmartTests.test_model_unconfigured_or_failed_never_falls_back_to_buy) ... ok
+test_modified_config_invalidates_queued_order (test_smart_trading.SmartTests.test_modified_config_invalidates_queued_order) ... ok
+test_pause_during_model_call_vetoes_late_approval (test_smart_trading.SmartTests.test_pause_during_model_call_vetoes_late_approval) ... ok
+test_review_strategy_does_not_auto_even_global_auto (test_smart_trading.SmartTests.test_review_strategy_does_not_auto_even_global_auto) ... ok
+test_stale_or_wrong_token_does_not_trade (test_smart_trading.SmartTests.test_stale_or_wrong_token_does_not_trade) ... ok
+test_stop_loss_checks_book_without_new_source_trade_or_cooldown_wait (test_smart_trading.SmartTests.test_stop_loss_checks_book_without_new_source_trade_or_cooldown_wait) ... ok
+test_take_profit_exits_owned_lots_even_model_offline (test_smart_trading.SmartTests.test_take_profit_exits_owned_lots_even_model_offline) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 9.618s
+
+OK

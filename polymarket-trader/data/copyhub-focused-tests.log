@@ -1,0 +1,11 @@
+test_fixed_ratio_caps_and_source_price_filters (test_copy_rules.CopyRuleTests.test_fixed_ratio_caps_and_source_price_filters) ... ok
+test_global_exit_consumes_fifo_rule_lots_before_another_rule_buys (test_copy_rules.CopyRuleTests.test_global_exit_consumes_fifo_rule_lots_before_another_rule_buys) ... ok
+test_mode_change_before_submit_and_old_backfill_are_blocked (test_copy_rules.CopyRuleTests.test_mode_change_before_submit_and_old_backfill_are_blocked) ... ok
+test_pause_rule_blocks_waiting_approval (test_copy_rules.CopyRuleTests.test_pause_rule_blocks_waiting_approval) ... ok
+test_rule_identity_deduplicates_same_source (test_copy_rules.CopyRuleTests.test_rule_identity_deduplicates_same_source) ... ok
+test_sell_never_spends_other_rule_inventory (test_copy_rules.CopyRuleTests.test_sell_never_spends_other_rule_inventory) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 2.702s
+
+OK

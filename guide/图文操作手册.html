@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polymarket 跟单机器人 — 图文操作手册</title>
+<style>
+  :root{ --bg:#0f1115; --card:#171a21; --line:#272b34; --txt:#e6e8ea; --dim:#9aa4b2; --ok:#3fb950; --warn:#d29922; --err:#f85149; --acc:#58a6ff; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;line-height:1.75}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 20px 80px}
+  h1{font-size:30px;margin:0 0 8px}
+  h2{font-size:22px;margin:44px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--acc);color:var(--acc)}
+  h3{font-size:17px;margin:26px 0 10px}
+  p,li{color:#d5d9df}
+  .sub{color:var(--dim);font-size:14px;margin:0 0 24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:16px 0}
+  .callout{border-left:4px solid var(--warn);background:#1d1a12;border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0}
+  .callout.ok{border-color:var(--ok);background:#111d14}
+  .callout.err{border-color:var(--err);background:#1f1213}
+  .callout.info{border-color:var(--acc);background:#111825}
+  .callout b{color:#fff}
+  code{background:#22262e;padding:2px 7px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:#7ee787}
+  pre{background:#0b0d11;border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:Consolas,monospace;font-size:13px;color:#c9d1d9;margin:12px 0}
+  figure{margin:20px 0;background:#0b0d11;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{padding:10px 16px;color:var(--dim);font-size:13px;border-top:1px solid var(--line);background:#12151b}
+  .step{display:flex;gap:14px;margin:18px 0}
+  .num{flex:0 0 34px;height:34px;border-radius:50%;background:var(--acc);color:#08111d;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .stepbody{flex:1;padding-top:3px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left}
+  th{background:#1c2129;color:var(--acc)}
+  .kv{color:var(--dim)}
+  .tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600}
+  .t-ok{background:#12261a;color:var(--ok);border:1px solid #2a5a37}
+  .t-no{background:#261416;color:var(--err);border:1px solid #5a2a2a}
+  .t-w{background:#262014;color:var(--warn);border:1px solid #5a4a2a}
+  ul{padding-left:22px}
+  .toc a{color:var(--acc);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Polymarket 跟单机器人 · 图文操作手册</h1>
+<p class="sub">本金 30 USDC · 跟单对象 ColdBlooded · 最新版（已修复 npm 脚本名错误）</p>
+
+<div class="callout ok">
+  <b>30 秒极简版</b><br>
+  进入项目文件夹 → 双击 <code>1-检测网络.bat</code> 看到三个 HTTP 200 → 双击 <code>2-开始监控.bat</code> → 黑窗口保持开着别关。<br>
+  <span class="kv">不充钱、不要私钥、不装任何东西，全程零风险。</span>
+</div>
+
+<div class="card toc">
+  <b>目录</b>
+  <ol>
+    <li><a href="#s1">先认识文件夹里的东西</a></li>
+    <li><a href="#s2">第 1 步：双击「1-检测网络.bat」</a></li>
+    <li><a href="#s3">第 2 步：双击「2-开始监控.bat」</a></li>
+    <li><a href="#s4">第 3 步：看懂黑窗口在说什么</a></li>
+    <li><a href="#s5">第 4 步：改参数（唯一需要你动手的文件）</a></li>
+    <li><a href="#s6">常见问题与报错对照表</a></li>
+    <li><a href="#s7">什么时候才能真的下单（live 模式）</a></li>
+  </ol>
+</div>
+
+<h2 id="s1">1. 先认识文件夹里的东西</h2>
+
+<p>打开这个文件夹（复制下面路径粘贴到「此电脑」地址栏回车即可）：</p>
+<pre>D:\Users\Administrator\Documents\deepseek-harness\default-workspace\.dsh-switchman\probe-npm</pre>
+
+<p>里面你会看到这些文件：</p>
+<table>
+  <tr><th>文件</th><th>它是干嘛的</th><th>你要动它吗</th></tr>
+  <tr><td><code>1-检测网络.bat</code></td><td>测网络通不通（只读，绝对安全）</td><td><span class="tag t-ok">要双击</span></td></tr>
+  <tr><td><code>2-开始监控.bat</code></td><td>开始跟单监控（dry-run，只打印不下单）</td><td><span class="tag t-ok">要双击</span></td></tr>
+  <tr><td><code>config.json</code></td><td>所有参数都在这里</td><td><span class="tag t-w">要用记事本改</span></td></tr>
+  <tr><td><code>README.md</code></td><td>纯文字完整说明</td><td>不看也行</td></tr>
+  <tr><td><code>src\</code> <code>scripts\</code></td><td>程序代码</td><td><span class="tag t-no">别动</span></td></tr>
+  <tr><td><code>logs\</code></td><td>每次运行的日志自动存这里</td><td>可以翻</td></tr>
+</table>
+
+<div class="callout err">
+  <b>本次修复了一个真实 Bug（重要）</b><br>
+  之前 <code>1-检测网络.bat</code> 里写的是 <code>npm run probe:proxy</code>，但 <code>package.json</code> 里根本没有这个名字。
+  结果 npm 没有跑脚本，反而弹了一个<b>「选择 npm run probe:proxy」的交互式选择框</b>让你手动选——
+  很多人以为程序卡住了或网络坏了，其实是这个原因。<b>已改成正确的 <code>npm run probe</code>，现在双击直接跑。</b>
+</div>
+
+<h2 id="s2">2. 第 1 步：双击「1-检测网络.bat」</h2>
+
+<div class="step">
+  <div class="num">1</div>
+  <div class="stepbody">在文件夹里找到 <code>1-检测网络.bat</code>，<b>双击</b>它。</div>
+</div>
+<div class="step">
+  <div class="num">2</div>
+  <div class="stepbody">会弹出一个黑窗口。等大约 <b>3~10 秒</b>（第一次可能慢一点）。</div>
+</div>
+<div class="step">
+  <div class="num">3</div>
+  <div class="stepbody">看到下面这个画面就说明网络完全正常：</div>
+</div>
+
+<figure>
+  <img src="images/02-probe.png" alt="网络检测成功截图">
+  <figcaption>▲ 真实截图（2026-10-24 13:48 于本机运行）：三个接口全部 HTTP 200，并列出目标地址最近 10 笔成交中哪些会被跟单。</figcaption>
+</figure>
+
+<h3>逐行解读这张图</h3>
+<table>
+  <tr><th>屏幕上的文字</th><th>什么意思</th></tr>
+  <tr><td><code>检测到本机代理：http://127.0.0.1:7897</code></td><td>程序自动找到了你电脑上的「梯子」端口。<b>不用你做任何事</b></td></tr>
+  <tr><td><code>正在用代理重启本程序（这是必需的一步，不是出错）...</code></td><td><span class="tag t-w">正常！</span>Node.js 只在程序启动的那一瞬间读代理配置，所以程序必须「重启自己」一次才能生效。<b>这不是报错，看到就对了</b></td></tr>
+  <tr><td><code>代理已就绪：http://127.0.0.1:7897</code></td><td>重启完成，代理生效</td></tr>
+  <tr><td><code>OK  data-api /trades: HTTP 200 (182ms, 701 bytes)</code></td><td><span class="tag t-ok">通</span>成交记录接口。200 = 成功，182ms = 响应速度</td></tr>
+  <tr><td><code>OK  gamma-api /markets: HTTP 200 (614ms, 6204 bytes)</code></td><td><span class="tag t-ok">通</span>市场信息接口</td></tr>
+  <tr><td><code>OK  clob /ok: HTTP 200 (343ms, 4 bytes)</code></td><td><span class="tag t-ok">通</span>交易引擎接口</td></tr>
+</table>
+
+<div class="callout info">
+  <b>为什么需要「代理」这一套？</b><br>
+  你的「梯子」是 Windows <b>系统级代理</b>：浏览器会自动走它，所以你用浏览器打开 Polymarket 一切正常。<br>
+  但 <b>Node.js（本程序）默认完全无视系统代理</b>，所以之前一直超时连不上。<br>
+  现在程序会自动探测本机代理端口并用它重启自己，<b>你保持梯子开着就行，其余全自动。</b>
+</div>
+
+<h3>然后看成交列表</h3>
+<p>图片下半部分的 <code>--- 目标地址最近 10 笔成交 ---</code> 是在告诉你：对方的哪些单会被跟。</p>
+<table>
+  <tr><th>行首标记</th><th>含义</th></tr>
+  <tr><td><code>OK 会跟</code></td><td>金额 ≥ 你设的下限 $500 → 会复制</td></tr>
+  <tr><td><code>-- 大小</code></td><td>金额太小 → 跳过（过滤噪音单）</td></tr>
+</table>
+<div class="callout">
+  <b>图里的实际情况</b>：3 笔会跟（$3481.90 / $2662.00 / $887.00），7 笔因太小跳过。<br>
+  <b>但要注意</b>：这几笔所在的英雄联盟市场成交量只有约 $36,453，低于你设的 <code>minMarketVolumeUsd = 50000</code>，
+  所以在真正的监控里<b>还是会被成交量过滤器挡掉</b>。这是「宁缺毋滥」的正常表现——不是坏了。
+</div>
+
+<h2 id="s3">3. 第 2 步：双击「2-开始监控.bat」</h2>
+
+<div class="step">
+  <div class="num">1</div>
+  <div class="stepbody">确认第一步三个 HTTP 200 之后，回到文件夹，<b>双击</b> <code>2-开始监控.bat</code>。</div>
+</div>
+<div class="step">
+  <div class="num">2</div>
+  <div class="stepbody">黑窗口出现，你会看到下面这个启动画面：</div>
+</div>
+
+<figure>
+  <img src="images/03-dryrun.png" alt="dry-run 监控启动截图">
+  <figcaption>▲ 真实截图（2026-10-24 13:49 于本机运行）：DRY-RUN 模式启动成功，配置全部生效。</figcaption>
+</figure>
+
+<h3>启动画面逐行解读</h3>
+<table>
+  <tr><th>屏幕上的文字</th><th>意思</th></tr>
+  <tr><td><code>Polymarket 跟单机器人启动  DRY-RUN 只观察不下单</code></td><td><span class="tag t-ok">安全模式</span>只会打印，绝不下单、绝不花钱</td></tr>
+  <tr><td><code>跟单对象: 0xbcc3...ac9c</code></td><td>ColdBlooded（胜率 69%，盈亏比 1.79）</td></tr>
+  <tr><td><code>下单模式: fixed 每笔 $3.00</code></td><td>每笔固定跟 $3，30 本金最多跟 10 笔</td></tr>
+  <tr><td><code>资金区间: 下限 $500.00 / 不设上限</code></td><td>对方单笔 &lt; $500 不跟；大单不限</td></tr>
+  <tr><td><code>仓位上限: 单市场 $6.00 / 总计 $15.00 / 单笔 $3.00</code></td><td>三道保险，防止一把亏光</td></tr>
+  <tr><td><code>止损 $-9.00 / 止盈 $15.00</code></td><td>总浮亏到 -$9 停机；总浮盈到 +$15 平仓</td></tr>
+  <tr><td><code>首次扫描到 100 条历史成交，只记录不下单</code></td><td><span class="tag t-ok">关键</span>防止一启动就把对方过去 100 笔全跟一遍</td></tr>
+</table>
+
+<div class="callout err">
+  <b>这个黑窗口千万别关！</b><br>
+  它每 <b>60 秒</b>检查一次对方有没有新交易。<b>关掉 = 停止监控</b>。<br>
+  想停止：在窗口里按 <code>Ctrl + C</code>，程序会自动保存状态。<br>
+  <span class="kv">建议：最小化就行，别关。</span>
+</div>
+
+<h2 id="s4">4. 看懂黑窗口在说什么</h2>
+
+<p>启动之后，每 60 秒会刷新一轮。你主要会看到这些输出：</p>
+<table>
+  <tr><th>输出</th><th>含义</th><th>你要做什么</th></tr>
+  <tr><td><code>[时间] INFO 第 N 轮 · 无新交易</code></td><td>对方这分钟没动作</td><td>什么都不用做</td></tr>
+  <tr><td><code>OK 会跟  $XXX  BUY xxx @ 0.7</code></td><td>发现一笔值得跟的单</td><td>记下来，观察后续</td></tr>
+  <tr><td><code>-- 大小</code></td><td>金额太小，跳过</td><td>正常</td></tr>
+  <tr><td><code>-- 冷门</code></td><td>市场成交量不足，跳过</td><td>正常</td></tr>
+  <tr><td><code>-- 超限</code></td><td>已触达单市场/总仓位上限</td><td>正常，说明保险在起作用</td></tr>
+  <tr><td><code>[DRY-RUN] 跳过下单</code></td><td>模拟完成，未真实下单</td><td>正常</td></tr>
+</table>
+
+<div class="callout">
+  <b>怎么判断它在正常工作？</b><br>
+  只要窗口<b>每隔一分钟左右出现新的时间戳</b>，就是活的。<br>
+  如果超过 3 分钟没有任何新输出 → 见下面第 6 节排查。
+</div>
+
+<h2 id="s5">5. 改参数（唯一需要你动手的文件）</h2>
+
+<div class="step">
+  <div class="num">1</div>
+  <div class="stepbody">在 <code>config.json</code> 上<b>右键 → 打开方式 → 记事本</b>。</div>
+</div>
+<div class="step">
+  <div class="num">2</div>
+  <div class="stepbody">你会看到下面这样的内容（每个字段都带中文注释）：</div>
+</div>
+
+<figure>
+  <img src="images/04-config.png" alt="config.json 记事本截图">
+  <figcaption>▲ config.json 在记事本中的实际样子，字段带中文注释。</figcaption>
+</figure>
+
+<h3>常用字段速查</h3>
+<table>
+  <tr><th>字段</th><th>当前值</th><th>作用</th><th>什么时候改</th></tr>
+  <tr><td><code>mode</code></td><td>dry-run</td><td>dry-run=只看不买；live=真下单</td><td><b>两周后才考虑改</b></td></tr>
+  <tr><td><code>targetWallet</code></td><td>0xbcc3…ac9c</td><td>跟谁</td><td>换跟单对象时</td></tr>
+  <tr><td><code>minTradeUsd</code></td><td>500</td><td>对方单笔低于此值不跟</td><td>想更保守→调高；想多跟→调低</td></tr>
+  <tr><td><code>maxTradeUsd</code></td><td>0</td><td>对方单笔高于此值不跟（0=不限）</td><td>目前<b>不建议改</b>，见下方说明</td></tr>
+  <tr><td><code>fixedOrderSizeUsd</code></td><td>3</td><td>每笔跟多少美元</td><td>本金变多时调高</td></tr>
+  <tr><td><code>minMarketVolumeUsd</code></td><td>50000</td><td>市场成交量低于此值不跟</td><td>觉得太保守可降到 20000</td></tr>
+  <tr><td><code>maxTotalInvestedUsd</code></td><td>15</td><td>同时在手最多多少钱</td><td>本金变多时调高</td></tr>
+  <tr><td><code>privateKey</code></td><td>空</td><td>你的钱包私钥</td><td><b>只有上 live 才填，且绝不外传</b></td></tr>
+</table>
+
+<div class="callout">
+  <b>为什么 maxTradeUsd 是 0（不设上限）？</b><br>
+  ColdBlooded 是<b>低频高信念型</b>选手——他不常出手，出手时的大单往往就是他最有把握的判断。<br>
+  如果设上限，反而会把<b>最值钱的那几笔</b>砍掉。<br>
+  建议：先跑两周，看清楚他单笔金额的实际分布，再决定要不要设。真要设，建议从 <code>$3000</code> 起。
+</div>
+
+<div class="callout err">
+  <b>改完必须做的事</b><br>
+  ① 记事本里按 <code>Ctrl + S</code> 保存<br>
+  ② <b>关掉黑窗口</b>（Ctrl+C），<b>重新双击 bat</b> —— 配置只在启动时读取，改了不重启不生效
+</div>
+
+<h2 id="s6">6. 常见问题与报错对照表</h2>
+
+<table>
+  <tr><th>你看到的现象</th><th>原因</th><th>怎么办</th></tr>
+  <tr><td>弹出「选择 npm run probe:proxy」窗口让你选</td><td>旧版 bat 的脚本名错误</td><td><span class="tag t-ok">已修复</span>重新拉最新文件；若还出现，直接关掉窗口，改用命令行 <code>node scripts/probe.mjs</code></td></tr>
+  <tr><td><code>fetch failed</code> / <code>UND_ERR_CONNECT_TIMEOUT</code></td><td>梯子没开，或端口不是 7897</td><td>① 确认梯子已开 ② 浏览器打开 polymarket.com 确认能上 ③ 若你的梯子端口不是 7897，程序会依次探测 7890/10809/10808/1080/8080 等常见端口；仍失败就去梯子设置里查端口，告诉我</td></tr>
+  <tr><td>一直卡在「正在用代理重启本程序」</td><td>代理连上了但目标域名被墙或梯子规则拦截</td><td>换梯子节点 / 确认梯子允许 polymarket.com</td></tr>
+  <tr><td><code>npm 不是内部或外部命令</code></td><td>没装 Node.js</td><td>去 nodejs.org 下载 LTS 版安装，一路下一步，装完<b>重开电脑</b></td></tr>
+  <tr><td>黑窗口一闪就消失</td><td>bat 路径含中文或权限问题</td><td>用命令行进入该目录再运行（见下方）</td></tr>
+  <tr><td>超过 3 分钟没新输出</td><td>网络断了或程序卡住</td><td>Ctrl+C 停掉，重跑 <code>1-检测网络.bat</code></td></tr>
+  <tr><td>所有单都被「-- 冷门」跳过</td><td>minMarketVolumeUsd=50000 太严</td><td>改到 20000，重启生效</td></tr>
+</table>
+
+<h3>备用启动方式（图形界面失败时用）</h3>
+<p>按 <code>Win + R</code>，输入 <code>cmd</code> 回车，然后粘贴下面两行（每行回车）：</p>
+<pre>cd /d "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\.dsh-switchman\probe-npm"
+node scripts/probe.mjs</pre>
+<p>确认网络 OK 后，再运行监控：</p>
+<pre>node src/index.mjs</pre>
+
+<h2 id="s7">7. 什么时候才能真的下单（live 模式）</h2>
+
+<div class="callout err">
+  <b>dry-run 至少跑满 3 天以上</b>，确认你亲眼看到过「会跟」的记录，再考虑 live。
+</div>
+
+<h3>开启 live 的完整步骤</h3>
+<div class="step"><div class="num">1</div><div class="stepbody"><b>充值</b>：往 <code>0x1279333686e1766Efc417acD55547E772EA7328</code> 转 30 USDC，<b>必须是 Base 网络</b>。</div></div>
+<div class="step"><div class="num">2</div><div class="stepbody"><b>拿到私钥</b>：从你控制该地址的钱包导出（0x 开头 64 位）。</div></div>
+<div class="step"><div class="num">3</div><div class="stepbody">打开 <code>config.json</code>，填 <code>privateKey</code>，把 <code>mode</code> 改成 <code>live</code>，保存。</div></div>
+<div class="step"><div class="num">4</div><div class="stepbody">重新双击 <code>2-开始监控.bat</code>。这次会真下单。</div></div>
+
+<div class="callout err">
+  <b>两个必须避开的坑</b><br>
+  <b>① 不要用以太坊主网桥接。</b>主网 gas 可能要 $5~20，直接吃掉你 30 本金的 17%~67%。<b>必须用交易所直接提币到 Base 网络。</b><br>
+  <b>② 私钥绝不外传。</b>不要截图、不要发给任何人（包括我）。这个文件只存在你自己的电脑上。
+</div>
+
+<div class="callout">
+  <b>关于这 30 U 的定位（说实话）</b><br>
+  这 30 U 主要作用是<b>「学费 + 平台测试费」</b>，不是指望它赚钱。<br>
+  两周测试期真正值钱的产出是三项：<br>
+  ① <b>滑点实测</b>——跟单实际成交价和对方成交价差多少<br>
+  ② <b>平台可信度</b>——下单/撤单是否稳定、有没有卡单<br>
+  ③ <b>心理承受度</b>——真金白银浮亏时你能不能拿住<br>
+  <span class="kv">把希望放在学到东西上，而不是放在 30 U 翻倍上。</span>
+</div>
+
+<hr style="border:0;border-top:1px solid var(--line);margin:44px 0">
+<p class="sub" style="margin:0">
+  本手册所有截图均于 2026-10-24 在本机实际运行截取，非示意图。<br>
+  配套纯文字版：项目文件夹内的 <code>README.md</code>
+</p>
+
+</div>
+</body>
+</html>

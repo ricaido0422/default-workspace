@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模拟操盘 - Polymarket 跟单系统</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-chart-line"></i>
+          <span>Polymarket 跟单</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/" class="nav-item" data-view="dashboard">
+          <i class="fas fa-home"></i>
+          <span>仪表盘</span>
+        </a>
+        <a href="#" class="nav-item active" data-view="simulate">
+          <i class="fas fa-play-circle"></i>
+          <span>模拟操盘</span>
+        </a>
+        <a href="#" class="nav-item" data-view="history">
+          <i class="fas fa-history"></i>
+          <span>跟单历史</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="avatar" style="background: linear-gradient(135deg, #00d4ff, #7b2cbf);">
+            <i class="fas fa-crown"></i>
+          </div>
+          <div class="user-info">
+            <div class="username">操作钱包</div>
+            <div class="rank" id="tradingWalletAddr">0x5268...0135d</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <h1 class="page-title">🎮 模拟操盘</h1>
+        </div>
+        <div class="header-right">
+          <div class="time-display">
+            <i class="fas fa-clock"></i>
+            <span id="currentTime">--:--:--</span>
+          </div>
+          <button class="btn-refresh" id="refreshBtn">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- 控制面板 -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-sliders-h"></i> 模拟控制</h3>
+        </div>
+        <div class="control-panel">
+          <div class="control-row">
+            <div class="control-item">
+              <label>跟单比例</label>
+              <div class="ratio-buttons" id="copyRatioButtons">
+                <button class="ratio-btn" data-ratio="0.05">5%</button>
+                <button class="ratio-btn active" data-ratio="0.1">10%</button>
+                <button class="ratio-btn" data-ratio="0.2">20%</button>
+                <button class="ratio-btn" data-ratio="0.5">50%</button>
+                <button class="ratio-btn" data-ratio="1">100%</button>
+              </div>
+            </div>
+            <div class="control-item">
+              <label>交易频率</label>
+              <select id="tradeFrequency" class="setting-select">
+                <option value="1000">慢速 (1秒/笔)</option>
+                <option value="500" selected>中速 (0.5秒/笔)</option>
+                <option value="200">快速 (0.2秒/笔)</option>
+                <option value="100">极速 (0.1秒/笔)</option>
+              </select>
+            </div>
+            <div class="control-item">
+              <label>模拟资金</label>
+              <div class="balance-display">
+                <span class="balance-value" id="balanceValue">$100,000</span>
+                <button class="btn-icon" id="resetBalance" title="重置资金"><i class="fas fa-undo"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="control-actions">
+            <button class="btn primary" id="startSimBtn">
+              <i class="fas fa-play"></i>
+              开始模拟
+            </button>
+            <button class="btn secondary" id="pauseSimBtn">
+              <i class="fas fa-pause"></i>
+              暂停
+            </button>
+            <button class="btn secondary" id="stopSimBtn">
+              <i class="fas fa-stop"></i>
+              停止
+            </button>
+            <button class="btn secondary" id="singleTradeBtn">
+              <i class="fas fa-forward-step"></i>
+              单步执行
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 实时交易流 -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-bolt"></i> 实时交易流</h3>
+          <div class="trade-stats">
+            <span class="trade-stat"><i class="fas fa-exchange-alt"></i> <span id="totalTrades">0</span> 笔</span>
+            <span class="trade-stat profit"><i class="fas fa-arrow-up"></i> <span id="winTrades">0</span> 盈利</span>
+            <span class="trade-stat loss"><i class="fas fa-arrow-down"></i> <span id="lossTrades">0</span> 亏损</span>
+            <span class="trade-stat"><i class="fas fa-dollar-sign"></i> <span id="totalPnl">$0</span></span>
+          </div>
+        </div>
+        <div class="trade-stream" id="tradeStream">
+          <div class="loading-state">
+            <i class="fas fa-info-circle"></i>
+            <span>点击「开始模拟」开始操盘</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 跟单历史 -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-copy"></i> 跟单记录</h3>
+          <button class="btn secondary" id="clearHistoryBtn">
+            <i class="fas fa-trash"></i>
+            清空记录
+          </button>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>时间</th>
+                <th>市场</th>
+                <th>方向</th>
+                <th>原金额</th>
+                <th>跟单金额</th>
+                <th>比例</th>
+                <th>预估盈亏</th>
+                <th>状态</th>
+                <th>交易哈希</th>
+              </tr>
+            </thead>
+            <tbody id="copyHistoryTable">
+              <tr>
+                <td colspan="9" class="loading-state">
+                  <i class="fas fa-info-circle"></i>
+                  <span>暂无跟单记录</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 盈亏图表 -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-chart-line"></i> 盈亏曲线</h3>
+        </div>
+        <div class="chart-container" style="height: 250px;">
+          <canvas id="pnlChart"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast 通知 -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/simulate.js"></script>
+</body>
+</html>

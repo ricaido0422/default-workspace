@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polymarket 跟单控制台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="dot" id="statusDot"></span>
+    <h1>Polymarket 跟单控制台</h1>
+    <span class="badge" id="modeBadge">—</span>
+  </div>
+  <div class="actions">
+    <button id="btnProbe" class="ghost">测试网络</button>
+    <button id="btnSim" class="ghost">参数体检</button>
+    <button id="btnStart" class="primary">启动</button>
+    <button id="btnStop" class="danger" disabled>停止</button>
+  </div>
+</header>
+
+<main>
+  <!-- 状态卡片 -->
+  <section class="stats" id="stats">
+    <div class="stat"><div class="k">运行状态</div><div class="v" id="sRunning">—</div></div>
+    <div class="stat"><div class="k">已扫描</div><div class="v" id="sSeen">0</div></div>
+    <div class="stat"><div class="k">已跟单</div><div class="v" id="sFollowed">0</div></div>
+    <div class="stat"><div class="k">已跳过</div><div class="v" id="sSkipped">0</div></div>
+    <div class="stat"><div class="k">累计投入</div><div class="v" id="sInvested">$0.00</div></div>
+    <div class="stat"><div class="k">轮询轮次</div><div class="v" id="sRound">0</div></div>
+  </section>
+
+  <div id="alert" class="alert hidden"></div>
+
+  <!-- 模式开关：整个页面最显眼的一个控件。dry-run 与 live 之间必须手输 CONFIRM 才能过 -->
+  <section class="panel wide modeswitch" id="modeSwitchWrap">
+    <div class="ms-main">
+      <div class="ms-text">
+        <h2>运行模式</h2>
+        <p class="hint" id="msHint">dry-run = 只观察、打印、绝不下单。想用真钱交易再切 LIVE。</p>
+      </div>
+      <button id="btnModeToggle" class="ms-btn is-dry">当前：DRY-RUN　点此切换到 LIVE</button>
+    </div>
+    <div class="ms-checklist" id="msChecklist"></div>
+  </section>
+
+  <!-- 健康面板：它回答的是"机器人有没有真的在干活"，不是"按钮亮没亮" -->
+  <section class="panel wide" id="healthPanelWrap">
+    <h2>运行健康</h2>
+    <div id="healthPanel"><div class="hrow h-dim"><span class="hlabel">状态</span><span class="htext">加载中…</span></div></div>
+    <p class="hint">
+      这里刻意把「连续失败次数」「下次轮询倒计时」「浮亏位置」摊开：以前界面只会显示"运行中"，
+      但网络断了它照样显示运行中，看着在干活其实一次都没成功。现在异常会直接变红。
+    </p>
+  </section>
+
+  <!-- 双栏：参数 / 日志 -->
+  <div class="grid">
+    <section class="panel">
+      <h2>策略参数</h2>
+      <p class="hint">改完点「保存参数」，<b>下一轮轮询自动生效，不需要重启</b>。但下面这些改动会让机器人自动重启并清零累计账目：跟单对象、下单金额、仓位上限。</p>
+
+      <div class="field-group">
+        <h3>跟单对象</h3>
+        <label class="row">
+          <span>目标地址</span>
+          <input id="f_targetWallet" type="text" spellcheck="false">
+        </label>
+        <div class="hint">当前默认 ColdBlooded：胜率 69%，盈亏比 1.79，低频高信念型。</div>
+      </div>
+
+      <div class="field-group">
+        <h3>下单金额</h3>
+        <label class="row">
+          <span>方式</span>
+          <select id="f_sizingMode">
+            <option value="fixed">fixed（每笔固定金额）</option>
+            <option value="percent">percent（按对方成交额比例）</option>
+            <option value="balancePercent">balancePercent（按可用余额比例）</option>
+          </select>
+        </label>
+        <label class="row">
+          <span>每笔金额 $</span>
+          <input id="f_fixedOrderSizeUsd" type="number" step="0.5" min="1">
+        </label>
+        <label class="row">
+          <span>比例 %</span>
+          <input id="f_percentScale" type="number" step="0.01" min="0" max="1">
+        </label>
+        <div class="hint">
+          fixed 只用「每笔金额」。<br>
+          percent = 对方下 $1000、比例 2% → 你下 $20（跟得更忠实，本金小容易低于 $1 失败）。<br>
+          balancePercent = 用剩余可用余额的比例，赚了自动加大、亏了自动缩小（上限 50%）。
+        </div>
+      </div>
+
+      <div class="field-group">
+        <h3>资金区间过滤</h3>
+        <label class="row">
+          <span>下限 $（低于不跟）</span>
+          <input id="f_minTradeUsd" type="number" step="50" min="0">
+        </label>
+        <label class="row">
+          <span>上限 $（0 = 不限）</span>
+          <input id="f_maxTradeUsd" type="number" step="100" min="0">
+        </label>
+        <div class="hint">当前不设上限的理由：他出手少，大单往往是最强信号，设上限会砍掉最值钱的下注。</div>
+      </div>
+
+      <div class="field-group">
+        <h3>板块 / 赛事过滤</h3>
+        <label class="row">
+          <span>模式</span>
+          <select id="f_scopeMode">
+            <option value="all">all（不过滤，所有板块都跟）</option>
+            <option value="whitelist">whitelist（只跟名单内的板块）</option>
+            <option value="blacklist">blacklist（不跟名单内的板块）</option>
+          </select>
+        </label>
+        <label class="row">
+          <span>关键词</span>
+          <input id="f_scopeKeywords" type="text" placeholder="esports, dota-2" spellcheck="false">
+        </label>
+        <div class="hint">
+          英文逗号分隔，大小写随便，空格写法等价连字符（<code>league of legends</code> = <code>league-of-legends</code>）。<br>
+          三级粒度任选：<b>板块</b> esports · <b>赛事</b> league-of-legends / dota-2 · <b>阶段（区间）</b> lol-worlds-2026 / swiss-round-2。<br>
+          不知道填什么 → 去下面「交易员分析中心 → 板块过滤」点「扫描他的板块」，那里会列出他真实打过的板块，点一下就填进来。
+        </div>
+      </div>
+
+      <div class="field-group">
+        <h3>仓位上限（防亏光）</h3>
+        <label class="row"><span>单笔最多 $</span><input id="f_maxPerOrderUsd" type="number" step="0.5" min="1"></label>
+        <label class="row"><span>单市场最多 $</span><input id="f_maxPerMarketUsd" type="number" step="1" min="1"></label>
+        <label class="row"><span>总计最多 $</span><input id="f_maxTotalInvestedUsd" type="number" step="1" min="1"></label>
+        <label class="row"><span>市场成交量下限 $</span><input id="f_minMarketVolumeUsd" type="number" step="5000" min="0"></label>
+      </div>
+
+      <div class="field-group">
+        <h3>风控（到线自动停）</h3>
+        <label class="row"><span>止损 $（负号）</span><input id="f_stopLossTotalUsd" type="number" step="1"></label>
+        <label class="row"><span>止盈 $</span><input id="f_takeProfitTotalUsd" type="number" step="1"></label>
+        <label class="row"><span>单日熔断 $（0=不启用）</span><input id="f_maxDailyLossUsd" type="number" step="1" min="0"></label>
+        <label class="row"><span>轮询间隔 秒</span><input id="f_pollIntervalSeconds" type="number" step="10" min="30"></label>
+        <div class="hint">
+          三条线各管一件事：<b>止损</b>看总浮亏、<b>止盈</b>看总浮盈、<b>单日熔断</b>看今天真实亏出去的钱。<br>
+          触发后只<b>停止开新仓</b>，不会替你卖出持仓——冷门盘市价抛售的滑点常常比止损线还大，反而更亏。
+        </div>
+        <label class="row check">
+          <span>触线时连带市价清仓</span>
+          <input id="f_autoFlattenOnStop" type="checkbox">
+        </label>
+        <label class="row"><span>清仓地板价</span><input id="f_minSellPrice" type="number" step="0.01" min="0" max="0.99"></label>
+        <div class="hint">默认关闭。打开后：低于地板价（如 0.02）的持仓不贱卖，留着等结算。</div>
+        <div class="savebar tight">
+          <button id="btnUnhalt" class="ghost">解除风险停机</button>
+          <span class="hint" id="unhaltMsg"></span>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <h3>钱包（仅 live 需要）</h3>
+        <label class="row">
+          <span>私钥</span>
+          <input id="f_privateKey" type="password" placeholder="已保存则留空" autocomplete="off">
+        </label>
+        <div class="hint" id="keyHint">私钥只存在你本机 config.json，永远不会上传到任何地方。留空表示不修改。</div>
+        <label class="row"><span>充值地址</span><input id="f_funderAddress" type="text" spellcheck="false"></label>
+      </div>
+
+      <div class="savebar">
+        <button id="btnSave" class="primary">保存参数</button>
+        <span class="hint" id="saveMsg"></span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>运行日志</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="events">跟单记录</button>
+        <button class="tab" data-tab="logs">系统日志</button>
+      </div>
+      <div id="tab-events" class="tabpane">
+        <table class="ev">
+          <thead><tr><th>时间</th><th>动作</th><th>对方金额</th><th>市场</th><th>说明</th></tr></thead>
+          <tbody id="evBody"><tr><td colspan="5" class="empty">暂无记录</td></tr></tbody>
+        </table>
+      </div>
+      <div id="tab-logs" class="tabpane hidden">
+        <div id="logBox" class="logbox"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 全功能区：对标 CopyOdds 的排行榜 / 体检 / 推荐param -->
+  <section class="panel wide">
+    <h2>交易员分析中心</h2>
+    <p class="hint">
+      下面的数据全部来自 Polymarket 官方 <code>/closed-positions</code> 已平仓记录，由我们本地翻页汇总后自己算，
+      <b>不采信任何平台给你的标称值</b>（实测同一地址在 CopyOdds 显示胜率 84%，官方全量算出来是 73.4%）。
+    </p>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="lb">排行榜</button>
+      <button class="tab" data-tab="audit">单人深度体检</button>
+      <button class="tab" data-tab="rec">参数推荐</button>
+      <button class="tab" data-tab="scope">板块过滤</button>
+      <button class="tab" data-tab="wl">关注名单</button>
+    </div>
+
+    <!-- 板块过滤 -->
+    <div id="pane-scope" class="tabpane hidden">
+      <div class="toolbar">
+        <button id="btnScopeScan" class="primary">扫描他的板块</button>
+        <button id="btnScopeSim" class="ghost">试跑当前关键词</button>
+        <span class="lbnote" id="scopeNote"></span>
+      </div>
+      <div id="scopeResult"><div class="empty">点「扫描他的板块」，看对方最近都在哪些板块下注</div></div>
+      <p class="hint">
+        板块标签来自 <code>/events</code> 的 tags（<code>/markets</code> 里没有，必须多查一次）。
+        每个市场同时挂着多个层级的标签，例如一场 LoL 比赛是：<br>
+        <code>esports</code>（板块） · <code>league-of-legends</code>（赛事） · <code>lol-worlds-2026</code>（赛事届） · <code>swiss-round-2</code>（阶段）
+        —— 填哪一级，就过滤到哪一级。
+      </p>
+    </div>
+
+    <!-- 排行榜 -->
+    <div id="pane-lb" class="tabpane lb-pane">
+      <div class="toolbar">
+        <button id="btnLbRefresh" class="primary">刷新排行榜</button>
+        <span class="lbnote" id="lbProgress"></span>
+        <span class="grow"></span>
+        <span class="lbnote">每位要翻多页抓全量已平仓，人越多越慢</span>
+      </div>
+      <div class="tablescroll">
+        <table class="lb">
+          <thead><tr><th>#</th><th>交易员</th><th>样本</th><th>胜率</th><th>盈亏比</th><th>累计盈亏</th><th>最大回撤</th><th>体检结论</th></tr></thead>
+          <tbody id="lbBody"><tr><td colspan="8" class="empty">点「刷新排行榜」开始分析</td></tr></tbody>
+        </table>
+      </div>
+      <p class="hint">
+        「合格」= 样本 ≥20 笔 且 胜率 ≥55% 且 盈亏比 ≥1.5 且 累计盈亏为正。排序时合格者按累计盈亏降序在前，未达标的排在后面。
+      </p>
+    </div>
+
+    <!-- 单人深度体检 -->
+    <div id="pane-audit" class="tabpane hidden">
+      <div class="toolbar">
+        <input id="auditAddr" type="text" placeholder="钱包地址 0x…，留空则用当前跟单对象" spellcheck="false">
+        <button id="btnAudit" class="primary">开始体检</button>
+        <span class="lbnote">会翻页拉取全部已平仓记录，几十秒</span>
+      </div>
+      <div id="auditResult"><div class="empty">填入地址后点「开始体检」</div></div>
+    </div>
+
+    <!-- 参数推荐 -->
+    <div id="pane-rec" class="tabpane hidden">
+      <div class="toolbar">
+        <label>本金 $<input id="recCapital" type="number" value="30" min="1" step="1"></label>
+        <button id="btnRec" class="primary">按当前跟单对象推荐</button>
+        <span class="lbnote">分析对方的下注节奏，给出一套不会被一两笔大单吃光的设置</span>
+      </div>
+      <div id="recResult"><div class="empty">点上面的按钮</div></div>
+    </div>
+
+    <!-- 关注名单 -->
+    <div id="pane-wl" class="tabpane hidden">
+      <div class="toolbar">
+        <input id="wlAddr" type="text" placeholder="钱包地址 0x…" spellcheck="false">
+        <input id="wlName" type="text" placeholder="备注名（可选）" spellcheck="false">
+        <button id="btnWlAdd" class="primary">添加</button>
+        <span class="lbnote" id="wlMsg"></span>
+      </div>
+      <div class="tablescroll">
+        <table class="lb">
+          <thead><tr><th>备注名</th><th>地址</th><th>操作</th></tr></thead>
+          <tbody id="wlBody"><tr><td colspan="3" class="empty">加载中…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="hint">名单存在项目目录的 watchlist.json，可以直接用记事本改。</p>
+    </div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+<script src="leaderboard.js"></script>
+<script src="tabs.js"></script>
+</body>
+</html>

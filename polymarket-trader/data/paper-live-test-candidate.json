@@ -1,0 +1,25 @@
+{
+  "book": {
+    "best_ask": 0.5,
+    "best_bid": 0.49,
+    "condition_id": "0x783c29afb8dbe0157a4cd3ed43a69cc5e848e566736dc602b8fc414b19af384a",
+    "min_order_size": "5",
+    "tick_size": "0.01",
+    "timestamp": "1793041475189"
+  },
+  "trade": {
+    "wallet": "0xd106952ebf30a3125affd8a23b6c1f30c35fc79c",
+    "condition_id": "0x783c29afb8dbe0157a4cd3ed43a69cc5e848e566736dc602b8fc414b19af384a",
+    "token_id": "47747529185149480885311701175109575325484535456822483151536281370442599028186",
+    "market_slug": "nba-phx-okc-2026-10-26-spread-home-8pt5",
+    "market_title": "Spread: Thunder (-8.5)",
+    "side": "BUY",
+    "price": 0.49,
+    "size": 320.88,
+    "timestamp": "2026-10-26T19:04:04Z",
+    "tx_hash": "0xb0257e05b5b095432be0a9875d967929e100eb39a63bb326cd32f5abb991e08e",
+    "asset_id": "",
+    "delay_seconds": 0,
+    "data_source": "rtds"
+  }
+}

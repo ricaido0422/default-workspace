@@ -1,0 +1,122 @@
+{
+  "preview": {
+    "price": 0.49000000000000005,
+    "best": 0.49,
+    "spread": 0.010000000000000009,
+    "depth_usdc": 13458.242,
+    "simulated": false,
+    "min_order_size": 5.0,
+    "price_source": "polymarket_market_ws",
+    "mode": "PAPER",
+    "cash_estimate": 2.45,
+    "fee_estimate": 0.0049
+  },
+  "result": {
+    "signal_id": "manual-paper-check-sell-10050c43e02f4367af94ccb654d54b3c",
+    "status": "FILLED",
+    "order_id": "paper_manual-paper-check-sell-10050c43e02f4367af94ccb654d54b3c_fff87caf",
+    "account_id": "legacy",
+    "fill_price": 0.49000000000000005,
+    "fill_size": 5.0,
+    "pnl": -0.04999999999999977,
+    "mode": "PAPER",
+    "timestamp": "2026-10-26T19:05:14.889943Z",
+    "error": ""
+  },
+  "summary": {
+    "mode": "PAPER",
+    "gross_realized_pnl": -0.04999999999999977,
+    "fee_estimate": 0.009899999999999999,
+    "initial_balance": 10000.0,
+    "cash_balance": 9999.9401,
+    "cost_by_condition": {},
+    "exposure_by_wallet": {},
+    "daily_trade_count": 2,
+    "net_pnl_estimate": -0.059899999999999766,
+    "benchmark_pnl": -0.050000000000000044,
+    "daily_net_pnl_estimate": -0.059899999999999766,
+    "drawdown": 0.059899999999999766,
+    "positions": [],
+    "wallet_sectors": [
+      {
+        "wallet": "manual",
+        "sector": "体育",
+        "closed_lots": 1,
+        "wins": 0,
+        "gross_pnl": -0.04999999999999977,
+        "benchmark_pnl": -0.050000000000000044,
+        "hold_seconds": 12.025885,
+        "fee_estimate": 0.0099,
+        "net_pnl_estimate": -0.059899999999999766,
+        "win_rate": 0.0,
+        "avg_hold_seconds": 12.025885
+      }
+    ],
+    "journal": [
+      {
+        "signal_id": "manual-paper-check-sell-10050c43e02f4367af94ccb654d54b3c",
+        "mode": "PAPER",
+        "wallet": "manual",
+        "title": "Spread: Thunder (-8.5)",
+        "token_id": "47747529185149480885311701175109575325484535456822483151536281370442599028186",
+        "side": "SELL",
+        "price": 0.49000000000000005,
+        "size": 5.0,
+        "source_price": 0.49,
+        "fee_estimate": 0.0049,
+        "realized_gross_pnl": -0.04999999999999977,
+        "kind": "trade",
+        "price_source": "polymarket_market_ws",
+        "adverse_slippage": -5.551115123125783E-17,
+        "timestamp": "2026-10-27T03:05:14.889943+08:00"
+      },
+      {
+        "signal_id": "manual-paper-check-buy-97161fe459f54459a7d414ff1f223520",
+        "mode": "PAPER",
+        "wallet": "manual",
+        "title": "Spread: Thunder (-8.5)",
+        "token_id": "47747529185149480885311701175109575325484535456822483151536281370442599028186",
+        "side": "BUY",
+        "price": 0.5,
+        "size": 5.0,
+        "source_price": 0.5,
+        "fee_estimate": 0.005,
+        "realized_gross_pnl": 0.0,
+        "kind": "trade",
+        "price_source": "polymarket_market_ws",
+        "adverse_slippage": 0.0,
+        "timestamp": "2026-10-27T03:05:02.864058+08:00"
+      }
+    ],
+    "unmatched_sells": 0,
+    "scope": "本交易台成交及平台最终结果确认的模拟结算；FIFO 配对，费用按设置费率估算；不含交易台外操作。浮动收益另按真实买盘估值，日期按UTC。",
+    "marks_missing": 0,
+    "market_value": 0.0,
+    "floating_pnl": 0.0,
+    "equity": 9999.9401,
+    "paper_settlements": []
+  },
+  "request": {
+    "token_id": "47747529185149480885311701175109575325484535456822483151536281370442599028186",
+    "condition_id": "0x783c29afb8dbe0157a4cd3ed43a69cc5e848e566736dc602b8fc414b19af384a",
+    "price": 0.49,
+    "size": 5.0,
+    "client_order_id": "paper-check-sell-10050c43e02f4367af94ccb654d54b3c",
+    "title": "Spread: Thunder (-8.5)",
+    "side": "SELL"
+  },
+  "sync": {
+    "enabled": true,
+    "rtds_connected": true,
+    "last_ws_message": "2026-10-27T03:05:15.076037+08:00",
+    "last_trade_at": "2026-10-27T03:05:15.076037+08:00",
+    "last_rest_at": "2026-10-27T03:05:11.59452+08:00",
+    "last_resolution_at": "2026-10-27T03:05:05.823202+08:00",
+    "ws_error": "",
+    "rest_error": "",
+    "settlement_error": "",
+    "received": 23834,
+    "dropped_follow_events": 0,
+    "reconnects": 0
+  }
+}

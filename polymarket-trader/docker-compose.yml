@@ -1,0 +1,35 @@
+# 语法版本（Compose v2 新语法，旧版 Docker Compose v1 无法解析）
+services:
+  # 主服务：Polymarket 跟单交易服务
+  polymarket-trader:
+    build: .                        # 使用当前目录的 Dockerfile 构建镜像
+    container_name: polymarket-trader
+    ports:
+      - "8765:8765"                 # 宿主机端口:容器端口（端口冲突时改左边宿主机端口）
+    volumes:
+      # SQLite 数据持久化：容器内 /app/data 映射到宿主机 ./data
+      - ./data:/app/data
+      # 配置文件只读挂载（容器内不可写，需在宿主机修改）
+      - ./config.yaml:/app/config.yaml:ro
+    environment:
+      # ===== 代理设置（留空表示不使用代理）=====
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
+      # ===== 监控轮询（MONITOR_INTERVAL 对应 MonitorConfig.interval）=====
+      MONITOR_INTERVAL: ${MONITOR_INTERVAL:-2}
+      MONITOR_MIN_INTERVAL: ${MONITOR_MIN_INTERVAL:-1}
+      MONITOR_WS_ENABLED: ${MONITOR_WS_ENABLED:-true}
+      # ===== 订单金额监测范围（USDC），0 = 不限制 =====
+      MONITOR_MIN_AMOUNT: ${MONITOR_MIN_AMOUNT:-0}
+      MONITOR_MAX_AMOUNT: ${MONITOR_MAX_AMOUNT:-0}
+      # ===== 执行模式（paper=模拟 / live=实盘）=====
+      EXECUTOR__MODE: ${EXECUTOR__MODE:-paper}
+      # ===== 风控（RISK__ 前缀对应 RiskConfig）=====
+      RISK__MAX_TRADE_AMOUNT: ${RISK__MAX_TRADE_AMOUNT:-100.0}
+      RISK__MAX_POSITION_PER_MARKET: ${RISK__MAX_POSITION_PER_MARKET:-500.0}
+      RISK__MAX_DAILY_TRADES: ${RISK__MAX_DAILY_TRADES:-50}
+      # ===== 通知开关（TELEGRAM_* 由 _apply_env_overrides 映射到 notification 配置）=====
+      # 注意：Bot Token 与 chat_id 属敏感信息，建议只通过 config.yaml 或设置页配置，不在此透传
+      TELEGRAM_ENABLED: ${TELEGRAM_ENABLED:-false}
+    restart: unless-stopped          # 除非手动停止，否则异常退出后自动重启

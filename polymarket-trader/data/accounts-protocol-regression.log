@@ -1,0 +1,277 @@
+test_current_protocol_signatures_and_amounts (test_accounts.AccountTests.test_current_protocol_signatures_and_amounts) ... Executing <Task finished name='Task-2' coro=<AccountTests.test_current_protocol_signatures_and_amounts() done, defined at D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_accounts.py:222> result=None created at asyncio\runners.py:100> took 0.891 seconds
+ok
+test_hmac_closed_loop_uses_same_core_and_original_account_receipt (test_accounts.AccountTests.test_hmac_closed_loop_uses_same_core_and_original_account_receipt) ... ok
+test_oauth_requires_bridge_and_matching_address (test_accounts.AccountTests.test_oauth_requires_bridge_and_matching_address) ... ok
+test_okx_cancel_requires_separate_interactive_signature (test_accounts.AccountTests.test_okx_cancel_requires_separate_interactive_signature) ... ok
+test_okx_eip712_large_token_sign_and_one_post (test_accounts.AccountTests.test_okx_eip712_large_token_sign_and_one_post) ... ok
+test_okx_never_accepts_private_key (test_accounts.AccountTests.test_okx_never_accepts_private_key) ... ok
+test_okx_offline_fails_without_order (test_accounts.AccountTests.test_okx_offline_fails_without_order) ... ok
+test_old_account_signal_cannot_execute_after_switch (test_accounts.AccountTests.test_old_account_signal_cannot_execute_after_switch) ... ok
+test_relay_url_rejects_embedded_secrets_and_remote_http (test_accounts.AccountTests.test_relay_url_rejects_embedded_secrets_and_remote_http) ... ok
+test_switch_forbidden_while_live_and_health_invalidated (test_accounts.AccountTests.test_switch_forbidden_while_live_and_health_invalidated) ... ok
+test_unknown_post_is_not_retried (test_accounts.AccountTests.test_unknown_post_is_not_retried) ... ok
+test_vault_encrypted_restart_and_no_secret_in_public (test_accounts.AccountTests.test_vault_encrypted_restart_and_no_secret_in_public) ... ok
+test_wrong_signer_and_stop_do_not_submit (test_accounts.AccountTests.test_wrong_signer_and_stop_do_not_submit) ... ok
+test_fixed_ratio_caps_and_source_price_filters (test_copy_rules.CopyRuleTests.test_fixed_ratio_caps_and_source_price_filters) ... ok
+test_global_exit_consumes_fifo_rule_lots_before_another_rule_buys (test_copy_rules.CopyRuleTests.test_global_exit_consumes_fifo_rule_lots_before_another_rule_buys) ... ok
+test_mode_change_before_submit_and_old_backfill_are_blocked (test_copy_rules.CopyRuleTests.test_mode_change_before_submit_and_old_backfill_are_blocked) ... ok
+test_pause_rule_blocks_waiting_approval (test_copy_rules.CopyRuleTests.test_pause_rule_blocks_waiting_approval) ... ok
+test_rule_identity_deduplicates_same_source (test_copy_rules.CopyRuleTests.test_rule_identity_deduplicates_same_source) ... ok
+test_sell_never_spends_other_rule_inventory (test_copy_rules.CopyRuleTests.test_sell_never_spends_other_rule_inventory) ... ok
+test_network_failure_does_not_call_authenticated_sdk (test_live_connection.LiveConnectionTests.test_network_failure_does_not_call_authenticated_sdk) ... ok
+test_pending_orders_stale_check_and_config_change_invalidate_readiness (test_live_connection.LiveConnectionTests.test_pending_orders_stale_check_and_config_change_invalidate_readiness) ... ok
+test_status_and_check_are_read_only_and_never_expose_secrets (test_live_connection.LiveConnectionTests.test_status_and_check_are_read_only_and_never_expose_secrets) ... ok
+test_stop_after_signing_never_posts_live_order (test_live_connection.LiveConnectionTests.test_stop_after_signing_never_posts_live_order) ... ok
+test_stop_during_connection_check_cannot_rearm_stale_result (test_live_connection.LiveConnectionTests.test_stop_during_connection_check_cannot_rearm_stale_result) ... ok
+test_zero_balance_missing_allowance_and_bad_response_block (test_live_connection.LiveConnectionTests.test_zero_balance_missing_allowance_and_bad_response_block) ... ok
+test_cancel_requires_exchange_confirmation_before_unlocking (test_live_trading.LiveTradingTests.test_cancel_requires_exchange_confirmation_before_unlocking) ... ok
+test_daily_budget_survives_restart (test_live_trading.LiveTradingTests.test_daily_budget_survives_restart) ... �ź� f0166025ba764bd2b8c3301448e17772 ����ؾܾ�: �ս����� 1 �ﵽ���� 1
+ok
+test_expired_source_does_not_submit (test_live_trading.LiveTradingTests.test_expired_source_does_not_submit) ... ok
+test_fok_real_fill_and_idempotency (test_live_trading.LiveTradingTests.test_fok_real_fill_and_idempotency) ... ok
+test_http_rejection_does_not_become_unknown (test_live_trading.LiveTradingTests.test_http_rejection_does_not_become_unknown) ... ok
+test_preflight_only_reads (test_live_trading.LiveTradingTests.test_preflight_only_reads) ... ok
+test_real_sdk_signs_offline_with_test_key (test_live_trading.LiveTradingTests.test_real_sdk_signs_offline_with_test_key) ... Executing <Task pending name='Task-161' coro=<LiveTradingTests.test_real_sdk_signs_offline_with_test_key() running at D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_live_trading.py:99> wait_for=<Future pending cb=[Task.task_wakeup()] created at asyncio\base_events.py:448> cb=[_run_until_complete_cb() at asyncio\base_events.py:181] created at asyncio\runners.py:100> took 0.562 seconds
+FAIL
+test_reconcile_keeps_unconfirmed_order_pending (test_live_trading.LiveTradingTests.test_reconcile_keeps_unconfirmed_order_pending) ... ok
+test_rejection_is_not_fill (test_live_trading.LiveTradingTests.test_rejection_is_not_fill) ... ok
+test_sell_limit_rounds_up_and_actual_amounts (test_live_trading.LiveTradingTests.test_sell_limit_rounds_up_and_actual_amounts) ... ok
+test_timeout_blocks_following_orders_and_restart (test_live_trading.LiveTradingTests.test_timeout_blocks_following_orders_and_restart) ... ok
+test_full_book_and_batched_delta (test_realtime.RealtimeTests.test_full_book_and_batched_delta) ... Executing <Task finished name='Task-185' coro=<RealtimeTests.asyncSetUp() done, defined at D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_realtime.py:15> result=None created at asyncio\runners.py:100> took 0.562 seconds
+ok
+test_gamma_split_requires_resolved_status (test_realtime.RealtimeTests.test_gamma_split_requires_resolved_status) ... Executing <Task finished name='Task-190' coro=<RealtimeTests.asyncSetUp() done, defined at D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_realtime.py:15> result=None created at asyncio\runners.py:100> took 0.562 seconds
+ok
+test_resolution_requires_final_winner_not_just_closed (test_realtime.RealtimeTests.test_resolution_requires_final_winner_not_just_closed) ... Executing <Task finished name='Task-195' coro=<RealtimeTests.asyncSetUp() done, defined at D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_realtime.py:15> result=None created at asyncio\runners.py:100> took 0.547 seconds
+ok
+test_rtds_rest_dedup_persistence_and_watched_dispatch (test_realtime.RealtimeTests.test_rtds_rest_dedup_persistence_and_watched_dispatch) ... Executing <Task finished name='Task-200' coro=<RealtimeTests.asyncSetUp() done, defined at D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_realtime.py:15> result=None created at asyncio\runners.py:100> took 0.563 seconds
+ok
+test_auto_and_observe (test_trading_desk.TradingDeskTests.test_auto_and_observe) ... ok
+test_auto_exit_executes_and_cooldown_prevents_duplicates (test_trading_desk.TradingDeskTests.test_auto_exit_executes_and_cooldown_prevents_duplicates) ... ok
+test_buy_sell_inventory_fifo_fees_and_attribution (test_trading_desk.TradingDeskTests.test_buy_sell_inventory_fifo_fees_and_attribution) ... ok
+test_changed_payload_cannot_reuse_manual_id (test_trading_desk.TradingDeskTests.test_changed_payload_cannot_reuse_manual_id) ... ok
+test_concurrent_approval_only_executes_once (test_trading_desk.TradingDeskTests.test_concurrent_approval_only_executes_once) ... ok
+test_daily_loss_stops_buy_but_allows_sell (test_trading_desk.TradingDeskTests.test_daily_loss_stops_buy_but_allows_sell) ... ok
+test_exit_trigger_respects_review_and_auto (test_trading_desk.TradingDeskTests.test_exit_trigger_respects_review_and_auto) ... ok
+test_expired_review_exit_does_not_suppress_new_exit_forever (test_trading_desk.TradingDeskTests.test_expired_review_exit_does_not_suppress_new_exit_forever) ... ok
+test_final_winner_settlement_idempotent_and_restart (test_trading_desk.TradingDeskTests.test_final_winner_settlement_idempotent_and_restart) ... ok
+test_loser_settlement_while_live_never_uses_live_funds (test_trading_desk.TradingDeskTests.test_loser_settlement_while_live_never_uses_live_funds) ... ok
+test_manual_bypasses_source_weights_but_keeps_total_limit (test_trading_desk.TradingDeskTests.test_manual_bypasses_source_weights_but_keeps_total_limit) ... �ź� manual-manual-over-cap ����Ϸ�ؾܾ�: �����Ͷ���Ȳ���
+ok
+test_manual_is_idempotent_and_requires_review_even_in_auto (test_trading_desk.TradingDeskTests.test_manual_is_idempotent_and_requires_review_even_in_auto) ... ok
+test_missing_mark_is_unknown_instead_of_zero_profit (test_trading_desk.TradingDeskTests.test_missing_mark_is_unknown_instead_of_zero_profit) ... ok
+test_mode_bound_queue (test_trading_desk.TradingDeskTests.test_mode_bound_queue) ... ok
+test_mode_change_during_quote_never_turns_paper_order_live (test_trading_desk.TradingDeskTests.test_mode_change_during_quote_never_turns_paper_order_live) ... ok
+test_no_naked_sell (test_trading_desk.TradingDeskTests.test_no_naked_sell) ... ok
+test_public_trade_parsing_never_invents_side_or_fresh_timestamp (test_trading_desk.TradingDeskTests.test_public_trade_parsing_never_invents_side_or_fresh_timestamp) ... ok
+test_recovery_records_fill_once_never_resubmits (test_trading_desk.TradingDeskTests.test_recovery_records_fill_once_never_resubmits) ... ok
+test_reprice_expiry_depth_and_spread (test_trading_desk.TradingDeskTests.test_reprice_expiry_depth_and_spread) ... ok
+test_review_does_not_execute_until_approval_and_no_double_submit (test_trading_desk.TradingDeskTests.test_review_does_not_execute_until_approval_and_no_double_submit) ... ok
+test_same_event_limit_across_wallets_and_tokens (test_trading_desk.TradingDeskTests.test_same_event_limit_across_wallets_and_tokens) ... ok
+test_specialty_filter_does_not_treat_activity_as_skill (test_trading_desk.TradingDeskTests.test_specialty_filter_does_not_treat_activity_as_skill) ... ok
+test_stale_book_never_submits (test_trading_desk.TradingDeskTests.test_stale_book_never_submits) ... ok
+test_unconfirmed_or_untrusted_result_does_not_settle (test_trading_desk.TradingDeskTests.test_unconfirmed_or_untrusted_result_does_not_settle) ... ok
+test_virtual_cash_budget_and_capital_lock (test_trading_desk.TradingDeskTests.test_virtual_cash_budget_and_capital_lock) ... ok
+test_weighted_paper_order_below_market_minimum_never_fakes_fill (test_trading_desk.TradingDeskTests.test_weighted_paper_order_below_market_minimum_never_fakes_fill) ... ok
+2026-10-27 02:56:05,428 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:06,035 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:06,035 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:06,035 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:06,035 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:06,038 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:06,038 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:06,038 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:06,043 [httpx] INFO: HTTP Request: PUT http://testserver/api/desk/copy-rules/copy_11111111111111111111111111111111 "HTTP/1.1 422 Unprocessable Entity"
+2026-10-27 02:56:06,054 [httpx] INFO: HTTP Request: PUT http://testserver/api/desk/copy-rules/copy_11111111111111111111111111111111 "HTTP/1.1 409 Conflict"
+2026-10-27 02:56:06,108 [backend.core.wallet_monitor] INFO: 已添加监控钱包: 0x22222222 (0x2222222222222222222222222222222222222222)
+2026-10-27 02:56:06,109 [httpx] INFO: HTTP Request: PUT http://testserver/api/desk/copy-rules/copy_11111111111111111111111111111111 "HTTP/1.1 200 OK"
+2026-10-27 02:56:06,111 [httpx] INFO: HTTP Request: GET http://testserver/api/desk/copy-rules "HTTP/1.1 200 OK"
+2026-10-27 02:56:06,113 [httpx] INFO: HTTP Request: GET http://testserver/api/wallets "HTTP/1.1 200 OK"
+2026-10-27 02:56:06,115 [httpx] INFO: HTTP Request: PUT http://testserver/api/desk/copy-rules/copy_11111111111111111111111111111111 "HTTP/1.1 409 Conflict"
+2026-10-27 02:56:06,117 [httpx] INFO: HTTP Request: PUT http://testserver/api/desk/copy-rules/copy_33333333333333333333333333333333 "HTTP/1.1 409 Conflict"
+2026-10-27 02:56:06,132 [httpx] INFO: HTTP Request: PUT http://testserver/api/desk/copy-rules/copy_11111111111111111111111111111111 "HTTP/1.1 200 OK"
+2026-10-27 02:56:06,134 [httpx] INFO: HTTP Request: GET http://testserver/api/desk/discovery?window=week "HTTP/1.1 200 OK"
+2026-10-27 02:56:06,136 [httpx] INFO: HTTP Request: GET http://testserver/api/desk/discovery?window=invalid "HTTP/1.1 422 Unprocessable Entity"
+2026-10-27 02:56:06,281 [httpx] INFO: HTTP Request: GET http://testserver/js/panels/copy-hub.js "HTTP/1.1 200 OK"
+2026-10-27 02:56:06,281 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:06,281 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:06,282 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_copy_rule_api_validation_mode_binding_and_discovery (test_workflows.WorkflowTests.test_copy_rule_api_validation_mode_binding_and_discovery) ... ok
+2026-10-27 02:56:07,577 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:08,204 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:08,204 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:08,204 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:08,204 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:08,206 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:08,206 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:08,207 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:08,208 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 403 Forbidden"
+2026-10-27 02:56:08,208 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:08,208 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:08,209 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_cross_origin_writes_rejected (test_workflows.WorkflowTests.test_cross_origin_writes_rejected) ... ok
+2026-10-27 02:56:09,375 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:09,963 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:09,963 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:09,963 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:09,963 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:09,965 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:09,965 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:09,966 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:09,970 [httpx] INFO: HTTP Request: POST http://testserver/api/desk/preview "HTTP/1.1 200 OK"
+2026-10-27 02:56:09,999 [httpx] INFO: HTTP Request: POST http://testserver/api/desk/orders "HTTP/1.1 200 OK"
+2026-10-27 02:56:10,001 [httpx] INFO: HTTP Request: GET http://testserver/api/executions "HTTP/1.1 200 OK"
+2026-10-27 02:56:10,050 [backend.core.paper_positions] INFO: [虚拟持仓] desk-accou BUY 12345 10.00 @ 0.5000 → 净持仓 10.00 @ 0.5000，本次已实现 +0.00 USDC
+2026-10-27 02:56:10,051 [backend.core.order_executor] INFO: [PAPER] 信号 manual-api-test-order 模拟成交: BUY 10.00 @ 0.5000 (已实现 PnL: 0.00)
+2026-10-27 02:56:10,100 [httpx] INFO: HTTP Request: POST http://testserver/api/desk/queue/manual-api-test-order/approve "HTTP/1.1 200 OK"
+2026-10-27 02:56:11,001 [httpx] INFO: HTTP Request: GET https://clob.polymarket.com/book?token_id=12345 "HTTP/1.1 404 Not Found"
+2026-10-27 02:56:11,004 [httpx] INFO: HTTP Request: GET http://testserver/api/desk/state "HTTP/1.1 200 OK"
+2026-10-27 02:56:11,005 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:11,005 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:11,006 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_desk_manual_routes_prepare_preview_and_approve (test_workflows.WorkflowTests.test_desk_manual_routes_prepare_preview_and_approve) ... ok
+2026-10-27 02:56:12,145 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:12,738 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:12,738 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:12,738 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:12,738 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:12,741 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:12,741 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:12,741 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:12,742 [backend.core.leaderboard] INFO: 排行榜获取成功: 0 条 (window=week)
+2026-10-27 02:56:12,743 [httpx] INFO: HTTP Request: GET http://testserver/api/leaderboard "HTTP/1.1 200 OK"
+2026-10-27 02:56:12,743 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:12,743 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:12,744 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_leaderboard_null_response (test_workflows.WorkflowTests.test_leaderboard_null_response) ... ok
+2026-10-27 02:56:13,750 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:14,335 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:14,336 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:14,336 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:14,336 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:14,338 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:14,339 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:14,339 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:14,342 [httpx] INFO: HTTP Request: GET http://testserver/api/executor/status "HTTP/1.1 200 OK"
+2026-10-27 02:56:14,344 [httpx] INFO: HTTP Request: POST http://testserver/api/executor/mode "HTTP/1.1 400 Bad Request"
+2026-10-27 02:56:14,348 [httpx] INFO: HTTP Request: POST http://testserver/api/executor/mode "HTTP/1.1 200 OK"
+2026-10-27 02:56:14,351 [httpx] INFO: HTTP Request: POST http://testserver/api/executor/check "HTTP/1.1 200 OK"
+2026-10-27 02:56:14,355 [httpx] INFO: HTTP Request: GET http://testserver/js/live-controls.js "HTTP/1.1 200 OK"
+2026-10-27 02:56:14,356 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:14,356 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:14,356 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_live_status_configuration_and_fresh_start_gate (test_workflows.WorkflowTests.test_live_status_configuration_and_fresh_start_gate) ... ok
+2026-10-27 02:56:15,395 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:15,973 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:15,973 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:15,973 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:15,973 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:15,975 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:15,975 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:15,975 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:16,000 [httpx] INFO: HTTP Request: PUT http://testserver/api/accounts "HTTP/1.1 200 OK"
+2026-10-27 02:56:16,015 [httpx] INFO: HTTP Request: POST http://testserver/api/accounts/relay-test/select "HTTP/1.1 200 OK"
+2026-10-27 02:56:16,018 [httpx] INFO: HTTP Request: GET http://testserver/api/executor/status "HTTP/1.1 200 OK"
+2026-10-27 02:56:16,020 [httpx] INFO: HTTP Request: GET http://testserver/api/accounts "HTTP/1.1 200 OK"
+2026-10-27 02:56:16,021 [httpx] INFO: HTTP Request: GET http://testserver/api/accounts "HTTP/1.1 403 Forbidden"
+2026-10-27 02:56:16,033 [httpx] INFO: HTTP Request: POST http://testserver/api/accounts/legacy/select "HTTP/1.1 200 OK"
+2026-10-27 02:56:16,035 [httpx] INFO: HTTP Request: POST http://testserver/api/executor/mode "HTTP/1.1 400 Bad Request"
+2026-10-27 02:56:16,036 [httpx] INFO: HTTP Request: GET http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:16,036 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:16,036 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:16,037 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_multi_account_port_configuration_and_secret_redaction (test_workflows.WorkflowTests.test_multi_account_port_configuration_and_secret_redaction) ... ok
+2026-10-27 02:56:16,995 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:17,570 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:17,570 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:17,571 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:17,571 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:17,573 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:17,573 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:17,573 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:17,576 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 422 Unprocessable Entity"
+2026-10-27 02:56:17,578 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 422 Unprocessable Entity"
+2026-10-27 02:56:17,579 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 422 Unprocessable Entity"
+2026-10-27 02:56:17,586 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:17,587 [httpx] INFO: HTTP Request: GET http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:17,595 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:17,597 [httpx] INFO: HTTP Request: POST http://testserver/api/simulate/trade "HTTP/1.1 422 Unprocessable Entity"
+2026-10-27 02:56:17,599 [httpx] INFO: HTTP Request: GET http://testserver/api/trades "HTTP/1.1 200 OK"
+2026-10-27 02:56:18,365 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:19,547 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:19,548 [httpx] INFO: HTTP Request: GET http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:19,549 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:19,549 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:19,549 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_settings_validation_and_persistence (test_workflows.WorkflowTests.test_settings_validation_and_persistence) ... ok
+2026-10-27 02:56:20,517 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:21,097 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:21,097 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:21,097 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:21,097 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:21,100 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:21,100 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:21,100 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:21,113 [backend.core.wallet_monitor] INFO: 已添加监控钱包: 0x22222222 (0x2222222222222222222222222222222222222222)
+2026-10-27 02:56:21,114 [httpx] INFO: HTTP Request: POST http://testserver/api/wallets "HTTP/1.1 200 OK"
+2026-10-27 02:56:21,136 [httpx] INFO: HTTP Request: PUT http://testserver/api/wallets/0x2222222222222222222222222222222222222222/profile "HTTP/1.1 200 OK"
+2026-10-27 02:56:21,138 [httpx] INFO: HTTP Request: GET http://testserver/api/wallets "HTTP/1.1 200 OK"
+2026-10-27 02:56:21,155 [httpx] INFO: HTTP Request: POST http://testserver/api/executor/credentials "HTTP/1.1 200 OK"
+2026-10-27 02:56:21,179 [httpx] INFO: HTTP Request: POST http://testserver/api/executor/credentials "HTTP/1.1 200 OK"
+2026-10-27 02:56:21,180 [httpx] INFO: HTTP Request: GET http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:21,181 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:21,181 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:21,181 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_wallet_identity_and_credentials (test_workflows.WorkflowTests.test_wallet_identity_and_credentials) ... ok
+2026-10-27 02:56:22,122 [backend.main] INFO: WebSocket 实时价格未启用 (monitor.ws_enabled=false)
+2026-10-27 02:56:22,707 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:56:22,707 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:56:22,707 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:56:22,707 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:56:22,710 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:56:22,710 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:56:22,710 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:56:22,724 [httpx] INFO: HTTP Request: PUT http://testserver/api/desk/policy "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,737 [backend.core.wallet_monitor] INFO: 已添加监控钱包: 回归测试 (0x1111111111111111111111111111111111111111)
+2026-10-27 02:56:22,738 [httpx] INFO: HTTP Request: POST http://testserver/api/wallets "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,752 [backend.core.wallet_monitor] INFO: 已移除监控钱包: 0x1111111111111111111111111111111111111111
+2026-10-27 02:56:22,752 [httpx] INFO: HTTP Request: POST http://testserver/api/wallets/0x1111111111111111111111111111111111111111/toggle "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,766 [backend.core.wallet_monitor] INFO: 已添加监控钱包: 回归测试 (0x1111111111111111111111111111111111111111)
+2026-10-27 02:56:22,766 [httpx] INFO: HTTP Request: POST http://testserver/api/wallets/0x1111111111111111111111111111111111111111/toggle "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,773 [httpx] INFO: HTTP Request: PUT http://testserver/api/config "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,790 [httpx] INFO: HTTP Request: POST http://testserver/api/pipelines "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,807 [httpx] INFO: HTTP Request: PUT http://testserver/api/pipelines/pl_bd5c14b3681c "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,902 [backend.core.paper_positions] INFO: [虚拟持仓] desk-accou BUY sim_token_9d 10.00 @ 0.5000 → 净持仓 10.00 @ 0.5000，本次已实现 +0.00 USDC
+2026-10-27 02:56:22,902 [backend.core.order_executor] INFO: [PAPER] 信号 77423405-2554-4f1f-a62b-af7e1e6a7461 模拟成交: BUY 10.00 @ 0.5000 (已实现 PnL: 0.00)
+2026-10-27 02:56:22,942 [backend.api.routes] INFO: 注入模拟交易: 钱包 0x1111111111111111111111111111111111111111 BUY 10.00 @ 0.5000 (5.00 USDC)
+2026-10-27 02:56:22,943 [httpx] INFO: HTTP Request: POST http://testserver/api/simulate/trade "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,945 [httpx] INFO: HTTP Request: GET http://testserver/api/executions "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,947 [httpx] INFO: HTTP Request: GET http://testserver/api/stats "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,949 [httpx] INFO: HTTP Request: GET http://testserver/api/trades "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,966 [httpx] INFO: HTTP Request: DELETE http://testserver/api/pipelines/pl_bd5c14b3681c "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,981 [backend.core.wallet_monitor] INFO: 已移除监控钱包: 0x1111111111111111111111111111111111111111
+2026-10-27 02:56:22,981 [httpx] INFO: HTTP Request: DELETE http://testserver/api/wallets/0x1111111111111111111111111111111111111111 "HTTP/1.1 200 OK"
+2026-10-27 02:56:22,982 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:56:22,982 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:56:22,983 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+test_wallet_pipeline_and_paper_execution (test_workflows.WorkflowTests.test_wallet_pipeline_and_paper_execution) ... ok
+
+======================================================================
+FAIL: test_real_sdk_signs_offline_with_test_key (test_live_trading.LiveTradingTests.test_real_sdk_signs_offline_with_test_key)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "asyncio\runners.py", line 118, in run
+  File "asyncio\base_events.py", line 691, in run_until_complete
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_live_trading.py", line 100, in test_real_sdk_signs_offline_with_test_key
+    self.assertEqual(result.status.value, 'FILLED')
+AssertionError: 'FAILED' != 'FILLED'
+- FAILED
+?  -
++ FILLED
+?   +
+
+
+----------------------------------------------------------------------
+Ran 75 tests in 65.297s
+
+FAILED (failures=1)
+sys:1: ResourceWarning: unclosed <ssl.SSLSocket fd=928, family=2, type=1, proto=0, laddr=('127.0.0.1', 10675), raddr=('127.0.0.1', 7897)>

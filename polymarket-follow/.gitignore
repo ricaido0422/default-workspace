@@ -1,0 +1,16 @@
+# 配置文件含私钥，切勿提交
+config.json
+
+# 状态文件
+state.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 临时文件
+*.log
+_pmt_probe*
+_once*
+_test_*

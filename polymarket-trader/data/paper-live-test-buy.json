@@ -1,0 +1,35 @@
+{
+  "request": {
+    "client_order_id": "paper-check-buy-97161fe459f54459a7d414ff1f223520",
+    "size": 5.0,
+    "token_id": "47747529185149480885311701175109575325484535456822483151536281370442599028186",
+    "side": "BUY",
+    "title": "Spread: Thunder (-8.5)",
+    "price": 0.5,
+    "condition_id": "0x783c29afb8dbe0157a4cd3ed43a69cc5e848e566736dc602b8fc414b19af384a"
+  },
+  "preview": {
+    "price": 0.5,
+    "best": 0.5,
+    "spread": 0.010000000000000009,
+    "depth_usdc": 8664.92,
+    "simulated": false,
+    "min_order_size": 5.0,
+    "price_source": "polymarket_market_ws",
+    "mode": "PAPER",
+    "cash_estimate": 2.5,
+    "fee_estimate": 0.005
+  },
+  "result": {
+    "signal_id": "manual-paper-check-buy-97161fe459f54459a7d414ff1f223520",
+    "status": "FILLED",
+    "order_id": "paper_manual-paper-check-buy-97161fe459f54459a7d414ff1f223520_0a573d2e",
+    "account_id": "legacy",
+    "fill_price": 0.5,
+    "fill_size": 5.0,
+    "pnl": 0.0,
+    "mode": "PAPER",
+    "timestamp": "2026-10-26T19:05:02.864058Z",
+    "error": ""
+  }
+}

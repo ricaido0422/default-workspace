@@ -1,0 +1,77 @@
+2026-10-27 02:59:23,456 [backend.core.ws_client] INFO: Polymarket WS 客户端已启动
+2026-10-27 02:59:23,456 [backend.main] INFO: WebSocket Market Channel 客户端已启动
+2026-10-27 02:59:24,005 [backend.core.ws_client] INFO: 正在连接 Polymarket WS: wss://ws-subscriptions-clob.polymarket.com/ws/market
+2026-10-27 02:59:24,100 [backend.core.notifier] INFO: 通知配置已应用 (渠道: 无)
+2026-10-27 02:59:24,100 [backend.core.notifier] INFO: 通知管理器已启动 (渠道: 无)
+2026-10-27 02:59:24,100 [backend.main] INFO: 通知管理器已启动 (渠道: 无（未启用任何通知渠道）)
+2026-10-27 02:59:24,100 [backend.api.ws] INFO: WebSocket 已注册到 EventBus (9 个频道)
+2026-10-27 02:59:24,104 [backend.core.wallet_monitor] INFO: 钱包监控已启动: 0 个钱包，默认间隔 2s
+2026-10-27 02:59:24,105 [backend.main] INFO: 🚀 Polymarket Trader 已启动 (port=8765, mode=paper)
+2026-10-27 02:59:24,106 [backend.main] INFO: 每日汇总将在 2026-10-27T08:00:00+00:00 触发（UTC 08:00）
+2026-10-27 02:59:24,152 [httpx] INFO: HTTP Request: GET http://testserver/api/health "HTTP/1.1 200 OK"
+PASS /api/health 200
+2026-10-27 02:59:24,156 [httpx] INFO: HTTP Request: GET http://testserver/api/stats "HTTP/1.1 200 OK"
+PASS /api/stats 200
+2026-10-27 02:59:24,157 [httpx] INFO: HTTP Request: GET http://testserver/api/wallets "HTTP/1.1 200 OK"
+PASS /api/wallets 200
+2026-10-27 02:59:24,159 [httpx] INFO: HTTP Request: GET http://testserver/api/trades "HTTP/1.1 200 OK"
+PASS /api/trades 200
+2026-10-27 02:59:24,160 [httpx] INFO: HTTP Request: GET http://testserver/api/executions "HTTP/1.1 200 OK"
+PASS /api/executions 200
+2026-10-27 02:59:24,162 [httpx] INFO: HTTP Request: GET http://testserver/api/pipelines "HTTP/1.1 200 OK"
+PASS /api/pipelines 200
+2026-10-27 02:59:24,165 [httpx] INFO: HTTP Request: GET http://testserver/api/strategies/available "HTTP/1.1 200 OK"
+PASS /api/strategies/available 200
+2026-10-27 02:59:24,166 [httpx] INFO: HTTP Request: GET http://testserver/api/config "HTTP/1.1 200 OK"
+PASS /api/config 200
+2026-10-27 02:59:24,167 [httpx] INFO: HTTP Request: GET http://testserver/api/ws/status "HTTP/1.1 200 OK"
+PASS /api/ws/status 200
+2026-10-27 02:59:24,168 [httpx] INFO: HTTP Request: GET http://testserver/api/notifications/config "HTTP/1.1 200 OK"
+PASS /api/notifications/config 200
+2026-10-27 02:59:24,169 [httpx] INFO: HTTP Request: GET http://testserver/api/notifications/log "HTTP/1.1 200 OK"
+PASS /api/notifications/log 200
+2026-10-27 02:59:24,170 [httpx] INFO: HTTP Request: GET http://testserver/api/backtest/strategies "HTTP/1.1 200 OK"
+PASS /api/backtest/strategies 200
+2026-10-27 02:59:24,173 [httpx] INFO: HTTP Request: GET http://testserver/api/analytics/summary "HTTP/1.1 200 OK"
+PASS /api/analytics/summary 200
+2026-10-27 02:59:24,176 [httpx] INFO: HTTP Request: GET http://testserver/api/analytics/wallets "HTTP/1.1 200 OK"
+PASS /api/analytics/wallets 200
+2026-10-27 02:59:24,178 [httpx] INFO: HTTP Request: GET http://testserver/api/analytics/strategies "HTTP/1.1 200 OK"
+PASS /api/analytics/strategies 200
+2026-10-27 02:59:24,181 [httpx] INFO: HTTP Request: GET http://testserver/api/analytics/markets "HTTP/1.1 200 OK"
+PASS /api/analytics/markets 200
+2026-10-27 02:59:24,184 [httpx] INFO: HTTP Request: GET http://testserver/api/analytics/daily "HTTP/1.1 200 OK"
+PASS /api/analytics/daily 200
+2026-10-27 02:59:24,185 [httpx] INFO: HTTP Request: GET http://testserver/api/portfolio "HTTP/1.1 200 OK"
+PASS /api/portfolio 200
+2026-10-27 02:59:24,186 [httpx] INFO: HTTP Request: GET http://testserver/api/portfolio/exposure "HTTP/1.1 200 OK"
+PASS /api/portfolio/exposure 200
+2026-10-27 02:59:24,187 [httpx] INFO: HTTP Request: GET http://testserver/api/portfolio/weights "HTTP/1.1 200 OK"
+PASS /api/portfolio/weights 200
+2026-10-27 02:59:24,188 [httpx] INFO: HTTP Request: GET http://testserver/api/portfolio/positions "HTTP/1.1 200 OK"
+PASS /api/portfolio/positions 200
+2026-10-27 02:59:24,189 [httpx] INFO: HTTP Request: GET http://testserver/api/wallets/positions "HTTP/1.1 200 OK"
+PASS /api/wallets/positions 200
+2026-10-27 02:59:24,191 [httpx] INFO: HTTP Request: GET http://testserver/api/simulate/status "HTTP/1.1 200 OK"
+PASS /api/simulate/status 200
+2026-10-27 02:59:24,193 [httpx] INFO: HTTP Request: GET http://testserver/api/trades/stats "HTTP/1.1 200 OK"
+PASS /api/trades/stats 200
+2026-10-27 02:59:24,331 [httpx] INFO: HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+PASS / 200
+2026-10-27 02:59:24,336 [httpx] INFO: HTTP Request: GET http://testserver/js/app.js "HTTP/1.1 200 OK"
+PASS /js/app.js 200
+2026-10-27 02:59:24,338 [httpx] INFO: HTTP Request: GET http://testserver/js/api.js "HTTP/1.1 200 OK"
+PASS /js/api.js 200
+2026-10-27 02:59:24,342 [httpx] INFO: HTTP Request: GET http://testserver/js/panels/trades.js "HTTP/1.1 200 OK"
+PASS /js/panels/trades.js 200
+2026-10-27 02:59:24,345 [httpx] INFO: HTTP Request: GET http://testserver/js/panels/wallet-positions.js "HTTP/1.1 200 OK"
+PASS /js/panels/wallet-positions.js 200
+2026-10-27 02:59:24,351 [httpx] INFO: HTTP Request: GET http://testserver/js/panels/positions.js "HTTP/1.1 200 OK"
+PASS /js/panels/positions.js 200
+2026-10-27 02:59:24,354 [httpx] INFO: HTTP Request: GET http://testserver/css/style.css "HTTP/1.1 200 OK"
+PASS /css/style.css 200
+2026-10-27 02:59:24,356 [backend.core.notifier] INFO: 通知管理器已停止
+2026-10-27 02:59:24,356 [backend.core.ws_client] INFO: Polymarket WS 客户端已断开
+2026-10-27 02:59:24,356 [backend.core.wallet_monitor] INFO: 钱包监控已停止
+2026-10-27 02:59:24,357 [backend.main] INFO: 👋 Polymarket Trader 已关闭
+=== 回归冒烟 31/31 PASS ===

@@ -1,0 +1,103 @@
+{
+  "_comment_proxy": "HTTP 代理地址，本机直连 Polymarket 不通时填写；留空则直连",
+  "proxy": "",
+
+  "_comment_api": "三个 API 的 base url，通常无需修改",
+  "api": {
+    "data_api": "https://data-api.polymarket.com",
+    "gamma_api": "https://gamma-api.polymarket.com",
+    "clob_api": "https://clob.polymarket.com"
+  },
+
+  "_comment_follow": "跟单配置",
+  "follow": {
+    "_comment_wallets": "手动指定的跟单钱包地址列表（0x 开头），可由 bootstrap 命令自动填充",
+    "wallets": [],
+
+    "_comment_from_leaderboard": "从排行榜自动选取跟单钱包",
+    "from_leaderboard": {
+      "enabled": true,
+      "window": "all",
+      "limit": 5
+    },
+
+    "_comment_poll": "轮询间隔（秒）",
+    "poll_interval_secs": 30,
+
+    "_comment_min_value": "低于此 USD 价值的新持仓/加仓信号降级为 debug，不告警",
+    "min_position_value_usd": 5,
+
+    "_comment_only_active": "仅跟踪活跃且接受订单的市场",
+    "only_active_markets": true,
+
+    "_comment_max_age": "忽略超过此天数的老市场（按 end_date 计算）",
+    "max_market_age_days": 365
+  },
+
+  "_comment_monitor": "平台市场监测配置",
+  "monitor": {
+    "enabled": true,
+
+    "_comment_markets": "手动指定监测市场（condition_id 或 slug）",
+    "markets": [],
+
+    "_comment_from_top_volume": "从 24h 交易量最高的市场自动选取",
+    "from_top_volume": {
+      "enabled": true,
+      "limit": 10
+    },
+
+    "poll_interval_secs": 20,
+    "price_move_alert_pct": 5,
+    "spread_alert_max": 0.05,
+
+    "_comment_ws": "是否启用 WebSocket 实时推送（需安装 websocket-client）",
+    "use_websocket": false,
+    "ws_ping_interval": 10
+  },
+
+  "_comment_alerts": "告警配置",
+  "alerts": {
+    "console": true,
+
+    "_comment_webhook": "webhook 推送：generic/telegram/discord/lark 四种",
+    "webhook_url": "",
+    "webhook_type": "generic",
+    "_comment_tg": "Telegram 专用：bot token 和 chat_id（webhook_url 留空）",
+    "webhook_token": "",
+    "webhook_chat_id": "",
+
+    "dedupe_window_secs": 300
+  },
+
+  "_comment_executor": "跟单执行器配置（真实下单，默认关闭+dry-run，安全优先）",
+  "_comment_okx": "OKX Wallet 用户：运行 python main.py setup 自动配置，或手动填入私钥+代理钱包地址",
+  "executor": {
+    "enabled": false,
+    "dry_run": true,
+
+    "_comment_creds": "OKX Wallet 私钥 + Polymarket 代理钱包地址（Gnosis Safe）；L2 API 凭据留空则自动派生",
+    "private_key": "",
+    "api_key": "",
+    "api_secret": "",
+    "api_passphrase": "",
+    "wallet_address": "",
+    "signature_type": 2,
+
+    "_comment_risk": "风控参数",
+    "max_order_usd": 50,
+    "max_daily_usd": 500,
+    "follow_ratio": 0.1,
+    "min_price": 0.02,
+    "max_price": 0.98,
+    "slippage_pct": 0.02,
+
+    "_comment_exec_proxy": "执行器代理，留空则继承顶层 proxy",
+    "proxy": ""
+  },
+
+  "_comment_storage": "状态持久化",
+  "storage": {
+    "state_file": "state.json"
+  }
+}

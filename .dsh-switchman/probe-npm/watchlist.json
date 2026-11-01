@@ -1,0 +1,30 @@
+{
+  "_comment": "交易员关注名单 —— 你在排行榜页添加的地址会存到这里，也可以直接手工改这个文件",
+  "_how_to_add": "复制下面的对象改地址即可。name 是备注名，随便写，方便你自己认",
+  "traders": [
+    {
+      "address": "0xbcc321b6336117432f4e9d2d28b20d8b6795ac9c",
+      "name": "ColdBlooded",
+      "source": "polymarket.com/leaderboard",
+      "addedAt": "2026-10-24T00:00:00.000Z"
+    },
+    {
+      "address": "0x482acc0c3c6268a16482953be000b2b46cccc85d",
+      "name": "Smallcoins",
+      "source": "polymarket.com/leaderboard",
+      "addedAt": "2026-10-24T00:00:00.000Z"
+    },
+    {
+      "address": "0x09e27c2cbcd98c7e821ef66b309506701dcf29de",
+      "name": "ronaldk",
+      "source": "CopyOdds 聪明钱榜",
+      "addedAt": "2026-10-25T00:00:00.000Z"
+    },
+    {
+      "address": "0x5268527977f700f9bf9b6d5cd843859e4e70135d",
+      "name": "HomeRunHazard",
+      "source": "已排除：胜率 51%、盈亏比 1.05、持仓 611 个无法复制",
+      "addedAt": "2026-10-24T00:00:00.000Z"
+    }
+  ]
+}

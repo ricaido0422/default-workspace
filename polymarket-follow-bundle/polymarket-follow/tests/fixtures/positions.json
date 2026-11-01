@@ -1,0 +1,9 @@
+{
+  "data": [],
+  "pagination": {
+    "limit": 5,
+    "offset": 0,
+    "has_more": false,
+    "next_cursor": null
+  }
+}

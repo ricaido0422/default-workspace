@@ -1,0 +1,40 @@
+{
+  "proxy": "http://127.0.0.1:7897",
+  "api": {
+    "data_api": "https://data-api.polymarket.com",
+    "gamma_api": "https://gamma-api.polymarket.com",
+    "clob_api": "https://clob.polymarket.com"
+  },
+  "follow": {
+    "wallets": [],
+    "from_leaderboard": {
+      "enabled": true,
+      "window": "all",
+      "limit": 5
+    },
+    "poll_interval_secs": 30,
+    "min_position_value_usd": 5,
+    "only_active_markets": true,
+    "max_market_age_days": 365
+  },
+  "monitor": {
+    "enabled": true,
+    "markets": [],
+    "from_top_volume": {
+      "enabled": true,
+      "limit": 10
+    },
+    "poll_interval_secs": 20,
+    "price_move_alert_pct": 5,
+    "spread_alert_max": 0.05,
+    "use_websocket": false
+  },
+  "alerts": {
+    "console": true,
+    "webhook_url": "",
+    "dedupe_window_secs": 300
+  },
+  "storage": {
+    "state_file": "state.json"
+  }
+}

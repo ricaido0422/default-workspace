@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#11130f" />
+    <style>
+      /* Establish precedence before Vite loads component CSS ahead of the main CSS. */
+      @layer properties, theme, base, components, utilities;
+    </style>
+    <script>
+      (function () {
+        try {
+          window.__CO_APP_INIT__ = Date.now();
+          if (window.performance && performance.mark) {
+            performance.mark("copyodds:app_init");
+          }
+        } catch (e) {}
+        try {
+          var launchHash = location.hash || "";
+          var launchSearch = location.search || "";
+          if (/tgWebApp/i.test(launchHash) || /tgWebApp/i.test(launchSearch)) {
+            sessionStorage.setItem(
+              "__telegram__launchLocation",
+              JSON.stringify({ hash: launchHash, search: launchSearch })
+            );
+          }
+        } catch (e) {}
+        var ua = navigator.userAgent || "";
+        var isAndroid = /Android/i.test(ua);
+        var isMiniApp =
+          /tgWebApp/i.test(location.hash || "") ||
+          /tgWebApp/i.test(location.search || "");
+        try {
+          if (!isMiniApp) {
+            var stashed = sessionStorage.getItem("__telegram__launchLocation") || "";
+            isMiniApp = /tgWebApp/i.test(stashed);
+          }
+        } catch (e) {}
+        // Capacitor / system WebView only — NOT Chrome “Add to Home Screen” PWA
+        // and NOT Telegram Mini App (Android Telegram UA also contains "wv").
+        var isAndroidWebView =
+          isAndroid && (/\bwv\b/i.test(ua) || /; wv\)/i.test(ua));
+        var isStandalone = false;
+        try {
+          isStandalone =
+            window.matchMedia("(display-mode: standalone)").matches ||
+            window.matchMedia("(display-mode: fullscreen)").matches ||
+            window.matchMedia("(display-mode: minimal-ui)").matches;
+        } catch (e) {}
+        if (isMiniApp) {
+          document.documentElement.classList.add("skip-web-splash");
+          // Parser-blocking SDK so WebApp exists before the module bundle runs.
+          document.write(
+            '<script src="https://telegram.org/js/telegram-web-app.js"><\/script>'
+          );
+          return;
+        }
+        if (isAndroidWebView) {
+          document.documentElement.classList.add("skip-web-splash");
+          document.documentElement.classList.add("native-shell");
+          return;
+        }
+        // Chrome already shows a native splash for installed Android PWAs
+        // (manifest background_color + 512 icon). A second /start.png overlay
+        // is the “two startup screens” bug — skip HTML splash here only.
+        // iOS PWA and mobile browsers still use /start.png.
+        if (isAndroid && isStandalone) {
+          document.documentElement.classList.add("skip-web-splash");
+        } else if (window.matchMedia("(max-width: 1023px)").matches) {
+          document.documentElement.classList.add("mobile-web-splash");
+          var splashPreload = document.createElement("link");
+          splashPreload.rel = "preload";
+          splashPreload.as = "image";
+          splashPreload.href = "/start.png";
+          document.head.appendChild(splashPreload);
+        }
+        // Non-blocking fonts for browser; skip entirely in Capacitor WebView
+        // and Telegram Mini App so fonts.googleapis.com cannot stall first paint.
+        var pre1 = document.createElement("link");
+        pre1.rel = "preconnect";
+        pre1.href = "https://fonts.googleapis.com";
+        document.head.appendChild(pre1);
+        var pre2 = document.createElement("link");
+        pre2.rel = "preconnect";
+        pre2.href = "https://fonts.gstatic.com";
+        pre2.crossOrigin = "anonymous";
+        document.head.appendChild(pre2);
+        var font = document.createElement("link");
+        font.rel = "stylesheet";
+        font.href =
+          "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap";
+        font.media = "print";
+        font.onload = function () {
+          font.media = "all";
+        };
+        document.head.appendChild(font);
+        var tg = document.createElement("script");
+        tg.src = "https://telegram.org/js/telegram-web-app.js";
+        tg.async = true;
+        document.head.appendChild(tg);
+      })();
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #000;
+        color-scheme: dark;
+        min-height: 100%;
+        min-height: 100dvh;
+      }
+      #app-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483647;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+        transition: opacity 0.32s ease, visibility 0.32s ease;
+      }
+      html.mobile-web-splash #app-splash {
+        background: #000 center / cover no-repeat url("/start.png");
+      }
+      html.skip-web-splash #app-splash {
+        display: none !important;
+      }
+      #app-splash.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      @media (min-width: 1024px) {
+        #app-splash {
+          display: none !important;
+        }
+      }
+    </style>
+    <meta name="description" content="Copy smart money on Polymarket. Auto-follow top traders with one-tap copy trading, risk controls, and live execution tracking." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CopyOdds" />
+    <meta property="og:title" content="CopyOdds — Copy Smart Money on Polymarket" />
+    <meta property="og:description" content="Auto-follow top traders with one-tap copy trading, risk controls, and live execution tracking on Polymarket." />
+    <meta property="og:url" content="https://app.copyodds.io/" />
+    <meta property="og:image" content="https://app.copyodds.io/og-preview.jpg" />
+    <meta property="og:image:secure_url" content="https://app.copyodds.io/og-preview.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CopyOdds — Polymarket copy trading platform" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CopyOdds — Copy Smart Money on Polymarket" />
+    <meta name="twitter:description" content="Auto-follow top traders with one-tap copy trading, risk controls, and live execution tracking on Polymarket." />
+    <meta name="twitter:image" content="https://app.copyodds.io/og-preview.jpg" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="CopyOdds" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-640-1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-750-1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1242-2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1125-2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-828-1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1242-2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1080-2340.png" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1170-2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1284-2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1179-2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1290-2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1206-2622.png" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <link rel="apple-touch-startup-image" href="/splash/apple-splash-1320-2868.png" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>CopyOdds</title>
+    <script type="module" crossorigin src="/assets/index-upo-5j_4.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/jsx-runtime-Cx0BB4qO.js">
+    <link rel="modulepreload" crossorigin href="/assets/antd-DNUlnHHO.js">
+    <link rel="modulepreload" crossorigin href="/assets/passkeys-D9BmFVn5.js">
+    <link rel="modulepreload" crossorigin href="/assets/chunk-62JRHF6Z-D2f7bCOA.js">
+    <link rel="modulepreload" crossorigin href="/assets/path-C28AyJrX.js">
+    <link rel="modulepreload" crossorigin href="/assets/i18n-Ck7PXXJr.js">
+    <link rel="modulepreload" crossorigin href="/assets/i18n-BTHr3kzy.js">
+    <link rel="modulepreload" crossorigin href="/assets/request-DIEfl4Qi.js">
+    <link rel="modulepreload" crossorigin href="/assets/parse-ref-invite-query-BZxDVtbN.js">
+    <link rel="modulepreload" crossorigin href="/assets/telegram-webapp-KS8Zg--3.js">
+    <link rel="modulepreload" crossorigin href="/assets/telegram-provider-CINe6cZE.js">
+    <link rel="modulepreload" crossorigin href="/assets/auth-provider-D-pcFWYF.js">
+    <link rel="modulepreload" crossorigin href="/assets/useQuery-BQMEjrSl.js">
+    <link rel="modulepreload" crossorigin href="/assets/app-link-B2BBAg6G.js">
+    <link rel="modulepreload" crossorigin href="/assets/useAppLocale-PlAIpMnm.js">
+    <link rel="modulepreload" crossorigin href="/assets/utils-hZG6twJP.js">
+    <link rel="modulepreload" crossorigin href="/assets/createLucideIcon-C9W0sCsZ.js">
+    <link rel="modulepreload" crossorigin href="/assets/activity-DXAARfZl.js">
+    <link rel="modulepreload" crossorigin href="/assets/compass-B3yy2j_o.js">
+    <link rel="modulepreload" crossorigin href="/assets/crown-BKYtFyEZ.js">
+    <link rel="modulepreload" crossorigin href="/assets/eye-BtMocYAX.js">
+    <link rel="modulepreload" crossorigin href="/assets/landmark-D1gv89bn.js">
+    <link rel="modulepreload" crossorigin href="/assets/key-round-4x6nlfRf.js">
+    <link rel="modulepreload" crossorigin href="/assets/shield-Dd5SV8vt.js">
+    <link rel="modulepreload" crossorigin href="/assets/trophy-D2VrjR1M.js">
+    <link rel="modulepreload" crossorigin href="/assets/trending-up-Df2xiess.js">
+    <link rel="modulepreload" crossorigin href="/assets/wallet-B8K4hGWD.js">
+    <link rel="modulepreload" crossorigin href="/assets/zap-D83H2Arp.js">
+    <link rel="modulepreload" crossorigin href="/assets/profile-avatar-BDPxZKRs.js">
+    <link rel="modulepreload" crossorigin href="/assets/arrow-down-left-BmePt6e-.js">
+    <link rel="modulepreload" crossorigin href="/assets/arrow-left-C0VGXQvQ.js">
+    <link rel="modulepreload" crossorigin href="/assets/arrow-right-DAB1_TdX.js">
+    <link rel="modulepreload" crossorigin href="/assets/arrow-up-right-CiQdhjeT.js">
+    <link rel="modulepreload" crossorigin href="/assets/book-open-CTQkuGAZ.js">
+    <link rel="modulepreload" crossorigin href="/assets/check-DkQ6OEKh.js">
+    <link rel="modulepreload" crossorigin href="/assets/chevron-down-06VmLOzz.js">
+    <link rel="modulepreload" crossorigin href="/assets/chevron-right-CcRBjp3h.js">
+    <link rel="modulepreload" crossorigin href="/assets/copy-sED2TIiH.js">
+    <link rel="modulepreload" crossorigin href="/assets/download-lU6XVeeK.js">
+    <link rel="modulepreload" crossorigin href="/assets/external-link-Bp8Wi3oO.js">
+    <link rel="modulepreload" crossorigin href="/assets/file-text-h791xz9j.js">
+    <link rel="modulepreload" crossorigin href="/assets/fingerprint-pattern-2TUt3PF6.js">
+    <link rel="modulepreload" crossorigin href="/assets/fuel-NWmi6PAP.js">
+    <link rel="modulepreload" crossorigin href="/assets/info-Nkz1kX-H.js">
+    <link rel="modulepreload" crossorigin href="/assets/loader-circle-DgW_lJp2.js">
+    <link rel="modulepreload" crossorigin href="/assets/plus-C6g_yjvL.js">
+    <link rel="modulepreload" crossorigin href="/assets/utils-DUDq8B4n.js">
+    <link rel="modulepreload" crossorigin href="/assets/order-lab-Ckt31mNH.js">
+    <link rel="modulepreload" crossorigin href="/assets/custody-agent-CoRtO_kD.js">
+    <link rel="modulepreload" crossorigin href="/assets/chat-Csgh4UQi.js">
+    <link rel="modulepreload" crossorigin href="/assets/auth-devices-C_S0X6sA.js">
+    <link rel="modulepreload" crossorigin href="/assets/announcements-_8dApT3w.js">
+    <link rel="modulepreload" crossorigin href="/assets/feedback-Dz2OmZw9.js">
+    <link rel="modulepreload" crossorigin href="/assets/api-DquGodAb.js">
+    <link rel="modulepreload" crossorigin href="/assets/format-datetime-D1X9k0hT.js">
+    <link rel="modulepreload" crossorigin href="/assets/wallet-ledger-list-C87goE6u.js">
+    <link rel="modulepreload" crossorigin href="/assets/refresh-cw-CifPiiUu.js">
+    <link rel="modulepreload" crossorigin href="/assets/shield-check-DmJKHpaU.js">
+    <link rel="modulepreload" crossorigin href="/assets/login-modal-provider-B0KyD2br.js">
+    <link rel="modulepreload" crossorigin href="/assets/useRequireLogin-BMOAbA3o.js">
+    <link rel="modulepreload" crossorigin href="/assets/deposit-modal-provider-Ct4ov_m8.js">
+    <link rel="modulepreload" crossorigin href="/assets/dialog-focus-stack-Dzy7BKkw.js">
+    <link rel="modulepreload" crossorigin href="/assets/breakpoints-j2SAL5AS.js">
+    <link rel="modulepreload" crossorigin href="/assets/popup-CyR7azn2.js">
+    <link rel="modulepreload" crossorigin href="/assets/return-to-DlgbKOUH.js">
+    <link rel="modulepreload" crossorigin href="/assets/skeleton-CrddxYcp.js">
+    <link rel="modulepreload" crossorigin href="/assets/help-info-button-s8Jie6sT.js">
+    <link rel="modulepreload" crossorigin href="/assets/play-qY_LLOXK.js">
+    <link rel="modulepreload" crossorigin href="/assets/page-header-DI8olJqU.js">
+    <link rel="modulepreload" crossorigin href="/assets/esm-BIIOqs6K.js">
+    <link rel="modulepreload" crossorigin href="/assets/mobile-app-download-DNGuveQX.js">
+    <link rel="modulepreload" crossorigin href="/assets/guide-steps-skeleton-aX4oxu2l.js">
+    <link rel="modulepreload" crossorigin href="/assets/mobile-chrome-context-Dz-rYj5y.js">
+    <link rel="modulepreload" crossorigin href="/assets/inline-copy-button-BubZNZUL.js">
+    <link rel="stylesheet" crossorigin href="/assets/deposit-modal-provider-RbNfkfem.css">
+    <link rel="stylesheet" crossorigin href="/assets/popup-BJc0uHzt.css">
+    <link rel="stylesheet" crossorigin href="/assets/help-info-button-CzCImCE9.css">
+    <link rel="stylesheet" crossorigin href="/assets/guide-steps-skeleton-CrheZZAG.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-Br1VGmOp.css">
+    <script type="module">import'data:text/javascript,if(!import.meta.resolve)throw Error("import.meta.resolve not supported")';import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
+    <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+  </head>
+  <body>
+    <div id="app-splash" data-shown-at=""></div>
+    <div id="root"></div>
+    <script>
+      (function () {
+        var el = document.getElementById("app-splash");
+        if (!el) return;
+        if (!document.documentElement.classList.contains("mobile-web-splash")) {
+          el.remove();
+          return;
+        }
+        el.setAttribute("data-shown-at", String(Date.now()));
+      })();
+    </script>
+    <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+    <script nomodule crossorigin id="vite-legacy-polyfill" src="/assets/polyfills-legacy-Cw-Gv8yF.js"></script>
+    <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-CI3YrilD.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+  </body>
+</html>

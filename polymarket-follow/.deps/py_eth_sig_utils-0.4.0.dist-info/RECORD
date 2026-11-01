@@ -1,0 +1,13 @@
+py_eth_sig_utils/__init__.py,sha256=rWwoG-g8VHuLVVIrskE7t684i9iaGtKFajWGuGfg0QY,65
+py_eth_sig_utils/signing.py,sha256=RyYKJcA-zAjXOhDecfsQJsxDyfm6_aQLNUjyf-ZUNRk,753
+py_eth_sig_utils/utils.py,sha256=kagt6GGhsYGdfKoQfXwxFI23ilL6kGxdmwkcDBqFfTc,13129
+py_eth_sig_utils/eip712/__init__.py,sha256=Vm_mf5TyXDiG1gDDelNFDWCSQtjvvldm33vmYzdN5EY,73
+py_eth_sig_utils/eip712/encoding.py,sha256=I9ySUjRONzJtaDRJPviARrgWGybCGDb_FVKBtJeqYZA,2706
+py_eth_sig_utils/tests/__init__.py,sha256=yl79wBfrtZvKjsMDmA1q8mmiFFJHBQBp-KJ7H507EpQ,65
+py_eth_sig_utils/tests/test_eip712_encode.py,sha256=V8IMFg-Wqh_vX7xQFky_XHGpx4qxllxYI7M_-Sa4F38,13068
+py_eth_sig_utils/tests/test_sign_typed_data.py,sha256=dcVC4l_cqctq6xuj6NA3cSQp-u6vMEQJo_v6NtvlI-U,2075
+py_eth_sig_utils-0.4.0.dist-info/LICENSE,sha256=3LWcfmygmjZ6KvL0OTMMLrfVS5HduWIR43p-eG34_VY,1073
+py_eth_sig_utils-0.4.0.dist-info/METADATA,sha256=oMt_LKlZJ_EzWOcWfVRIEgfVfQhpjORM_WmHnkRGtTo,1316
+py_eth_sig_utils-0.4.0.dist-info/WHEEL,sha256=p46_5Uhzqz6AzeSosiOnxK-zmFja1i22CrQCjmYe8ec,92
+py_eth_sig_utils-0.4.0.dist-info/top_level.txt,sha256=3QJ2ku8OYlBGNZfKzc-BsEYDLz2N-1WxCes2G0NPvI4,17
+py_eth_sig_utils-0.4.0.dist-info/RECORD,,

@@ -1,0 +1,106 @@
+test_oauth_requires_bridge_and_matching_address (test_accounts.AccountTests.test_oauth_requires_bridge_and_matching_address) ... ok
+test_okx_eip712_large_token_sign_and_one_post (test_accounts.AccountTests.test_okx_eip712_large_token_sign_and_one_post) ... Executing <Task pending name='Task-7' coro=<AccountTests.test_okx_eip712_large_token_sign_and_one_post() running at D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_accounts.py:106> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at asyncio\futures.py:389, Task.task_wakeup()] created at asyncio\base_events.py:448> cb=[_run_until_complete_cb() at asyncio\base_events.py:181] created at asyncio\runners.py:100> took 0.734 seconds
+ERROR
+test_okx_never_accepts_private_key (test_accounts.AccountTests.test_okx_never_accepts_private_key) ... ok
+test_okx_offline_fails_without_order (test_accounts.AccountTests.test_okx_offline_fails_without_order) ... ERROR
+test_old_account_signal_cannot_execute_after_switch (test_accounts.AccountTests.test_old_account_signal_cannot_execute_after_switch) ... ok
+test_relay_url_rejects_embedded_secrets_and_remote_http (test_accounts.AccountTests.test_relay_url_rejects_embedded_secrets_and_remote_http) ... ok
+test_switch_forbidden_while_live_and_health_invalidated (test_accounts.AccountTests.test_switch_forbidden_while_live_and_health_invalidated) ... ok
+test_unknown_post_is_not_retried (test_accounts.AccountTests.test_unknown_post_is_not_retried) ... ERROR
+test_vault_encrypted_restart_and_no_secret_in_public (test_accounts.AccountTests.test_vault_encrypted_restart_and_no_secret_in_public) ... ok
+test_wrong_signer_and_stop_do_not_submit (test_accounts.AccountTests.test_wrong_signer_and_stop_do_not_submit) ... ERROR
+
+======================================================================
+ERROR: test_okx_eip712_large_token_sign_and_one_post (test_accounts.AccountTests.test_okx_eip712_large_token_sign_and_one_post)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "asyncio\runners.py", line 118, in run
+  File "asyncio\base_events.py", line 691, in run_until_complete
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_accounts.py", line 106, in test_okx_eip712_large_token_sign_and_one_post
+    record = await self.c.execute(signal)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\backend\accounts\coordinator.py", line 61, in execute
+    return await self.apply(pending)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\backend\accounts\coordinator.py", line 21, in apply
+    record = ExecutionRecord(signal_id=submission.intent_id, account_id=submission.account_id,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\Python312\Lib\site-packages\pydantic\main.py", line 280, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ExecutionRecord
+order_id
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.14/v/string_type
+
+======================================================================
+ERROR: test_okx_offline_fails_without_order (test_accounts.AccountTests.test_okx_offline_fails_without_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "asyncio\runners.py", line 118, in run
+  File "asyncio\base_events.py", line 691, in run_until_complete
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_accounts.py", line 174, in test_okx_offline_fails_without_order
+    record = await self.c.execute(self.signal())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\backend\accounts\coordinator.py", line 61, in execute
+    return await self.apply(pending)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\backend\accounts\coordinator.py", line 21, in apply
+    record = ExecutionRecord(signal_id=submission.intent_id, account_id=submission.account_id,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\Python312\Lib\site-packages\pydantic\main.py", line 280, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ExecutionRecord
+order_id
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.14/v/string_type
+
+======================================================================
+ERROR: test_unknown_post_is_not_retried (test_accounts.AccountTests.test_unknown_post_is_not_retried)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "asyncio\runners.py", line 118, in run
+  File "asyncio\base_events.py", line 691, in run_until_complete
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_accounts.py", line 148, in test_unknown_post_is_not_retried
+    await self.c.execute(signal)
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\backend\accounts\coordinator.py", line 61, in execute
+    return await self.apply(pending)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\backend\accounts\coordinator.py", line 21, in apply
+    record = ExecutionRecord(signal_id=submission.intent_id, account_id=submission.account_id,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\Python312\Lib\site-packages\pydantic\main.py", line 280, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ExecutionRecord
+order_id
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.14/v/string_type
+
+======================================================================
+ERROR: test_wrong_signer_and_stop_do_not_submit (test_accounts.AccountTests.test_wrong_signer_and_stop_do_not_submit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "asyncio\runners.py", line 118, in run
+  File "asyncio\base_events.py", line 691, in run_until_complete
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_accounts.py", line 125, in test_wrong_signer_and_stop_do_not_submit
+    await self.c.execute(self.signal())
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\backend\accounts\coordinator.py", line 61, in execute
+    return await self.apply(pending)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\backend\accounts\coordinator.py", line 21, in apply
+    record = ExecutionRecord(signal_id=submission.intent_id, account_id=submission.account_id,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\Python312\Lib\site-packages\pydantic\main.py", line 280, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ExecutionRecord
+order_id
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.14/v/string_type
+
+----------------------------------------------------------------------
+Ran 10 tests in 13.906s
+
+FAILED (errors=4)

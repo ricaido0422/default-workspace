@@ -1,0 +1,15 @@
+# 虚拟环境（避免把宿主机 .venv 打进镜像）
+.venv/
+# Python 字节码缓存
+__pycache__/
+*.pyc
+# 临时文件目录
+.tmp/
+# 本地 SQLite 数据库（容器数据卷由 ./data 提供）
+data/*.db
+# 版本控制目录
+.git/
+# 本地编排/代理工作目录
+.dsh-switchman/
+# 日志文件
+*.log

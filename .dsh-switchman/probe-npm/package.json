@@ -1,0 +1,12 @@
+{
+  "name": "polymarket-copytrader",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Polymarket 跟单机器人 — 30 USDC 起步，dry-run 优先，配置文件驱动",
+  "scripts": {
+    "probe": "node scripts/probe.mjs",
+    "dryrun": "node src/index.mjs",
+    "start": "node src/index.mjs"
+  }
+}

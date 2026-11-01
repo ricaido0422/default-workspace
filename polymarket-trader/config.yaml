@@ -1,0 +1,42 @@
+proxy:
+  http: ''
+  https: ''
+polymarket:
+  api_key: ''
+  api_secret: ''
+  api_passphrase: ''
+  wallet_address: ''
+  private_key: ''
+monitor:
+  interval: 1
+  min_interval: 1
+  ws_enabled: true
+  min_amount: 0.0
+  max_amount: 0.0
+risk:
+  max_trade_amount: 100.0
+  max_position_per_market: 500.0
+  max_daily_trades: 50
+executor:
+  mode: paper
+server:
+  port: 8765
+  host: 0.0.0.0
+notification:
+  telegram_enabled: false
+  telegram_token: ''
+  telegram_chat_ids: []
+  email_enabled: false
+  email_host: ''
+  email_port: 587
+  email_user: ''
+  email_password: ''
+  email_from: ''
+  email_to: []
+  email_use_ssl: false
+  min_notify_amount: 0.0
+  notify_events: []
+  notify_wallets: []
+  cooldown_seconds: 0.0
+  daily_summary_hour: 8
+  daily_summary_minute: 0

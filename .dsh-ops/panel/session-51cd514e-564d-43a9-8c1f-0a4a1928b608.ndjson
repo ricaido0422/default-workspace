@@ -1,0 +1,4 @@
+{"record":"open","sessionId":"session-51cd514e-564d-43a9-8c1f-0a4a1928b608","cwd":"D:\\Users\\Administrator\\Documents\\deepseek-harness\\default-workspace","at":"2026-10-21T11:43:13.322Z"}
+{"record":"event","seq":0,"time":1792582993100,"type":"permission/preset"}
+{"record":"event","seq":1,"time":1792582993101,"type":"sandbox/mode"}
+{"record":"event","seq":2,"time":1792582993104,"type":"approval/policy"}

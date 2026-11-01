@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polymarket Trader — 跟单系统</title>
+    <link rel="stylesheet" href="css/style.css?v=20261026-workspace8">
+    <link rel="stylesheet" href="css/workspace.css?v=20261028-smart2">
+</head>
+<body>
+    <div id="app">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <a class="logo" href="#copy-hub/discover" aria-label="PM Trader 首页"><span class="brand-mark">P<span>↗</span></span><div><h1>PM Trader</h1><small>POLYMARKET WORKSPACE</small></div></a>
+            <div class="sidebar-scroll"><div class="nav-label">交易工作台</div><ul class="nav-items">
+                <li><button class="nav-item" data-panel="copy-hub" data-view="discover" title="发现交易员"><span class="nav-icon">◈</span><span>发现交易员</span></button></li>
+                <li><button class="nav-item" data-panel="copy-hub" data-view="rules" title="我的跟单"><span class="nav-icon">⇄</span><span>我的跟单</span></button></li>
+                <li><button class="nav-item" data-panel="desk" data-view="trade" title="市场与买卖"><span class="nav-icon">▥</span><span>市场与买卖</span></button></li>
+                <li><button class="nav-item" data-panel="desk" data-view="queue" title="订单审核"><span class="nav-icon">☷</span><span>订单审核</span><span class="nav-count" data-queue-count hidden></span></button></li>
+                <li><button class="nav-item" data-panel="desk" data-view="positions" title="持仓与结算"><span class="nav-icon">▣</span><span>持仓与结算</span></button></li>
+                <li><button class="nav-item" data-panel="wallets" title="观察钱包"><span class="nav-icon">◎</span><span>观察钱包</span></button></li>
+                <li><button class="nav-item" data-panel="smart" title="智能策略交易"><span class="nav-icon">✧</span><span>智能策略</span></button></li>
+            </ul><details class="advanced-nav"><summary>分析与高级工具</summary><ul class="nav-items">
+                <li><button class="nav-item" data-panel="dashboard" title="总览"><span class="nav-icon">⌂</span><span>总览</span></button></li>
+                <li><button class="nav-item" data-panel="analytics" title="绩效分析"><span class="nav-icon">↗</span><span>绩效分析</span></button></li>
+                <li><button class="nav-item" data-panel="strategies" title="高级策略"><span class="nav-icon">⌘</span><span>高级策略</span></button></li>
+                <li><button class="nav-item" data-panel="execution" title="执行记录"><span class="nav-icon">≡</span><span>执行记录</span></button></li>
+                <li><button class="nav-item" data-panel="trades" title="钱包成交流"><span class="nav-icon">≋</span><span>钱包成交流</span></button></li>
+                <li><button class="nav-item" data-panel="portfolio" title="组合配置"><span class="nav-icon">▦</span><span>组合配置</span></button></li>
+                <li><button class="nav-item" data-panel="wallet-positions" title="源钱包持仓"><span class="nav-icon">◉</span><span>源钱包持仓</span></button></li>
+                <li><button class="nav-item" data-panel="positions" title="旧版模拟台账"><span class="nav-icon">▤</span><span>旧版模拟台账</span></button></li>
+                <li><button class="nav-item" data-panel="backtest" title="策略回测"><span class="nav-icon">⤺</span><span>策略回测</span></button></li>
+                <li><button class="nav-item" data-panel="optimizer" title="策略调优"><span class="nav-icon">✧</span><span>策略调优</span></button></li>
+            </ul></details><div class="nav-label">账户</div><ul class="nav-items"><li><button class="nav-item" data-panel="settings" title="设置与连接"><span class="nav-icon">⚙</span><span>设置与连接</span></button></li></ul></div>
+            <div class="status-indicator">
+                <span id="ws-status" class="status-dot disconnected"></span>
+                <span id="ws-status-text">未连接</span>
+            </div>
+            <div class="status-indicator">
+                <span id="market-ws-status" class="status-dot disconnected"></span>
+                <span id="market-ws-status-text">实时价格未启用</span>
+            </div>
+        </nav>
+
+        <!-- 主内容区 -->
+        <main class="content">
+            <header class="workspace-topbar"><div class="workspace-location"><span class="workspace-kicker">WORKSPACE</span><strong id="workspace-title">发现交易员</strong></div><div class="workspace-account"><button class="account-state" onclick="LiveControls.open()" aria-label="查看账户模式与连接状态"><span class="account-dot"></span><strong data-shell-mode>模拟盘</strong><span data-shell-connection>连接状态</span><span>⌄</span></button><button class="btn btn-secondary" onclick="LiveControls.configure()">配置实盘</button><button class="btn btn-danger" data-live-start disabled onclick="LiveControls.start()">启动实盘</button><button class="btn btn-secondary" data-shell-paper hidden onclick="LiveControls.paper()">切回模拟盘</button></div></header>
+            <div class="workspace-panels">
+            <div id="panel-dashboard" class="panel active"></div>
+            <div id="panel-copy-hub" class="panel"></div>
+            <div id="panel-desk" class="panel"></div>
+            <div id="panel-wallets" class="panel"></div>
+            <div id="panel-trades" class="panel"></div>
+            <div id="panel-strategies" class="panel"></div>
+            <div id="panel-smart" class="panel"></div>
+            <div id="panel-execution" class="panel"></div>
+            <div id="panel-backtest" class="panel"></div>
+            <div id="panel-analytics" class="panel"></div>
+            <div id="panel-optimizer" class="panel"></div>
+            <div id="panel-portfolio" class="panel"></div>
+            <div id="panel-positions" class="panel"></div>
+            <div id="panel-wallet-positions" class="panel"></div>
+            <div id="panel-settings" class="panel"></div>
+            </div>
+        </main>
+    </div>
+
+    <dialog id="account-drawer" class="account-drawer"><div class="drawer-heading"><div><span class="workspace-kicker">ACCOUNT CONNECTION</span><h2>账户与实盘连接</h2></div><button class="icon-close" aria-label="关闭账户面板" onclick="document.getElementById('account-drawer').close()">×</button></div><div id="account-controls"></div></dialog>
+    <!-- Toast 容器 -->
+    <div id="toast-container"></div>
+
+    <!-- 模态框容器 -->
+    <div id="modal-container"></div>
+
+    <!-- JS 模块（顺序：基础设施 → 面板 → 主应用） -->
+    <script src="js/api.js?v=20261026-workspace8"></script>
+    <script src="js/ws.js?v=20261026-workspace8"></script>
+    <script src="js/accounts.js?v=20261027-accounts2"></script>
+    <script src="js/live-controls.js?v=20261027-accounts1"></script>
+    <script src="js/panels/dashboard.js?v=20261026-workspace8"></script>
+    <script src="js/panels/wallets.js?v=20261026-workspace8"></script>
+    <script src="js/panels/trades.js?v=20261026-workspace8"></script>
+    <script src="js/panels/strategies.js?v=20261026-workspace8"></script>
+    <script src="js/panels/execution.js?v=20261026-workspace8"></script>
+    <script src="js/panels/backtest.js?v=20261026-workspace8"></script>
+    <script src="js/panels/analytics.js?v=20261026-workspace8"></script>
+    <script src="js/panels/optimizer.js?v=20261026-workspace8"></script>
+    <script src="js/panels/portfolio.js?v=20261026-workspace8"></script>
+    <script src="js/panels/positions.js?v=20261026-workspace8"></script>
+    <script src="js/panels/wallet-positions.js?v=20261026-workspace8"></script>
+    <script src="js/panels/settings.js?v=20261027-accounts1"></script>
+    <script src="js/panels/desk.js?v=20261026-workspace8"></script>
+    <script src="js/panels/copy-hub.js?v=20261027-accounts1"></script>
+    <script src="js/panels/smart.js?v=20261028-smart1"></script>
+    <script src="js/app.js?v=20261028-smart1"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+test_auto_strategy_executes_with_global_review_and_caps (test_smart_trading.SmartTests.test_auto_strategy_executes_with_global_review_and_caps) ... Executing <Task pending name='Task-2' coro=<SmartTests.test_auto_strategy_executes_with_global_review_and_caps() running at D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_smart_trading.py:53> wait_for=<Future pending cb=[Task.task_wakeup()] created at asyncio\base_events.py:448> cb=[_run_until_complete_cb() at asyncio\base_events.py:181] created at asyncio\runners.py:100> took 0.109 seconds
+ok
+test_consensus_counts_unique_wallets_not_number_of_trades (test_smart_trading.SmartTests.test_consensus_counts_unique_wallets_not_number_of_trades) ... ok
+test_estimates_disclose_hypothesis_and_costs (test_smart_trading.SmartTests.test_estimates_disclose_hypothesis_and_costs) ... ok
+test_global_observe_vetoes_auto (test_smart_trading.SmartTests.test_global_observe_vetoes_auto) ... ok
+test_mode_mismatch_no_live_orders (test_smart_trading.SmartTests.test_mode_mismatch_no_live_orders) ... ok
+test_model_schema_cannot_override_orders (test_smart_trading.SmartTests.test_model_schema_cannot_override_orders) ... ok
+test_model_unconfigured_or_failed_never_falls_back_to_buy (test_smart_trading.SmartTests.test_model_unconfigured_or_failed_never_falls_back_to_buy) ... ok
+test_modified_config_invalidates_queued_order (test_smart_trading.SmartTests.test_modified_config_invalidates_queued_order) ... FAIL
+test_pause_during_model_call_vetoes_late_approval (test_smart_trading.SmartTests.test_pause_during_model_call_vetoes_late_approval) ... ok
+test_review_strategy_does_not_auto_even_global_auto (test_smart_trading.SmartTests.test_review_strategy_does_not_auto_even_global_auto) ... ok
+test_stale_or_wrong_token_does_not_trade (test_smart_trading.SmartTests.test_stale_or_wrong_token_does_not_trade) ... ok
+test_take_profit_exits_owned_lots_even_model_offline (test_smart_trading.SmartTests.test_take_profit_exits_owned_lots_even_model_offline) ... ok
+
+======================================================================
+FAIL: test_modified_config_invalidates_queued_order (test_smart_trading.SmartTests.test_modified_config_invalidates_queued_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "asyncio\runners.py", line 118, in run
+  File "asyncio\base_events.py", line 691, in run_until_complete
+  File "D:\Users\Administrator\Documents\deepseek-harness\default-workspace\polymarket-trader\tests\test_smart_trading.py", line 77, in test_modified_config_invalidates_queued_order
+    with self.assertRaises(ValueError):await self.desk.approve(row['signal_id'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 12 tests in 6.279s
+
+FAILED (failures=1)

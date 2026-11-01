@@ -1,0 +1,470 @@
+{
+  "name": "polymarket-enhance",
+  "id": "polymarket-enhance",
+  "description": "完善 Polymarket 跟单系统：通知推送系统、策略回测引擎、绩效分析面板",
+  "captainSessionId": "session-80df8942-0582-4527-b127-baeab025b127",
+  "createdAt": 1792784503171,
+  "phase": "running",
+  "members": [
+    {
+      "id": "7337519e-b4d7-4a43-9166-91d16d57d7c6",
+      "name": "notify-dev",
+      "role": "notification engineer",
+      "provider": "minimax",
+      "model": "MiniMax-M3.1-Flash",
+      "reasoningEffort": "default",
+      "joinedAt": 1792784503171,
+      "status": "removed",
+      "runtimeSetup": {
+        "persona": "You are notify-dev, a member of the multi-agent team \"polymarket-enhance\" running inside DeepSeek Harness AgentTeams. The captain leads the team; you are a worker member with the role: notification engineer.\n\nTeam context:\n- Team id: polymarket-enhance\n- Your name inside the team (use it as `from`/identity): notify-dev\n- Team goal: 完善 Polymarket 跟单系统：通知推送系统、策略回测引擎、绩效分析面板\n- Profile protocol: (none)\n- The team state lives under .agent-teams/polymarket-enhance/ (team.json and inbox/*.jsonl). You may inspect these files read-only for diagnostics, but never edit them directly; use the agent_teams_* tools so JSON escaping and concurrent updates stay safe.\n- The captain and your teammates reach you through messages. Coordination arrives at your nearest model step. Apply it to your current attempt; a task assignment starts a separate turn.\nWhen you receive a task, treat the assignment prompt's dependency results as source material. Do not ignore them.\n\nWorking rules:\n1. When you receive a task assignment, call agent_teams_claim_task with the task id. Keep the returned attempt_id: include it in every agent_teams_update_task call for that execution attempt. Then mark the task in_progress.\n2. Work thoroughly with your available tools; do not cut corners.\n3. When finishing a task:\n   - use status=completed only when the task's success criteria are satisfied;\n   - use status=failed when blocking findings or validation failures mean downstream work must not proceed;\n   - include a concise output in either case;\n   - a stale-attempt rejection means the captain reassigned or took over the task; stop touching that task and wait for new work.\n   claimed cannot jump to completed. Mark in_progress first, then completed or failed.\n   Include attempt_id on every update. Then report once as described below and become idle.\n4. Send one short report with agent_teams_send_message (to=captain) when you complete a task or hit a blocker. Include source_task_id and source_attempt_id in task reports; a stale source rejection means stop, never relabel an old result with a new attempt. The captain is also your parent: this single message satisfies both reporting duties. Do not repeat it through the native send_message tool or send acknowledgments that add no new information.\n5. To ask a teammate something, use agent_teams_send_message with to=<teammate name>; the message lands in their mailbox and wakes them directly — teammates talk to each other without the captain in the loop. The same applies to the captain (to=captain).\n6. After your turn becomes idle, the shared task scheduler may assign your next ready task automatically. Never claim a second task while you still own unfinished work.\n7. If you already own an open attempt (claimed or in_progress) and receive mail, treat it as guidance for that same attempt_id unless the mail explicitly tells you to stop or fail. Do not claim a new task in that turn.\n8. Do not start a teammate's assigned task. Do not privately tell the next-stage member to start; the scheduler assigns unlocked work after you become idle.\n9. You are a worker: do not create or delete teams, reassign tasks, or add/remove members — that is the captain's job.\n10. Quality-gate kinds carry a contract (kind, objective, inScope, acceptance, verify). Stay inside inScope. Do not mark your own implementation as review pass. Review/requirements complete only with verdict=pass; needs_revision/reject must fail with findings. Mail is not a formal next review. Completed work must not be repeated to attach late evidence: call update_task on the original task with its attempt_id and acceptanceResults/commandsRun/evidence_note; supplements are append-only and cannot change its verdict.",
+        "toolFilter": {
+          "deny": [
+            "agent_teams_create",
+            "agent_teams_approve",
+            "agent_teams_edit_plan",
+            "agent_teams_add_member",
+            "agent_teams_remove_member",
+            "agent_teams_create_task",
+            "agent_teams_reassign_task",
+            "agent_teams_amend_task",
+            "agent_teams_resume",
+            "agent_teams_delete"
+          ]
+        }
+      }
+    },
+    {
+      "id": "be78dc6e-7c85-4d03-b7fe-1e9630b9114a",
+      "name": "backtest-dev",
+      "role": "backtest engine engineer",
+      "provider": "minimax",
+      "model": "MiniMax-M3.1-Flash",
+      "reasoningEffort": "default",
+      "joinedAt": 1792784503171,
+      "status": "removed",
+      "runtimeSetup": {
+        "persona": "You are backtest-dev, a member of the multi-agent team \"polymarket-enhance\" running inside DeepSeek Harness AgentTeams. The captain leads the team; you are a worker member with the role: backtest engine engineer.\n\nTeam context:\n- Team id: polymarket-enhance\n- Your name inside the team (use it as `from`/identity): backtest-dev\n- Team goal: 完善 Polymarket 跟单系统：通知推送系统、策略回测引擎、绩效分析面板\n- Profile protocol: (none)\n- The team state lives under .agent-teams/polymarket-enhance/ (team.json and inbox/*.jsonl). You may inspect these files read-only for diagnostics, but never edit them directly; use the agent_teams_* tools so JSON escaping and concurrent updates stay safe.\n- The captain and your teammates reach you through messages. Coordination arrives at your nearest model step. Apply it to your current attempt; a task assignment starts a separate turn.\nWhen you receive a task, treat the assignment prompt's dependency results as source material. Do not ignore them.\n\nWorking rules:\n1. When you receive a task assignment, call agent_teams_claim_task with the task id. Keep the returned attempt_id: include it in every agent_teams_update_task call for that execution attempt. Then mark the task in_progress.\n2. Work thoroughly with your available tools; do not cut corners.\n3. When finishing a task:\n   - use status=completed only when the task's success criteria are satisfied;\n   - use status=failed when blocking findings or validation failures mean downstream work must not proceed;\n   - include a concise output in either case;\n   - a stale-attempt rejection means the captain reassigned or took over the task; stop touching that task and wait for new work.\n   claimed cannot jump to completed. Mark in_progress first, then completed or failed.\n   Include attempt_id on every update. Then report once as described below and become idle.\n4. Send one short report with agent_teams_send_message (to=captain) when you complete a task or hit a blocker. Include source_task_id and source_attempt_id in task reports; a stale source rejection means stop, never relabel an old result with a new attempt. The captain is also your parent: this single message satisfies both reporting duties. Do not repeat it through the native send_message tool or send acknowledgments that add no new information.\n5. To ask a teammate something, use agent_teams_send_message with to=<teammate name>; the message lands in their mailbox and wakes them directly — teammates talk to each other without the captain in the loop. The same applies to the captain (to=captain).\n6. After your turn becomes idle, the shared task scheduler may assign your next ready task automatically. Never claim a second task while you still own unfinished work.\n7. If you already own an open attempt (claimed or in_progress) and receive mail, treat it as guidance for that same attempt_id unless the mail explicitly tells you to stop or fail. Do not claim a new task in that turn.\n8. Do not start a teammate's assigned task. Do not privately tell the next-stage member to start; the scheduler assigns unlocked work after you become idle.\n9. You are a worker: do not create or delete teams, reassign tasks, or add/remove members — that is the captain's job.\n10. Quality-gate kinds carry a contract (kind, objective, inScope, acceptance, verify). Stay inside inScope. Do not mark your own implementation as review pass. Review/requirements complete only with verdict=pass; needs_revision/reject must fail with findings. Mail is not a formal next review. Completed work must not be repeated to attach late evidence: call update_task on the original task with its attempt_id and acceptanceResults/commandsRun/evidence_note; supplements are append-only and cannot change its verdict.",
+        "toolFilter": {
+          "deny": [
+            "agent_teams_create",
+            "agent_teams_approve",
+            "agent_teams_edit_plan",
+            "agent_teams_add_member",
+            "agent_teams_remove_member",
+            "agent_teams_create_task",
+            "agent_teams_reassign_task",
+            "agent_teams_amend_task",
+            "agent_teams_resume",
+            "agent_teams_delete"
+          ]
+        }
+      }
+    },
+    {
+      "id": "261cd96e-f4e1-4ed3-981b-fe588a122a3d",
+      "name": "analytics-dev",
+      "role": "analytics engineer",
+      "provider": "minimax",
+      "model": "MiniMax-M3.1-Flash",
+      "reasoningEffort": "default",
+      "joinedAt": 1792784503171,
+      "status": "removed",
+      "runtimeSetup": {
+        "persona": "You are analytics-dev, a member of the multi-agent team \"polymarket-enhance\" running inside DeepSeek Harness AgentTeams. The captain leads the team; you are a worker member with the role: analytics engineer.\n\nTeam context:\n- Team id: polymarket-enhance\n- Your name inside the team (use it as `from`/identity): analytics-dev\n- Team goal: 完善 Polymarket 跟单系统：通知推送系统、策略回测引擎、绩效分析面板\n- Profile protocol: (none)\n- The team state lives under .agent-teams/polymarket-enhance/ (team.json and inbox/*.jsonl). You may inspect these files read-only for diagnostics, but never edit them directly; use the agent_teams_* tools so JSON escaping and concurrent updates stay safe.\n- The captain and your teammates reach you through messages. Coordination arrives at your nearest model step. Apply it to your current attempt; a task assignment starts a separate turn.\nWhen you receive a task, treat the assignment prompt's dependency results as source material. Do not ignore them.\n\nWorking rules:\n1. When you receive a task assignment, call agent_teams_claim_task with the task id. Keep the returned attempt_id: include it in every agent_teams_update_task call for that execution attempt. Then mark the task in_progress.\n2. Work thoroughly with your available tools; do not cut corners.\n3. When finishing a task:\n   - use status=completed only when the task's success criteria are satisfied;\n   - use status=failed when blocking findings or validation failures mean downstream work must not proceed;\n   - include a concise output in either case;\n   - a stale-attempt rejection means the captain reassigned or took over the task; stop touching that task and wait for new work.\n   claimed cannot jump to completed. Mark in_progress first, then completed or failed.\n   Include attempt_id on every update. Then report once as described below and become idle.\n4. Send one short report with agent_teams_send_message (to=captain) when you complete a task or hit a blocker. Include source_task_id and source_attempt_id in task reports; a stale source rejection means stop, never relabel an old result with a new attempt. The captain is also your parent: this single message satisfies both reporting duties. Do not repeat it through the native send_message tool or send acknowledgments that add no new information.\n5. To ask a teammate something, use agent_teams_send_message with to=<teammate name>; the message lands in their mailbox and wakes them directly — teammates talk to each other without the captain in the loop. The same applies to the captain (to=captain).\n6. After your turn becomes idle, the shared task scheduler may assign your next ready task automatically. Never claim a second task while you still own unfinished work.\n7. If you already own an open attempt (claimed or in_progress) and receive mail, treat it as guidance for that same attempt_id unless the mail explicitly tells you to stop or fail. Do not claim a new task in that turn.\n8. Do not start a teammate's assigned task. Do not privately tell the next-stage member to start; the scheduler assigns unlocked work after you become idle.\n9. You are a worker: do not create or delete teams, reassign tasks, or add/remove members — that is the captain's job.\n10. Quality-gate kinds carry a contract (kind, objective, inScope, acceptance, verify). Stay inside inScope. Do not mark your own implementation as review pass. Review/requirements complete only with verdict=pass; needs_revision/reject must fail with findings. Mail is not a formal next review. Completed work must not be repeated to attach late evidence: call update_task on the original task with its attempt_id and acceptanceResults/commandsRun/evidence_note; supplements are append-only and cannot change its verdict.",
+        "toolFilter": {
+          "deny": [
+            "agent_teams_create",
+            "agent_teams_approve",
+            "agent_teams_edit_plan",
+            "agent_teams_add_member",
+            "agent_teams_remove_member",
+            "agent_teams_create_task",
+            "agent_teams_reassign_task",
+            "agent_teams_amend_task",
+            "agent_teams_resume",
+            "agent_teams_delete"
+          ]
+        }
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "profileSeedId": "N1",
+      "subject": "通知推送系统（Telegram + 邮件）",
+      "description": "项目路径：D:\\Users\\Administrator\\Documents\\deepseek-harness\\default-workspace\\polymarket-trader\\（所有路径相对于此）\n\n为跟单系统增加主动通知能力，让用户不用一直盯屏幕。\n\n1. 新建 backend/core/notifier.py：\n   - class NotifierBase(ABC)：async notify(event_type, title, message, data) 接口\n   - class TelegramNotifier：调用 Telegram Bot API（https://api.telegram.org/bot{TOKEN}/sendMessage），支持 Markdown-ish 格式，支持 chat_id 列表\n   - class EmailNotifier：使用 smtplib 发邮件（支持 SSL/TLS 465 和 STARTTLS 587），支持多收件人\n   - class NotifierManager：管理多个通知器、事件过滤规则、发送队列（异步后台 worker 批量发送，避免阻塞主流程）\n   - 事件类型常量：TRADE_DETECTED（大额交易）、SIGNAL_GENERATED（跟单信号）、EXECUTION_FILLED（成交）、EXECUTION_FAILED（失败）、RISK_BLOCKED（风控拦截）、DAILY_SUMMARY（每日汇总）\n   - 过滤规则：最小金额阈值、只通知指定钱包、事件类型白名单、冷却期（同一事件不重复通知）\n\n2. 修改 backend/config.py：\n   - 新增 NotificationConfig 模型：telegram_enabled, telegram_token, telegram_chat_ids(list), email_enabled, email_host, email_port, email_user, email_password, email_from, email_to(list), email_use_ssl, min_notify_amount, notify_events(list), cooldown_seconds\n   - 环境变量映射：TELEGRAM_ENABLED, TELEGRAM_TOKEN, TELEGRAM_CHAT_IDS(逗号分隔), EMAIL_ENABLED, EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD, EMAIL_FROM, EMAIL_TO, NOTIFY_MIN_AMOUNT, NOTIFY_EVENTS, NOTIFY_COOLDOWN\n\n3. 修改 backend/main.py：\n   - lifespan 中初始化 NotifierManager，加载配置\n   - 订阅 EventBus 的 signal_generated / execution_update / trade_update 事件，按过滤规则触发通知\n   - 每日汇总任务（cron 风格 asyncio task，每天固定时间发送一次汇总：今日交易数、信号数、成交数、盈亏）\n   - 关闭时优雅停止通知 worker\n\n4. 修改 backend/api/routes.py：\n   - GET /api/notifications/config → 返回脱敏后的通知配置（token 显示为前4后4，密码完全隐藏）\n   - PUT /api/notifications/config → 更新通知配置（写入 DB config 表并热更新 NotifierManager）\n   - POST /api/notifications/test {channel: telegram|email} → 发送测试消息，返回成功/失败\n   - GET /api/notifications/log → 最近通知发送记录（时间、事件类型、渠道、状态、错误信息）\n\n5. 修改 backend/store/state.py：新增 notifications_log 表（id, created_at, event_type, channel, status, error, payload），提供 async log_notification() 和 async get_notification_logs(limit)\n\n6. 前端修改 frontend/js/panels/settings.js：\n   - 在现有设置面板中新增「通知设置」区块：Telegram 开关 + Bot Token + Chat ID（可多个）；邮件开关 + SMTP 主机/端口/用户名/密码/发件人/收件人；事件类型勾选（复选框组：交易/信号/成交/失败/风控/汇总）；最小通知金额；冷却秒数\n   - 「发送测试」按钮，分别测试 Telegram 和邮件，结果 Toast 提示\n   - 前端 js/api.js 新增对应 4 个方法\n\n7. 修改 .env.example 和 config.example.yaml：补充通知相关配置项（带中文注释）\n\n验收：notifier.py 可独立 import；NotifierManager 可实例化并调用 send 测试（网络失败时优雅降级不崩溃）；4 个新 REST 端点定义完成；前端设置面板含完整通知配置表单；所有改动 Python 文件 py_compile 通过，JS 用 node --check 通过。",
+      "status": "completed",
+      "assignee": "notify-dev",
+      "dependencies": [],
+      "attempt": 1,
+      "createdAt": 1792784503171,
+      "updatedAt": 1792787261317,
+      "attemptId": "1d2a35c9-f67e-4b42-a471-ea834f998dde",
+      "reassigning": false,
+      "output": "通知推送系统（Telegram + 邮件）已完成。\n\n**新增文件**\n- `backend/core/notifier.py`（960 行）：`NotifierBase`(ABC) / `TelegramNotifier` / `EmailNotifier` / `NotifierManager`；事件常量 `EventType`（trade_detected / signal_generated / execution_filled / execution_failed / risk_blocked / daily_summary + test）；过滤规则（最小金额阈值、钱包白名单、事件类型白名单、冷却期）；异步后台 worker 批量发送队列。仅依赖标准库（httpx 可选），可独立 import。\n\n**修改文件**\n- `backend/config.py`：新增 `NotificationConfig` 模型 + 14 个环境变量映射（TELEGRAM_*/EMAIL_*/NOTIFY_*）。\n- `backend/store/state.py`：新增 `notifications_log` 表 + `log_notification()` / `get_notification_logs(limit)`，附带 `get_signals()`（每日汇总需要）。\n- `backend/main.py`：lifespan 初始化 NotifierManager（DB 持久化配置优先）+ 订阅 trade_update/signal_generated/execution_update + 每日汇总 cron 任务 + 关闭时 flush/stop 优雅退出。\n- `backend/api/routes.py`：4 个新端点 GET/PUT /api/notifications/config、POST /api/notifications/test、GET /api/notifications/log。\n- `backend/models/schemas.py`：`NotificationConfigRequest` / `NotificationTestRequest`。\n- `frontend/js/api.js`：4 个新方法。\n- `frontend/js/panels/settings.js`：新增「通知设置」区块（完整表单 + 2 个发送测试按钮 + 最近通知记录表）。\n- `.env.example` / `config.example.yaml` / `docs/api-contract.md`：补充通知配置与契约。\n\n**验证结果**\n- notifier.py 独立 import 通过（用 importlib 从文件路径加载，无第三方依赖）。\n- NotifierManager 可实例化；send() 在网络失败时优雅降级返回 False，不抛异常、不崩溃。\n- 4 个 REST 端点经 FastAPI TestClient 运行时验证：全部 200；token 脱敏为 `1234...ALUE`、密码脱敏为 `********`；PUT 后 GET 反映新配置；测试端点对无效凭据返回 ok=false 而非 500。\n- 事件流集成验证：trade_detected / signal_generated / execution_filled / risk_blocked 正确触发；小额交易被金额阈值过滤；白名单外事件被过滤；冷却期生效；通知日志写入 DB（4 条）；优雅停止正常。\n- 每日汇总内容正确（今日交易/信号/成交数 + 累计盈亏 +12.50）。\n- 全部 Python 文件 py_compile 通过（含 compileall backend 全量）；全部 JS node --check 通过。\n\n**说明**\n1. 最小金额阈值只对能确定金额的事件生效（交易/信号/成交）；风控拦截、每日汇总等无金额事件不做阈值过滤，避免重要通知被误杀。\n2. 敏感字段（telegram_token / email_password）前端不回显，PUT 时传空字符串表示保持原值。\n3. `notify_wallets` 为我在「只通知指定钱包」要求基础上的实现字段（DB 持久化 + API 暴露 + 过滤生效）。\n4. 测试期间为运行 FastAPI TestClient 临时安装的依赖与临时脚本已全部清理，工作区无残留。",
+      "changedPaths": [
+        "backend/core/notifier.py",
+        "backend/config.py",
+        "backend/store/state.py",
+        "backend/main.py",
+        "backend/api/routes.py",
+        "backend/models/schemas.py",
+        "frontend/js/api.js",
+        "frontend/js/panels/settings.js",
+        ".env.example",
+        "config.example.yaml",
+        "docs/api-contract.md"
+      ],
+      "acceptanceResults": [
+        {
+          "criterion": "backend/core/notifier.py 可独立 import（不依赖第三方包）",
+          "status": "passed",
+          "evidence": "用 importlib.util.spec_from_file_location 从文件路径直接加载 notifier.py 成功；模块仅依赖标准库（httpx 为可选加速，缺失时回退 urllib）。为此把 _NotificationItem 从 dataclass 改为普通类，避免 dataclass 装饰器要求模块已注册进 sys.modules。"
+        },
+        {
+          "criterion": "NotifierManager 可实例化并调用 send 测试，网络失败时优雅降级不崩溃",
+          "status": "passed",
+          "evidence": "NotifierManager() 空配置实例化成功；send() 对假 Token 真实请求 Telegram API 返回 {'telegram': False} 且未抛出异常；EmailNotifier 对不可达主机返回 False；完整脚本退出码 0。"
+        },
+        {
+          "criterion": "NotifierManager 含事件过滤规则：最小金额阈值、只通知指定钱包、事件类型白名单、冷却期",
+          "status": "passed",
+          "evidence": "should_notify() 逐条验证：金额 100 < 阈值 500 被拒（原因含阈值）、金额 1000 放行；白名单外事件类型被拒；钱包 0xbbb 不在白名单被拒而 0xAAA 放行；cooldown_seconds=60 时同 signal_id 第二次被拒（原因含「冷却期未过」）。"
+        },
+        {
+          "criterion": "4 个新 REST 端点定义完成并可运行时调用",
+          "status": "passed",
+          "evidence": "backend.api.routes.router 路由表实测包含 GET/PUT /api/notifications/config、POST /api/notifications/test、GET /api/notifications/log。FastAPI TestClient 实跑：4 端点全部 HTTP 200；PUT 返回 ok:true；GET 回显 telegram_token='1234...ALUE'、email_password='********'；POST /test 对假凭据返回 200 且 ok=false（非 500）；GET /log 返回 2 条日志记录。"
+        },
+        {
+          "criterion": "backend/config.py 新增 NotificationConfig 与环境变量映射",
+          "status": "passed",
+          "evidence": "NotificationConfig 含 telegram_enabled/token/chat_ids、email_enabled/host/port/user/password/from/to/use_ssl、min_notify_amount、notify_events、notify_wallets、cooldown_seconds、daily_summary_hour/minute；_apply_env_overrides 映射 TELEGRAM_ENABLED/TOKEN/CHAT_IDS、EMAIL_ENABLED/HOST/PORT/USER/PASSWORD/FROM/TO/USE_SSL、NOTIFY_MIN_AMOUNT/EVENTS/WALLETS/COOLDOWN、SUMMARY_HOUR/MINUTE，列表型用逗号分隔拆分、布尔型支持 true/1/yes/on。"
+        },
+        {
+          "criterion": "backend/store/state.py 新增 notifications_log 表并提供 log_notification / get_notification_logs",
+          "status": "passed",
+          "evidence": "CREATE TABLE notifications_log (id, created_at, event_type, channel, status, error, payload) + 索引。log_notification() 写入后 get_notification_logs(20) 实测返回 2 行，字段为 id/created_at/event_type/channel/status/error/payload。"
+        },
+        {
+          "criterion": "backend/main.py 集成 NotifierManager：lifespan 初始化、事件订阅、每日汇总、优雅关闭",
+          "status": "passed",
+          "evidence": "lifespan 中 from_settings + DB 持久化配置优先 + notifier.start()；订阅 TRADE_UPDATE/SIGNAL_GENERATED/EXECUTION_UPDATE 三个频道；_daily_summary_worker 为 cron 风格 asyncio 任务（按 daily_summary_hour:minute 计算下次触发）；关闭时 notifier.flush(5.0) + notifier.stop() 优雅停止 worker。TestClient 上下文管理器实测启动与关闭日志完整无异常。"
+        },
+        {
+          "criterion": "事件流集成正确（信号/成交/失败/风控分流正确且过滤生效）",
+          "status": "passed",
+          "evidence": "经 EventBus 真实分发，实测收到事件序列 ['trade_detected','signal_generated','execution_filled','risk_blocked']；小额交易（金额 10 < 阈值 100）被过滤未通知；白名单外的 execution_failed 未通知；冷却期内重复 signal 被拦截。"
+        },
+        {
+          "criterion": "每日汇总任务发送内容正确（今日交易数、信号数、成交数、盈亏）",
+          "status": "passed",
+          "evidence": "_send_daily_summary 实测输出 event_type=daily_summary，data={'today_trades':1,'today_signals':1,'today_executions':1,'total_pnl':12.5}，正文「今日交易 1 笔 | 信号 1 个 | 成交 1 笔 / 累计盈亏 +12.50 USDC」。"
+        },
+        {
+          "criterion": "前端设置面板含完整通知配置表单 + 两个发送测试按钮 + Toast 提示",
+          "status": "passed",
+          "evidence": "settings.js 新增「通知设置」卡片，含 notif-tg-enabled/token/chat-ids、notif-email-enabled/host/port/user/password/from/to/ssl、6 个事件类型复选框（.notif-event-check，值对应 6 种 EventType）、notif-min-amount、notif-cooldown、汇总时间；两个 onclick=\"SettingsPanel.testNotification('telegram'|'email')\" 按钮，结果经 Toast.success/Toast.error 提示；另含最近通知记录区。"
+        },
+        {
+          "criterion": "frontend/js/api.js 新增对应 4 个方法",
+          "status": "passed",
+          "evidence": "新增 getNotificationConfig() / updateNotificationConfig(data) / testNotification(channel) / getNotificationLogs(limit=50)，均通过 API.request 封装。"
+        },
+        {
+          "criterion": ".env.example 与 config.example.yaml 补充通知相关配置项（带中文注释）",
+          "status": "passed",
+          "evidence": ".env.example 新增「通知推送配置」段（TELEGRAM_*/EMAIL_*/NOTIFY_* 全量 + 中文注释说明端口含义与安全警告）；config.example.yaml 新增 notification 段（全部字段 + 行内中文注释）。"
+        },
+        {
+          "criterion": "所有改动 Python 文件 py_compile 通过",
+          "status": "passed",
+          "evidence": "py_compile backend/core/notifier.py backend/config.py backend/store/state.py backend/main.py backend/api/routes.py backend/models/schemas.py 退出码 0；额外 compileall -q backend 全量退出码 0。"
+        },
+        {
+          "criterion": "JS 用 node --check 通过",
+          "status": "passed",
+          "evidence": "node --check frontend/js/api.js 与 frontend/js/panels/settings.js 退出码 0；另对 app.js/ws.js 及全部 panels/*.js 一并检查亦全部通过。"
+        }
+      ],
+      "commandsRun": [
+        {
+          "command": "python -m py_compile backend/core/notifier.py backend/config.py backend/store/state.py backend/main.py backend/api/routes.py backend/models/schemas.py",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "PY_COMPILE OK — 6 个改动 Python 文件全部编译通过"
+        },
+        {
+          "command": "python -m compileall -q backend",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "COMPILEALL_EXIT=0 — backend 全量包编译通过"
+        },
+        {
+          "command": "node --check frontend/js/api.js && node --check frontend/js/panels/settings.js",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "FINAL NODE CHECK OK — api.js 与 settings.js 语法检查通过"
+        },
+        {
+          "command": "node --check frontend/js/app.js frontend/js/ws.js frontend/js/panels/{dashboard,execution,strategies,trades,wallets}.js",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "NODE CHECK ALL OK — 其余前端 JS 未被破坏"
+        },
+        {
+          "command": "python _tmp_test_notifier.py  (notifier 独立 import + 实例化 + 优雅降级 + 过滤规则)",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "10 项检查全过：独立 import OK、NotifierManager 实例化 OK、send 网络失败降级 {'telegram': False} 不崩、金额阈值/事件白名单/钱包白名单/冷却期 4 项过滤均正确、队列 start/send/flush/stop OK、EmailNotifier 降级 False、markdown_to_html 正确"
+        },
+        {
+          "command": "python _tmp_test_endpoints.py  (FastAPI TestClient 跑 4 个通知端点)",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "4 端点全部注册并 HTTP 200；token 脱敏 '1234...ALUE'、密码 '********'；PUT 后 GET 反映新配置；测试端点对假凭据返回 200 + ok=false 而非 500；/log 返回记录"
+        },
+        {
+          "command": "python _tmp_test_flow.py  (EventBus → NotifierManager 事件流集成)",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "收到 ['trade_detected','signal_generated','execution_filled','risk_blocked']；阈值过滤、白名单过滤、冷却期生效；DB 日志 4 条；优雅停止 OK；配置持久化 OK"
+        },
+        {
+          "command": "python _tmp_test_summary.py  (每日汇总内容)",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "daily_summary 事件 data={'today_trades':1,'today_signals':1,'today_executions':1,'total_pnl':12.5}，正文与数据一致"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "profileSeedId": "N2",
+      "subject": "策略回测引擎与回测面板",
+      "description": "项目路径：D:\\Users\\Administrator\\Documents\\deepseek-harness\\default-workspace\\polymarket-trader\\（所有路径相对于此）\n\n让用户在下真实跟单前，先用历史数据验证策略效果。\n\n1. 新建 backend/core/backtest.py：\n   - class BacktestEngine：\n     - async run_backtest(wallet_address, pipeline_config: StrategyPipeline, params: BacktestParams) → BacktestResult\n     - 从 DB trades 表读取该钱包的历史交易（若无数据则调用 PolymarketClient.get_wallet_activity 拉取）\n     - 按时间顺序逐笔送入 StrategyPipelineRunner.process()\n     - 对每个通过策略的信号模拟成交：用交易发生时刻的价格 + 简单滑点模型（滑点 = tick_size * slippage_ticks，可配置）\n     - 模拟盈亏：同一市场后续价格变动计算 PnL（用历史交易中该 token_id 的后续价格序列）\n     - 统计指标：\n       * 总交易数、总信号数、通过率、成交数\n       * 胜率（盈利信号占比）、总盈亏、平均盈亏、最大单笔盈利、最大单笔亏损\n       * 盈亏比（profit factor）、最大回撤（基于累计盈亏曲线）\n       * 与「直接镜像跟单」的基准对比（benchmark），给出超额收益\n     - class BacktestParams：start_time, end_time, initial_capital, slippage_ticks, min_amount, max_position_per_market\n     - class BacktestResult：上述所有指标的 Pydantic 模型 + 逐笔明细列表（每笔：源交易、是否通过策略、原因、模拟成交价、盈亏）\n\n2. 修改 backend/models/schemas.py：新增 BacktestParams / BacktestResult / BacktestTradeDetail / BacktestMetrics 模型\n\n3. 修改 backend/api/routes.py：\n   - POST /api/backtest/run {wallet, pipeline_id 或 pipeline_config, params} → BacktestResult\n   - POST /api/backtest/compare {wallets: list, pipeline_config} → 多钱包对比结果\n   - GET /api/backtest/strategies → 可用于回测的策略类型及其参数 schema（复用 STRATEGY_REGISTRY）\n   - 注意：此任务会修改 routes.py，若与 N1 任务冲突，以「不同端点函数名、不同区段」方式追加，不要覆盖他人已有代码\n\n4. 前端新建 frontend/js/panels/backtest.js：\n   - 回测配置区：选择钱包（下拉，从已监测钱包列表）、选择/新建管道（复用 strategies.js 的管道列表）、回测参数（时间范围、初始资金、滑点、最大仓位、最小金额）\n   - 运行按钮 → 展示加载状态 → 结果区\n   - 结果展示：核心指标卡片（总信号数、胜率、总盈亏、盈亏比、最大回撤、超额收益 vs 基准）\n   - 盈亏曲线图（用 Canvas 手绘折线图，参考 execution.js 中已有的 Canvas 绘图风格）\n   - 逐笔明细表格：时间、源交易市场、是否通过、过滤原因、成交价、盈亏（红绿着色）\n   - 「过滤原因」统计：哪些策略过滤掉最多交易（归因分析）\n\n5. 修改 frontend/index.html：在左侧导航新增「策略回测」面板入口（nav item + 对应 section 容器），nav data-panel 值用 \"backtest\"。修改 frontend/js/app.js 注册面板路由。\n\n6. 修改 frontend/js/api.js：新增 3 个回测相关方法\n\n验收：backtest.py 可独立 import；BacktestEngine.run_backtest 在有历史交易数据时能返回完整 BacktestResult（盈亏计算逻辑自洽，可用构造数据验证：买入后价格上涨应盈利）；3 个 REST 端点定义完成；前端回测面板含配置区+结果区+明细表+盈亏曲线；所有改动 Python/JS 文件编译检查通过。",
+      "status": "completed",
+      "assignee": "backtest-dev",
+      "dependencies": [],
+      "attempt": 1,
+      "createdAt": 1792784503171,
+      "updatedAt": 1792787705436,
+      "attemptId": "b6b0503e-9c61-4567-be12-03d9c4ec9eae",
+      "reassigning": false,
+      "output": "已完成 N2「策略回测引擎与回测面板」。\n\n## 交付物\n\n**1. `backend/core/backtest.py`（新建，~830 行）**\n- `BacktestEngine.run_backtest(wallet_address, pipeline_config, params) -> BacktestResult`\n- 数据源：优先读 DB `trades` 表；表内无数据时回退 `PolymarketClient.get_wallet_activity`（分页最多 10 页）\n- 按时间升序逐笔送入 `StrategyPipelineRunner.process()`；用 `_StrategyProbe` 包装每个策略以捕获**过滤原因**\n- 成交价 = 触发价 ± 滑点（滑点 = tick_size × slippage_ticks，BUY 加 / SELL 减，钳制在 [0.01, 0.99]）\n- 盈亏：取同一 token_id 成交时刻之后的**第一笔历史价格**作为平仓价\n  - BUY: pnl = size × (exit − fill)；SELL: pnl = size × (fill − exit)；无后续价则 pnl = 0\n- 指标：总交易数 / 总信号数 / 通过率 / 成交数 / 过滤数、胜率、总盈亏、平均盈亏、最大单笔盈亏、盈亏比、最大回撤（累计盈亏曲线）、期末权益\n- 基准对比：独立重放一遍「直接镜像跟单」（不过滤，但受同样的最小金额 / 单市场仓位 / 初始资金约束，保证可比），输出 `benchmark_pnl` / `benchmark_win_rate` / `benchmark_trades` / `excess_pnl` / `excess_return_pct`\n- 回测级约束：`min_amount`、`max_position_per_market`、`initial_capital`（含 `_PositionBook` 仓位账本）\n- `build_strategy_catalog()` 复用 `STRATEGY_REGISTRY` 输出策略目录\n\n**2. `backend/models/schemas.py`（追加区段）**\n新增 `BacktestParams` / `BacktestMetrics` / `BacktestTradeDetail` / `BacktestFilterStat` / `BacktestResult` / `BacktestRunRequest` / `BacktestCompareRequest`。\n**为避免与 N1 并发改动冲突，所有新模型追加在文件末尾**（N1 的 NotificationConfigRequest / NotificationTestRequest 区段未被触碰）。\n\n**3. `backend/api/routes.py`（末尾新增「策略回测（N2 任务区段）」）**\n- `GET /api/backtest/strategies` → 策略类型 + 参数 schema\n- `POST /api/backtest/run` → BacktestResult\n- `POST /api/backtest/compare` → 多钱包对比 + summary\n- 导入新增项仅追加在既有 import 块内，未改写他人代码。\n- 未指定 pipeline 时回退到内置「镜像跟单」基线管道（而非报错），便于前端「默认」选项。\n\n**4. `frontend/js/panels/backtest.js`（新建，~540 行）**\n配置区（钱包下拉 / 管道下拉 / 时间范围 / 初始资金 / 滑点 / 最小金额 / 最大仓位）→ 运行按钮 + 加载态 → 结果区：\n7 张核心指标卡片、Canvas 手绘盈亏折线图（渐变填充 + 网格 + 零线，参照 execution.js 风格）、逐笔明细表（时间/市场/方向/通过/过滤原因/成交价/数量/盈亏，盈亏红绿着色）、过滤原因归因条形统计、多钱包对比表。过滤按钮支持 全部/仅通过/仅过滤。\n\n**5. `frontend/index.html`** — 导航新增 `data-panel=\"backtest\"`「🧪 策略回测」项、`panel-backtest` 容器、引入 `js/panels/backtest.js`。\n**6. `frontend/js/app.js`** — `_panels` 注册 `backtest: () => BacktestPanel`。\n**7. `frontend/js/api.js`** — 新增 `runBacktest()` / `compareBacktest()` / `getBacktestStrategies()`。\n\n## 验证结果（全部通过）\n- `python -m compileall backend` → exit 0；`node --check` 全部前端 JS → 0 失败\n- 引擎功能测试 40 项全 PASS：独立 import、买入涨价→盈利(+10)、卖出跌价→盈利(+5)、滑点(2 ticks → 成交价 0.52 / 盈亏 8)、过滤原因归因、基准对比与超额收益(负)、最大回撤(10)、最小金额/仓位上限约束、空数据不崩溃、3 个端点注册\n- FastAPI TestClient 端到端 21 项全 PASS：3 端点 HTTP 200 / 400 分支正确\n- 真实 `backend.main.create_app()` 冒烟 21 项全 PASS：静态前端可下载、index.html 与 backtest.js/app.js/api.js 均含预期标记、API 正常返回\n- N1 的 `/api/notifications/*` 路由与本任务路由共存无冲突（已同时出现在 app.routes）\n\n## 注意事项\n- 环境原本 `.venv` 为空且 pip 因沙箱临时目录权限不可用；已用自写下载器把依赖 wheel 解压到 `.venv\\Lib\\site-packages`，使项目可实际运行与测试（未改动 requirements.txt）。\n- `polymarket-trader\\.tmp\\` 为 pip 遗留的空目录，其上继承了工作区根的 `Everyone: DeleteSubdirectoriesAndFiles` 拒绝权限项（DSH 沙箱标准保护，非本任务引入），无法删除但无内容、不影响运行。\n- 后端回测在 DB 无数据时走 Data API，受本机网络限制时会重试 4 次后降级为空结果（已验证不崩溃）。",
+      "changedPaths": [
+        "polymarket-trader/backend/core/backtest.py",
+        "polymarket-trader/backend/models/schemas.py",
+        "polymarket-trader/backend/api/routes.py",
+        "polymarket-trader/frontend/js/panels/backtest.js",
+        "polymarket-trader/frontend/js/api.js",
+        "polymarket-trader/frontend/js/app.js",
+        "polymarket-trader/frontend/index.html"
+      ],
+      "acceptanceResults": [
+        {
+          "criterion": "新建 backend/core/backtest.py：class BacktestEngine，含 async run_backtest(wallet_address, pipeline_config, params) -> BacktestResult",
+          "status": "passed",
+          "evidence": "backend/core/backtest.py 已创建；BacktestEngine.run_backtest 为 async，签名 (wallet_address, pipeline_config: StrategyPipeline, params: BacktestParams) -> BacktestResult；独立 import 验证通过（'from backend.core.backtest import BacktestEngine' → IMPORT OK）"
+        },
+        {
+          "criterion": "从 DB trades 表读取历史交易，无数据时调用 PolymarketClient.get_wallet_activity 拉取",
+          "status": "passed",
+          "evidence": "_load_trades() 优先 store.get_trades(wallet=...)，为空时走 _fetch_trades_from_api() → client.get_wallet_activity(activity_type='TRADE') 带 cursor 翻页（最多 10 页）；结果中 data_source 字段区分 'db'/'api'，测试断言 data_source == 'db' 通过"
+        },
+        {
+          "criterion": "按时间顺序逐笔送入 StrategyPipelineRunner.process()",
+          "status": "passed",
+          "evidence": "run_backtest 中 trades.sort(key=_aware(timestamp)) 后 for trade in trades: signal = await runner.process(trade, ctx)；_build_runner 由 StrategyPipelineRunner.from_config 同构逻辑构建 runner"
+        },
+        {
+          "criterion": "模拟成交：成交时刻价格 + 简单滑点模型（tick_size * slippage_ticks，可配置）",
+          "status": "passed",
+          "evidence": "_apply_slippage(side, price, tick_size, slippage_ticks)：BUY 加滑点、SELL 减滑点，钳制 [0.01,0.99]；测试断言 slippage_ticks=2 时 BUY 成交价 0.52（源价 0.50 + 2×0.01），盈亏 8 —— PASS"
+        },
+        {
+          "criterion": "模拟盈亏：用历史交易中该 token_id 的后续价格序列计算 PnL",
+          "status": "passed",
+          "evidence": "_build_price_series 构建 token_id→[(ts,price)] 升序序列；_lookup_exit_price 取成交时刻之后第一笔价格；_calc_pnl: BUY=size×(exit-fill)，SELL=size×(fill-exit)。测试：买 0.50→后续 0.60 得 +10（期望 10），卖 0.40→后续 0.30 得 +5 —— 均 PASS"
+        },
+        {
+          "criterion": "统计指标：总交易数、总信号数、通过率、成交数",
+          "status": "passed",
+          "evidence": "BacktestMetrics 含 total_trades/total_signals/pass_rate/executed_trades/filtered_trades；测试断言总交易 3、通过信号 2、过滤 1、通过率 1.0 —— PASS"
+        },
+        {
+          "criterion": "统计指标：胜率、总盈亏、平均盈亏、最大单笔盈利、最大单笔亏损",
+          "status": "passed",
+          "evidence": "BacktestMetrics 含 win_rate/total_pnl/avg_pnl/max_win/max_loss；测试断言总盈亏 == 10、胜率 0.5（1 盈 1 平）—— PASS"
+        },
+        {
+          "criterion": "统计指标：盈亏比 (profit factor)、最大回撤（基于累计盈亏曲线）",
+          "status": "passed",
+          "evidence": "profit_factor = gross_profit/gross_loss（无亏损时封顶 999 防 Infinity）；_max_drawdown 基于 equity_curve 峰值计算。测试：先赚 10 再亏 10 → 最大回撤 == 10，总盈亏 == 0 —— PASS"
+        },
+        {
+          "criterion": "与「直接镜像跟单」基准对比，给出超额收益",
+          "status": "passed",
+          "evidence": "_run_benchmark 独立重放全部源交易（不过滤，但受同样的最小金额/单市场仓位/初始资金约束以保证可比），产出 benchmark_pnl/benchmark_win_rate/benchmark_trades；excess_pnl = 策略盈亏 - 基准盈亏，excess_return_pct 相对初始资金。测试：基准成交 3、基准盈亏 2、策略盈亏 0、超额为负且 = 策略-基准 —— PASS"
+        },
+        {
+          "criterion": "class BacktestParams：start_time, end_time, initial_capital, slippage_ticks, min_amount, max_position_per_market",
+          "status": "passed",
+          "evidence": "backend/models/schemas.py 新增 BacktestParams，含上述全部字段（另加 tick_size），并有字段级默认值与约束（initial_capital>0, slippage_ticks>=0, min_amount>=0, max_position_per_market>0）"
+        },
+        {
+          "criterion": "class BacktestResult：上述所有指标的 Pydantic 模型 + 逐笔明细列表（源交易、是否通过策略、原因、模拟成交价、盈亏）",
+          "status": "passed",
+          "evidence": "BacktestResult 含 metrics(BacktestMetrics)/trades(list[BacktestTradeDetail])/equity_curve/filter_reasons/filter_stats/params；BacktestTradeDetail 含 source_trade/passed/executed/reason/fill_price/fill_size/exit_price/pnl/side/strategy_chain/filter_strategy_id/filter_strategy_name —— 测试断言明细 2 条且盈亏字段正确 —— PASS"
+        },
+        {
+          "criterion": "修改 backend/models/schemas.py：新增 BacktestParams / BacktestResult / BacktestTradeDetail / BacktestMetrics 模型",
+          "status": "passed",
+          "evidence": "4 个必需模型 + BacktestFilterStat/BacktestRunRequest/BacktestCompareRequest 全部新增。为避免与 N1 并发改动冲突，新模型统一追加在文件末尾，N1 的通知区段未被触碰"
+        },
+        {
+          "criterion": "POST /api/backtest/run {wallet, pipeline_id 或 pipeline_config, params} → BacktestResult",
+          "status": "passed",
+          "evidence": "routes.py 新增 run_backtest 端点（@router.post('/backtest/run', response_model=BacktestResult)）；_resolve_backtest_pipeline 支持 pipeline_config 优先、其次 pipeline_id 查库、最后回退内置镜像跟单基线。TestClient 实测 HTTP 200 且返回完整 metrics/trades/equity_curve/filter_stats —— PASS"
+        },
+        {
+          "criterion": "POST /api/backtest/compare {wallets: list, pipeline_config} → 多钱包对比结果",
+          "status": "passed",
+          "evidence": "routes.py 新增 compare_backtest 端点，返回 {pipeline_id, pipeline_name, count, results(按 excess_pnl 降序), summary{best_wallet,best_excess_pnl,avg_excess_pnl,total_pnl,avg_pass_rate,avg_win_rate}}；空 wallets 返回 400。TestClient 实测 count==2、results 长度 2、summary 齐全 —— PASS"
+        },
+        {
+          "criterion": "GET /api/backtest/strategies → 可用于回测的策略类型及其参数 schema（复用 STRATEGY_REGISTRY）",
+          "status": "passed",
+          "evidence": "端点调用 backtest.build_strategy_catalog()，遍历 STRATEGY_REGISTRY 输出 type/category/name/description/params_schema。TestClient 实测 HTTP 200，返回 10 个策略且每个含 type/category/name/params_schema —— PASS"
+        },
+        {
+          "criterion": "修改 routes.py 时不覆盖 N1 已有代码（不同端点函数名、不同区段）",
+          "status": "passed",
+          "evidence": "回测端点全部追加在文件末尾「── 策略回测（N2 任务区段）──」区段，函数名为 list_backtest_strategies/run_backtest/compare_backtests/_resolve_backtest_pipeline，与 N1 的通知端点无重名；import 块仅新增条目。实测 create_app() 后 /api/backtest/* 与 /api/notifications/* 同时存在 —— PASS"
+        },
+        {
+          "criterion": "前端新建 frontend/js/panels/backtest.js：回测配置区（钱包下拉/管道选择/时间范围/初始资金/滑点/最大仓位/最小金额）",
+          "status": "passed",
+          "evidence": "backtest.js 配置区含 bt-wallet(从已监测钱包列表填充)、bt-pipeline(复用 API.getPipelines())、bt-start/bt-end、bt-capital、bt-slippage、bt-min-amount、bt-max-position 及 bt-run-btn 运行按钮"
+        },
+        {
+          "criterion": "运行按钮 → 展示加载状态 → 结果区",
+          "status": "passed",
+          "evidence": "run() 先 _setLoading(true) 禁用按钮并显示 spinner + '回测中...'，finally 中恢复；bt-results 容器在完成后显示"
+        },
+        {
+          "criterion": "结果展示：核心指标卡片（总信号数、胜率、总盈亏、盈亏比、最大回撤、超额收益 vs 基准）",
+          "status": "passed",
+          "evidence": "_renderMetrics 输出 7 张 stat-card：历史交易/通过率/胜率/总盈亏/盈亏比/最大回撤/超额收益（后者与 benchmark_pnl、excess_return_pct 同卡对照），盈亏按正负套 pnl-positive/pnl-negative"
+        },
+        {
+          "criterion": "盈亏曲线图（Canvas 手绘折线图，参考 execution.js 风格）",
+          "status": "passed",
+          "evidence": "_renderChart 用 canvas.getContext('2d') 手绘：#0d1117 背景、网格线、零线、渐变填充折线、末端点、坐标标签，与 execution.js 的 _renderChart 风格一致；空数据显示「暂无成交数据」"
+        },
+        {
+          "criterion": "逐笔明细表格：时间、源交易市场、是否通过、过滤原因、成交价、盈亏（红绿着色）",
+          "status": "passed",
+          "evidence": "_renderTable 输出 bt-tbody：时间(fmtDateTime)、市场(title/slug)、方向(buy/sell badge)、通过/过滤 badge、过滤原因(带策略名前缀)、成交价、数量、盈亏；盈亏用 text-success/text-danger 红绿着色；支持全部/仅通过/仅过滤筛选与列排序"
+        },
+        {
+          "criterion": "「过滤原因」统计：哪些策略过滤掉最多交易（归因分析）",
+          "status": "passed",
+          "evidence": "_renderFilterStats 渲染 bt-filter-stats：对每个 (strategy_id, strategy_name, reason) 组合显示策略名、原因、次数与占比，并按 count 降序 + 归一化条形宽度可视化"
+        },
+        {
+          "criterion": "修改 frontend/index.html：新增「策略回测」nav item（data-panel=\"backtest\"）+ section 容器",
+          "status": "passed",
+          "evidence": "index.html 导航新增 <li class=\"nav-item\" data-panel=\"backtest\"><span class=\"nav-icon\">🧪</span><span>策略回测</span></li>；主内容区新增 <div id=\"panel-backtest\" class=\"panel\"></div>；并引入 js/panels/backtest.js"
+        },
+        {
+          "criterion": "修改 frontend/js/app.js 注册面板路由",
+          "status": "passed",
+          "evidence": "App._panels 新增 backtest: () => BacktestPanel（与既有面板同级，仅追加一行）"
+        },
+        {
+          "criterion": "修改 frontend/js/api.js：新增 3 个回测相关方法",
+          "status": "passed",
+          "evidence": "api.js 新增 runBacktest(wallet, pipelineId, params, pipelineConfig)、compareBacktest(wallets, pipelineId, params, pipelineConfig)、getBacktestStrategies()，均指向 /backtest/* 端点"
+        },
+        {
+          "criterion": "验收：backtest.py 可独立 import",
+          "status": "passed",
+          "evidence": "python -c \"from backend.core.backtest import BacktestEngine, build_strategy_catalog\" → 'IMPORT OK'，10 strategies；模块不依赖 FastAPI"
+        },
+        {
+          "criterion": "验收：run_backtest 在有历史交易数据时返回完整 BacktestResult，盈亏逻辑自洽（买入后涨价应盈利）",
+          "status": "passed",
+          "evidence": "构造数据：同一 token 先 0.50 买后 0.60 → 首笔 pnl = 100×(0.60-0.50) = +10，总盈亏 +10，通过率 1.0，equity_curve 2 点，明细 2 条，metrics/filter_stats/filter_reasons 齐全 —— 全部断言 PASS"
+        },
+        {
+          "criterion": "验收：3 个 REST 端点定义完成",
+          "status": "passed",
+          "evidence": "router.routes 中确认 ('/api/backtest/run', ('POST',))、('/api/backtest/compare', ('POST',))、('/api/backtest/strategies', ('GET',)) 三者均存在；TestClient 实测全部 HTTP 200 且响应结构正确"
+        },
+        {
+          "criterion": "验收：前端回测面板含配置区+结果区+明细表+盈亏曲线",
+          "status": "passed",
+          "evidence": "backtest.js 内 21 个 DOM id 与 getElementById 查找完全一一对应：bt-wallet/bt-pipeline/bt-capital/bt-start/bt-end/bt-slippage/bt-min-amount/bt-max-position/bt-run-btn（配置区）、bt-results/bt-stats-grid（结果区）、bt-tbody/bt-row-count（明细表）、bt-equity-chart（Canvas 曲线）、bt-filter-stats（归因）、bt-compare/bt-compare-tbody（对比区）"
+        },
+        {
+          "criterion": "验收：所有改动 Python/JS 文件编译检查通过",
+          "status": "passed",
+          "evidence": "python -m compileall -q backend → exit 0（覆盖 backtest.py/schemas.py/routes.py 及全部 backend 模块）；node --check 遍历 frontend/js 全部 .js 文件 → 0 失败"
+        }
+      ],
+      "commandsRun": [
+        {
+          "command": "python -m compileall -q backend",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "全部 backend 模块（含 backtest.py / schemas.py / routes.py）编译通过，exit 0"
+        },
+        {
+          "command": "node --check frontend/js/panels/backtest.js && node --check frontend/js/api.js && node --check frontend/js/app.js",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "前端全部 10 个 .js 文件语法检查通过，0 失败"
+        },
+        {
+          "command": "python _verify/test_backtest.py",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "引擎功能测试 40 项全 PASS：独立 import、买入涨价+10 盈利、卖出跌价+5 盈利、滑点 2 ticks→成交价 0.52/盈亏 8、过滤原因归因正确、基准对比与超额收益为负、最大回撤 10、最小金额/仓位上限约束、空数据不崩溃、3 端点注册 —— ALL PASSED"
+        },
+        {
+          "command": "python _verify/test_backtest_api.py",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "FastAPI TestClient 端到端 21 项全 PASS：GET /api/backtest/strategies 返回 10 策略；POST /api/backtest/run 返回 metrics/trades/equity_curve/filter_stats 且总盈亏 == 10；POST /api/backtest/compare count==2 含 summary；无 pipeline 时回退默认镜像管道 HTTP 200；compare 空 wallets → 400 —— ALL PASSED"
+        },
+        {
+          "command": "python _verify/smoke_backtest.py",
+          "status": "passed",
+          "exitCode": 0,
+          "evidence": "真实 backend.main.create_app() 冒烟 21 项全 PASS：/index.html 200 且含 data-panel=\"backtest\"、panel-backtest 容器、backtest.js 引用；/js/panels/backtest.js 200 且含 bt-wallet/bt-equity-chart/bt-tbody/bt-filter-stats；app.js 注册 backtest 面板；api.js 含 3 个新方法；3 个 API 端点正常返回 —— ALL PASSED"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "profileSeedId": "N3",
+      "subject": "绩效分析面板与跟单效果统计",
+      "description": "项目路径：D:\\Users\\Administrator\\Documents\\deepseek-harness\\default-workspace\\polymarket-trader\\（所有路径相对于此）\n\n依赖 N2 完成（因为要修改 routes.py 和 index.html/app.js，避免冲突）。\n\n让用户看清跟单的实际效果：跟了谁、跟对了吗、赚没赚钱。\n\n1. 新建 backend/core/analytics.py：\n   - class AnalyticsEngine：\n     - async get_performance_summary(days: int = 7) → PerformanceSummary\n     - 从 DB executions 表 + signals 表 + trades 表聚合\n   - 统计维度：\n     * 总览：总信号数、总执行数、成交率、总盈亏、胜率、平均持仓时长\n     * 按钱包分组：每个监测钱包的信号数、盈亏、胜率、贡献占比\n     * 按策略分组：每个策略类型/策略实例被触发次数、通过率、贡献盈亏（归因：统计每个策略在管道中的位置对最终结果的影响）\n     * 按市场分组：盈亏最高的 10 个市场、最差的 10 个市场\n     * 时间序列：每日盈亏（用于柱状图）、每日信号数\n     * 执行质量：被风控拦截次数、失败次数、下单延迟分布（信号生成→执行完成的时间差）\n   - class PerformanceSummary / WalletPerformance / StrategyPerformance / MarketPerformance / DailyPerformance 模型\n\n2. 修改 backend/models/schemas.py：新增上述分析模型\n\n3. 修改 backend/api/routes.py（追加，不覆盖已有代码）：\n   - GET /api/analytics/summary?days=7 → PerformanceSummary\n   - GET /api/analytics/wallets?days=7 → list[WalletPerformance]\n   - GET /api/analytics/strategies?days=7 → list[StrategyPerformance]\n   - GET /api/analytics/markets?days=7 → list[MarketPerformance]\n   - GET /api/analytics/daily?days=30 → list[DailyPerformance]\n\n4. 前端新建 frontend/js/panels/analytics.js：\n   - 顶部时间范围选择器（7天/30天/全部）\n   - 概览指标卡片组：总信号、执行数、成交率、总盈亏、胜率、平均延迟\n   - 「按钱包」表格 + 横向条形图（用 CSS 百分比条或 Canvas）\n   - 「按策略」表格：展示每个策略的触发次数与盈亏贡献\n   - 「按市场」表格：Top10 盈利 / Top10 亏损（可切换 tab）\n   - 「每日盈亏」柱状图（Canvas 绘制，正负绿红着色）\n   - 空数据状态：数据库无记录时显示引导提示（引导用户去添加钱包或跑回测）\n\n5. 修改 frontend/index.html：导航新增「绩效分析」入口（data-panel=\"analytics\"）+ section 容器；修改 frontend/js/app.js 注册路由与面板初始化。\n\n6. 修改 frontend/js/api.js：新增 5 个分析相关方法\n\n7. 修改 frontend/css/style.css：补充分析面板用到的样式（bar-chart 容器、metric-group、tab 切换等，与现有深色主题保持一致）\n\n验收：analytics.py 可独立 import；PerformanceSummary 模型定义完整；5 个 REST 端点定义完成；前端分析面板含时间范围选择、指标卡、4 组表格/图表；空数据状态有友好提示；所有改动 Python/JS 文件编译检查通过。",
+      "status": "failed",
+      "assignee": "analytics-dev",
+      "dependencies": [
+        "t2"
+      ],
+      "attempt": 1,
+      "createdAt": 1792784503171,
+      "updatedAt": 1792787899917,
+      "attemptId": "1aa6b19c-4699-4044-97a7-eb464aaf951a",
+      "reassigning": false,
+      "output": "minimax: HTTP 402 — {\"type\":\"error\",\"error\":{\"type\":\"insufficient_balance_error\",\"message\":\"insufficient balance (1008)\"},\"request_id\":\"072af8bcbf2566ea4b609207ef0653af\"} (code QUOTA_EXCEEDED)"
+    }
+  ],
+  "taskSeq": 3,
+  "approvedAt": 1792785351048
+}
